@@ -1,0 +1,37 @@
+*******************************************************************************************************
+***		Fiche de personnage enregistrer pour sauvegarde et utilisation			    ***
+*******************************************************************************************************
+
+/*
+Le fichier n'est pris en compte que à la première ocurence des séparateurs après le terme de début
+Il peut contenir 1-n personnages (1 de préférence vu background long)
+les noms des personnages peuvent être identique (identifiant différent en interne programme)
+Ce n'est pas le cas pour les autres données (Équipements)
+
+A voir : comment faire fonctionner le background au fil du temps
+*/
+BEGIN
+*******************************************************************************************************
+
+Name 		:= Nom Du Personnage
+Classe 		:= Classe_Personnage
+Niveau		:= 0
+PVTotal		:= 20	
+PVActuel	:= 5
+NombreAttribut	:= 8
+Attribut1	:= 5
+Attribut2	:= 7
+Attribut3	:= 4
+Attribut4	:= 6
+Attribut5	:= 8
+Attribut6	:= 9
+Attribut7	:= 3
+Attribut8	:= 5
+NBEquipement	:= 1
+Equipement1	:= Nom de l'Équipement
+Richesse	:= 10
+Background	:=  
+
+*******************************************************************************************************
+END
+*******************************************************************************************************
