@@ -2,5 +2,5 @@
 .settings
 .classpath
 .project
-build.xml
-manifest.mf
+*.xml
+*.mf
