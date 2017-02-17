@@ -1,5 +1,5 @@
 ﻿*******************************************************************************************************
-***                                     	Livre aventure Template 			    ***
+***                                     			Livre aventure Template 					    ***
 *******************************************************************************************************
 
 /*
@@ -20,6 +20,7 @@ AventureName := nom de l'aventure (de préférence unique)
 Auteur := Liste des auteurs de l'aventure
 AventureSerie   := Nom de la série lié à l'aventure
 AventureTome := Numéro de tome de la série de l'aventure
+Resume := Description rapide de l'aventure
 Niveau requis := Niveau nécessaire à l'accès de l'aventure
 ClassePossibles := classe requisepour l'aventure
 ListeDictionnaire := liste des synonymes et leur correspondance pour que l'application puisse gérer
@@ -31,7 +32,7 @@ Description := texte à afficher à l'écran, contenu du paragraphe, zone actuel
 NbEvenement := nombre d'évènements liés au paragraphe
 
     EvenementX_type :=
-    EvenementX_desc         := description afficahble à l'écran (laisser vide si rien à afficher)
+    EvenementX_desc         := description affichable à l'écran (laisser vide si rien à afficher)
     EvenementX_nbeffets     := nombre d'éffet lier à l'évènement      
         EvenementX_effetX_type  := type de l'effet de l'évènement
         EvenementX_effetX_desc  := description (non afficher) de l'effet
@@ -46,6 +47,7 @@ AventureName            := Aventure générale
 Auteur                  := Arnaud Lebeau
 AventureSerie           := Serie Principale
 AventureTome            := 0
+Resume                  := aventure mère de l'application version 0.0.0.1
 NiveauRequis            := 0
 ClassePossibles         := 1
 Classe1                 := NomClasse
