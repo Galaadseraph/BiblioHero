@@ -1,4 +1,4 @@
-package bibliohero.IHM;
+package bibliohero.ihm;
 
 /**
  *
