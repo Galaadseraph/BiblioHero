@@ -1,15 +1,14 @@
 package bibliohero.ihm;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -24,20 +23,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JProgressBar;
 import javax.swing.JSeparator;
-import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MutableAttributeSet;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 public class MainFrame extends JFrame {
 
@@ -48,10 +40,13 @@ public class MainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame() {
+	public MainFrame() throws Exception
+	{
+		setMinimumSize(new Dimension(640, 480));
+		setMaximizedBounds(new Rectangle(0, 0, 800, 600));
 		setTitle("BiblioHero");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 726, 378);
+		setBounds(100, 100, 584, 480);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -110,11 +105,13 @@ public class MainFrame extends JFrame {
 		JMenuItem menuAPropos = new JMenuItem("A Propos");
 		menuHlp.add(menuAPropos);
 		contenuPrincipal = new JPanel();
+		contenuPrincipal.setMinimumSize(new Dimension(630, 440));
 		contenuPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contenuPrincipal.setLayout(new BorderLayout(0, 0));
 		setContentPane(contenuPrincipal);
 		
 		JPanel contenuInformatif = new JPanel();
+		contenuInformatif.setMinimumSize(new Dimension(220, 400));
 		contenuPrincipal.add(contenuInformatif, BorderLayout.WEST);
 		
 		JTabbedPane onglets = new JTabbedPane(JTabbedPane.BOTTOM);
@@ -158,9 +155,9 @@ public class MainFrame extends JFrame {
 		equipeTable.setValueAt("Personnage 1", 1, 0);
 		equipeTable.setValueAt("Humain", 1, 1);
 		equipeTable.setValueAt("Guerrier", 1, 2);
+		contenuInformatif.setLayout(new BorderLayout(0, 0));
 		
 		ongletEquipe.add(equipeTable, BorderLayout.CENTER);
-		contenuInformatif.setLayout(new BorderLayout(0, 0));
 		contenuInformatif.add(onglets);
 		
 				
@@ -184,19 +181,17 @@ public class MainFrame extends JFrame {
 				gbcLblPersonnage.gridy = 0;
 				ongletPersonnage.add(lblPersonnage, gbcLblPersonnage);
 				
-				JProgressBar barreDeVie = new JProgressBar();
-				barreDeVie.setFont(new Font("Tahoma", Font.PLAIN, 11));
-				barreDeVie.setBackground(Color.RED);
-				barreDeVie.setForeground(new Color(0, 128, 0));
-				barreDeVie.setStringPainted(true);
-				barreDeVie.setValue(90);
-				barreDeVie.setString("PV : 80 / 100");
-				GridBagConstraints gbcBarreDeVie = new GridBagConstraints();
-				gbcBarreDeVie.fill = GridBagConstraints.BOTH;
-				gbcBarreDeVie.insets = new Insets(0, 0, 5, 5);
-				gbcBarreDeVie.gridx = 0;
-				gbcBarreDeVie.gridy = 1;
-				ongletPersonnage.add(barreDeVie, gbcBarreDeVie);
+				JBarreSlide barreDeMana = new JBarreSlide(1);
+				barreDeMana.setMaximum(10);
+				barreDeMana.setValue(9);
+				barreDeMana.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				
+				GridBagConstraints gbcBarreDeMana = new GridBagConstraints();
+				gbcBarreDeMana.fill = GridBagConstraints.HORIZONTAL;
+				gbcBarreDeMana.insets = new Insets(0, 0, 5, 5);
+				gbcBarreDeMana.gridx = 0;
+				gbcBarreDeMana.gridy = 1;
+				ongletPersonnage.add(barreDeMana, gbcBarreDeMana);
 				
 				JLabel lblNiveau = new JLabel("Niveau : 1");
 				GridBagConstraints gbcLblNiveau = new GridBagConstraints();
@@ -205,26 +200,24 @@ public class MainFrame extends JFrame {
 				gbcLblNiveau.gridy = 1;
 				ongletPersonnage.add(lblNiveau, gbcLblNiveau);
 				
-				JLabel raceLbl = new JLabel("Race :");
-				GridBagConstraints gbcRaceLbl = new GridBagConstraints();
-				gbcRaceLbl.insets = new Insets(0, 0, 5, 5);
-				gbcRaceLbl.gridx = 0;
-				gbcRaceLbl.gridy = 2;
-				ongletPersonnage.add(raceLbl, gbcRaceLbl);
+				JBarreSlide barreDeVie = new JBarreSlide(0);
+				barreDeVie.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				barreDeVie.setValue(90);
+
+				GridBagConstraints gbcBarreDeVie = new GridBagConstraints();
+				gbcBarreDeVie.gridwidth = 2;
+				gbcBarreDeVie.fill = GridBagConstraints.BOTH;
+				gbcBarreDeVie.insets = new Insets(0, 0, 5, 5);
+				gbcBarreDeVie.gridx = 0;
+				gbcBarreDeVie.gridy = 2;
+				ongletPersonnage.add(barreDeVie, gbcBarreDeVie);
 				
 				JLabel raceValue = new JLabel("Nom de la race");
 				GridBagConstraints gbcRaceValue = new GridBagConstraints();
-				gbcRaceValue.insets = new Insets(0, 0, 5, 0);
-				gbcRaceValue.gridx = 1;
-				gbcRaceValue.gridy = 2;
+				gbcRaceValue.insets = new Insets(0, 0, 5, 5);
+				gbcRaceValue.gridx = 0;
+				gbcRaceValue.gridy = 3;
 				ongletPersonnage.add(raceValue, gbcRaceValue);
-				
-				JLabel classeLbl = new JLabel("Classe :");
-				GridBagConstraints gbcClasseLbl = new GridBagConstraints();
-				gbcClasseLbl.insets = new Insets(0, 0, 5, 5);
-				gbcClasseLbl.gridx = 0;
-				gbcClasseLbl.gridy = 3;
-				ongletPersonnage.add(classeLbl, gbcClasseLbl);
 				
 				JLabel classeValue = new JLabel("nom de la classe");
 				GridBagConstraints gbcClasseValue = new GridBagConstraints();
@@ -447,75 +440,8 @@ public class MainFrame extends JFrame {
 		JPanel ongletSettings = new JPanel();
 		onglets.addTab("Parametres", null, ongletSettings, null);
 		
-		JPanel contenuAventure = new JPanel();
+		JPanelAventure contenuAventure = new JPanelAventure();
 		contenuPrincipal.add(contenuAventure, BorderLayout.CENTER);
-		contenuAventure.setLayout(new BorderLayout(0, 0));
-		
-		JSplitPane horizonEvenement = new JSplitPane();
-		horizonEvenement.setContinuousLayout(true);
-		horizonEvenement.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contenuAventure.add(horizonEvenement, BorderLayout.CENTER);
-		
-		JPanel zoneAffichage = new JPanel();
-		horizonEvenement.setLeftComponent(zoneAffichage);
-		zoneAffichage.setLayout(new BorderLayout(0, 0));
-		
-		JTextPane view = new JTextPane();
-		view.setForeground(Color.BLACK);
-		view.setEnabled(false);
-		view.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		StyledDocument doc = view.getStyledDocument();
-		MutableAttributeSet sa = new SimpleAttributeSet();
-		StyleConstants.setAlignment(sa, StyleConstants.ALIGN_CENTER);
-		doc.setParagraphAttributes(0, 0, sa, true);
-		view.setText("L'aventure de votre personnage commence ici, au fil des paragraphes, vous  pourrez développer ses caractéristiques. Voici les choix possibles de  classe, ne vous inquiétez pas encore, il vous est possible de creer une équipe de personnages au fil du temps. Vous pouvez choisir parmi les classes de guerrier, mages, prètres, voleurs et bien d'autres. Ce text n'est qu'une ébaucheafinde présenter une interface plutôt contractuelle de la future version PC du jeu BiblioHero.");
-		zoneAffichage.add(view, BorderLayout.CENTER);
-		
-		JPanel zoneChoixEvenement = new JPanel();
-		horizonEvenement.setRightComponent(zoneChoixEvenement);
-		zoneChoixEvenement.setLayout(new GridLayout(0, 4, 0, 0));
-		
-		JButton eventChoix0 = new JButton("Evènement 0");
-		zoneChoixEvenement.add(eventChoix0);
-		
-		JButton eventChoix1 = new JButton("Evènement 1");
-		zoneChoixEvenement.add(eventChoix1);
-		
-		JButton eventChoix2 = new JButton("Evènement 2");
-		zoneChoixEvenement.add(eventChoix2);
-		
-		JButton eventChoix3 = new JButton("Evènement 3");
-		zoneChoixEvenement.add(eventChoix3);
-		
-		JButton eventChoix4 = new JButton("Evènement 4");
-		zoneChoixEvenement.add(eventChoix4);
-		
-		JButton eventChoix5 = new JButton("Evènement 5");
-		zoneChoixEvenement.add(eventChoix5);
-		
-		JButton eventChoix6 = new JButton("Evènement 6");
-		eventChoix6.setEnabled(false);
-		zoneChoixEvenement.add(eventChoix6);
-		
-		JButton eventChoix7 = new JButton("Evènement 7");
-		eventChoix7.setEnabled(false);
-		zoneChoixEvenement.add(eventChoix7);
-		
-		JPanel contexte = new JPanel();
-		contenuAventure.add(contexte, BorderLayout.SOUTH);
-		contexte.setLayout(new BorderLayout(0, 0));
-		
-		JComboBox contextuel = new JComboBox();
-		contextuel.setModel(new DefaultComboBoxModel(new String[] {"Fouiller", "Se reposer", "Fuir", "Fuir Aventure"}));
-		contexte.add(contextuel, BorderLayout.CENTER);
-		
-		JButton validCOntext = new JButton("valider");
-		contexte.add(validCOntext, BorderLayout.EAST);
-		
-		JLabel zoneDeJeu = new JLabel("Titre de l'aventure en cours");
-		zoneDeJeu.setHorizontalAlignment(SwingConstants.CENTER);
-		zoneDeJeu.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		contenuAventure.add(zoneDeJeu, BorderLayout.NORTH);
 	}
 	
 	/**
