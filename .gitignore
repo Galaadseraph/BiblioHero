@@ -5,3 +5,7 @@
 *.xml
 *.mf
 /*windows*/
+.idea
+/out
+
+

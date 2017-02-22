@@ -14,7 +14,7 @@ public class Personnage
     String Classe;
     String Genre;
     String Race;
-    enum Sexe {Male, Female, Herma, CuntB, DickG}
+    enum Sexe {Male, Female, Herma, CuntB, DickG};
     short PV;
     char Niveau;
     long expA;
