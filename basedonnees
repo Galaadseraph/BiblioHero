@@ -1,0 +1,181 @@
+/* CREATION DES TABLES D'ENTITE*/
+
+CREATE TABLE personnage
+(	idpersonnage	BIGINT NOT NULL IDENTITY,
+
+	nom				VARCHAR(50) NOT NULL,
+	race 			VARCHAR(50) NOT NULL,
+	classe			VARCHAR(50) NOT NULL,
+	sexe			VARCHAR(20)	NOT NULL,	-- Caractéristiques principales et communes à tous les personnages
+	genre			VARCHAR(50)	NOT NULL,
+	niveau			INT NOT NULL,
+	richesse 		DOUBLE,
+	experience 		DOUBLE,
+	
+	pv				INT NOT NULL,
+	
+	force			TINYINT NOT NULL,
+	dexterite		TINYINT NOT NULL,		
+	endurance		TINYINT NOT NULL,		-- Caractéristiques propre au personnage
+	intelligence	TINYINT NOT NULL,
+	attribut 1		TINYINT,
+	attribut 2		TINYINT,
+	attribut 3		TINYINT,
+	
+	estjoueur		BOOLEAN,				-- Permet de déterminer si un personnage est joueur ou non
+	estactif		BOOLEAN,
+	hommedefer		BOOLEAN,				-- Peux fuir l'aventure ou non l'aventure fille
+	mortpermanente	BOOLEAN					-- Le personnage ne peux pas réapparaitre dans l'aventure mère (aucun retour possible)
+)
+
+
+CREATE TABLE aventure
+(	idaventure		BIGINT NOT NULL IDENTITY,
+	nom				VARCHAR(50) NOT NULL,
+	auteur			VARCHAR(50) NOT NULL,
+	nomserie		VARCHAR(50) NOT NULL,	-- Informations principales et complémentaires lié à chaque aventure
+	theme			VARCHAR(50) NOT NULL,
+	resume			VARCHAR(200) NOT NULL,
+	nbparagraphe	INT NOT NULL
+
+	dictionnaire	?,												-- à remplir
+	isbnserie		?,												-- à remplir
+	isbnaventure	?,												-- à remplir
+	
+	nvrequis		INT,
+	classerequise	VARCHAR(50)	,	-- Caractéristiques à avoir pour entrer dans une aventure
+	)
+
+	
+CREATE TABLE paragraphe
+(	idparagraphe		BIGINT NOT NULL IDENTITY,
+	pdepart				INT NOT NULL,								-- Vérifier la pertinence
+	parrivee			INT NOT NULL,								-- Vérifier la pertinence
+	texte				TEXT NOT NULL,
+	nbevenement			SMALLINT NOT NULL,
+	numparagraphe		INT NOT NULL,								-- à vérifier
+)
+
+
+CREATE TABLE equipement
+(	idequipement		BIGINT NOT NULL IDENTITY,
+	nomequipement		VARCHAR(50) NOT NULL,	-- Description principale d'un objet
+	classeequipement	VARCHAR(50) NOT NULL,
+	description 		VARCHAR(150) NOT NULL,
+	niveau				INT NOT NULL,
+	
+	attribut1			VARCHAR(50) NOT NULL,
+	attribut2			VARCHAR(50) NOT NULL,	-- Attributs lié à l'objet, l'équipement en question
+	attribut3			VARCHAR(50) NOT NULL,
+	
+	classerequise		VARCHAR(50) NOT NULL	-- Prérequis pour obtenir cet équipement
+)
+
+
+CREATE TABLE sort
+(	idsort				BIGINT NOT NULL IDENTITY,
+	nomdessorts			VARCHAR(50) NOT NULL,
+	capacite			VARCHAR(50) NOT NULL,	-- Description d'un sort ainsi que ses effets
+	ecoledemagie		VARCHAR(50) NOT NULL,
+	description 		VARCHAR(200) NOT NULL,
+	
+	duree				INT NOT NULL
+)
+
+
+CREATE TABLE inventaire
+(	idinventaire		BIGINT NOT NULL IDENTITY,
+	typeinventaire		VARCHAR(50) NOT NULL,	-- Si l'inventaire est un sac, un coffre ou autre
+	nom					VARCHAR(50) NOT NULL,
+	nbemplacement 		INT NOT NULL
+)
+
+
+CREATE TABLE typeinventaire
+(	idtypeinventaire	BIGINT NOT NULL IDENTITY,
+	code				CHAR(2) NOT NULL,		-- A vérifier
+	nom					VARCHAR(50) NOT NULL
+)
+
+
+CREATE TABLE equipe
+(	idequipe			BIGINT NOT NULL IDENTITY,
+	suivre				BOOLEAN NOT NULL,		
+	
+)
+	
+	
+CREATE TABLE typeaction
+(	idtypeaction		BIGINT NOT NULL IDENTITY,
+	code				INT NOT NULL,
+	nom					VARCHAR(50) NOT NULL
+)
+
+
+CREATE TABLE action
+(	idaction			BIGINT NOT NULL IDENTITY,
+	description 		VARCHAR(200) NOT NULL,
+	typeaction			VARCHAR(50) NOT NULL,	-- 
+	effet				VARCHAR(50) NOT NULL,
+	paragraphesuite		INT NOT NULL,
+	paragrapheorigine	INT NOT NULL			-- Renseigne le paragraphe d'orine et les paragraphes possibles suite à un evenement
+)
+
+
+/*Création des tables d'associations*/
+
+CREATE TABLE personnagesort
+(	idpersonnage		BIGINT NOT NULL,	
+	idsort				BIGINT NOT NULL			
+)
+
+CREATE TABLE equipepersonnage
+( 	idequipe			BIGINT NOT NULL,
+	idpersonnage		BIGINT NOT NULL
+)
+
+
+
+
+/* Création des clés primaires */
+
+
+ALTER TABLE personnage
+	ADD CONSTRAINT PK_personnage PRIMARY KEY (idpersonnage)
+
+
+ALTER TABLE aventure
+	ADD CONSTRAINT PK_aventure PRIMARY KEY (idaventure)
+
+
+ALTER TABLE paragraphe
+	ADD CONSTRAINT PK_paragraphe PRIMARY KEY (idparagraphe)
+
+	
+ALTER TABLE equipement
+	ADD CONSTRAINT PK_equipement PRIMARY KEY (idequipement)
+	
+	
+ALTER TABLE sort
+	ADD CONSTRAINT PK_sort PRIMARY KEY (idsort)
+
+
+ALTER TABLE inventaire
+	ADD CONSTRAINT PK_Service PRIMARY KEY (idinventaire)
+
+
+ALTER TABLE equipe
+	ADD CONSTRAINT PK_equipe PRIMARY KEY (idequipe)
+
+
+ALTER TABLE typeaction
+	ADD CONSTRAINT PK_typeaction PRIMARY KEY (idtypeaction)
+
+
+ALTER TABLE action
+	ADD CONSTRAINT PK_action PRIMARY KEY (idaction)
+
+
+
+/* Création des clés étrangères */
+
