@@ -1,0 +1,333 @@
+/*------------------------------------------------------------------------------
+ CREATION DES TABLES D'ENTITE
+------------------------------------------------------------------------------*/
+
+CREATE TABLE personnage
+(	idpersonnage		BIGINT NOT NULL,
+
+	nom			VARCHAR(50) NOT NULL,
+	race 			VARCHAR(50) NOT NULL,
+	classe			VARCHAR(50) NOT NULL,
+	sexe			VARCHAR(20)	NOT NULL,	-- Caractéristiques principales et communes à tous les personnages
+	genre			VARCHAR(50)	NOT NULL,
+	niveau			INT NOT NULL,
+	richesse 		DOUBLE,
+	experience 		DOUBLE,
+	
+	pv				INT NOT NULL,
+	
+	`force`			TINYINT NOT NULL,
+	dexterite		TINYINT NOT NULL,		
+	endurance		TINYINT NOT NULL,		-- Caractéristiques propre au personnage
+	intelligence		TINYINT NOT NULL,
+	attribut1		TINYINT,
+	attribut2		TINYINT,
+	attribut3		TINYINT,
+	
+	estjoueur		BOOLEAN,				-- Permet de déterminer si un personnage est joueur ou un compagnon
+	estactif		BOOLEAN,
+	hommedefer		BOOLEAN,				-- Peux fuir l'aventure ou non l'aventure fille
+	mortpermanente		BOOLEAN					-- Le personnage ne peux pas réapparaitre dans l'aventure mère (aucun retour possible)
+);
+
+
+CREATE TABLE aventure
+(   idaventure			BIGINT NOT NULL,
+	nom			VARCHAR(50) NOT NULL,
+	auteur			VARCHAR(50) NOT NULL,
+	nomserie		VARCHAR(50) NOT NULL,	-- Informations principales et complémentaires lié à chaque aventure
+	theme			VARCHAR(50) NOT NULL,
+	`resume`		VARCHAR(200) NOT NULL,
+	nbparagraphe		INT NOT NULL,
+
+	dictionnaire		VARCHAR(50) NOT NULL,											-- à remplir
+	isbnserie		VARCHAR(50) NOT NULL,											-- à remplir
+	isbnaventure		VARCHAR(50) NOT NULL,											-- à remplir
+	
+	nvrequis		INT,
+	classerequise		VARCHAR(50)	-- Caractéristiques à avoir pour entrer dans une aventure
+);
+
+	
+CREATE TABLE paragraphe
+(	idparagraphe			BIGINT NOT NULL,
+	pdepart				INT NOT NULL,								-- Vérifier la pertinence
+	parrivee			INT NOT NULL,								-- Vérifier la pertinence
+	texte				TEXT NOT NULL,
+	nbevenement			SMALLINT NOT NULL,
+	numparagraphe			INT NOT NULL,								-- à vérifier
+	idaventure 			BIGINT NOT NULL
+);
+
+
+CREATE TABLE equipement
+(	idequipement			BIGINT NOT NULL,
+	nomequipement			VARCHAR(50) NOT NULL,	-- Description principale d'un objet
+	classeequipement		VARCHAR(50) NOT NULL,
+	description 			VARCHAR(150) NOT NULL,
+	niveau				INT NOT NULL,
+	
+	attribut1			VARCHAR(50) NOT NULL,
+	attribut2			VARCHAR(50) NOT NULL,	-- Attributs lié à l'objet, l'équipement en question
+	attribut3			VARCHAR(50) NOT NULL,
+	
+	classerequise			VARCHAR(50) NOT NULL,	-- Prérequis pour obtenir cet équipement
+	idtypeequipement		BIGINT NOT NULL
+);
+
+
+CREATE TABLE sort
+(	idsort				BIGINT NOT NULL,
+	nomdessorts			VARCHAR(50) NOT NULL,
+	capacite			VARCHAR(50) NOT NULL,	-- Description d'un sort ainsi que ses effets
+	ecoledemagie			VARCHAR(50) NOT NULL,
+	description 			VARCHAR(200) NOT NULL,
+	
+	duree				INT NOT NULL
+);
+
+
+CREATE TABLE inventaire
+(	idinventaire			BIGINT NOT NULL,
+	idtypeinventaire		BIGINT NOT NULL,	-- Si l'inventaire est un sac, un coffre ou autre
+	nom				VARCHAR(50) NOT NULL,
+	nbemplacement 			INT NOT NULL,
+	idpersonnage			BIGINT NOT NULL
+
+);
+
+
+CREATE TABLE typeinventaire
+(	idtypeinventaire		BIGINT NOT NULL,
+	code				CHAR(2) NOT NULL,		-- A vérifier
+	nom				VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE equipe
+(	idequipe			BIGINT NOT NULL,
+	suivre				BOOLEAN NOT NULL	
+);
+	
+	
+CREATE TABLE typeaction
+(	idtypeaction			BIGINT NOT NULL,
+	code				INT NOT NULL,
+	nom				VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE action
+(	idaction			BIGINT NOT NULL,
+	description 			VARCHAR(200) NOT NULL,
+	typeaction			INT NOT NULL,	-- 
+	effet				VARCHAR(50) NOT NULL,
+	paragraphesuite			INT NOT NULL,
+	paragrapheorigine		INT NOT NULL,			-- Renseigne le paragraphe d'orine et les paragraphes possibles suite à un evenement
+	idtypeaction			BIGINT NOT NULL
+);
+
+CREATE TABLE des
+(	iddes				BIGINT NOT NULL
+);
+
+CREATE TABLE combat
+(	idcombat			BIGINT NOT NULL
+);
+
+CREATE TABLE ennemi
+( 	idennemi			BIGINT NOT NULL
+);
+
+CREATE TABLE typeequipement
+(	idtypeequipement		BIGINT NOT NULL
+);
+
+/*------------------------------------------------------------------------------
+ Création des tables d'associations
+------------------------------------------------------------------------------*/
+
+CREATE TABLE personnagesort
+(	idpersonnage			BIGINT NOT NULL,	
+	idsort				BIGINT NOT NULL			
+);
+
+CREATE TABLE equipepersonnage
+( 	idequipe			BIGINT NOT NULL,
+	idpersonnage			BIGINT NOT NULL
+);
+
+CREATE TABLE pnjcompagnon
+(	idcompagnon			BIGINT NOT NULL,
+	idpersonnage			BIGINT NOT NULL
+);
+
+CREATE TABLE inventaireequipement
+(	idinventaire 			BIGINT NOT NULL,
+	idequipement			BIGINT NOT NULL
+);
+
+CREATE TABLE rechercher
+(	idparagraphe			BIGINT NOT NULL,
+	idequipement			BIGINT NOT NULL
+);
+
+CREATE TABLE combatennemi
+(	idcombat			BIGINT NOT NULL,
+	idennemi			BIGINT NOT NULL
+);
+
+CREATE TABLE desaventure
+(	iddes				BIGINT NOT NULL,
+	idaventure			BIGINT NOT NULL
+);
+
+CREATE TABLE glossaire
+(	idglossaire			BIGINT NOT NULL,
+	idaventure			BIGINT NOT NULL,
+	synonyme			VARCHAR(50)
+);
+
+
+
+/*------------------------------------------------------------------------------
+ Création des tables de paramètres 
+------------------------------------------------------------------------------*/
+
+CREATE TABLE parametreaventure
+(	idparametreaventure		BIGINT NOT NULL
+);
+
+CREATE TABLE parametreaffichage
+(	idparametreaffichage		BIGINT NOT NULL
+);
+
+/*------------------------------------------------------------------------------
+ Création des clés primaires 
+------------------------------------------------------------------------------*/
+
+ALTER TABLE personnage
+	ADD CONSTRAINT PK_personnage PRIMARY KEY (idpersonnage);
+
+
+ALTER TABLE aventure
+	ADD CONSTRAINT PK_aventure PRIMARY KEY (idaventure);
+
+
+ALTER TABLE paragraphe
+	ADD CONSTRAINT PK_paragraphe PRIMARY KEY (idparagraphe);
+
+	
+ALTER TABLE equipement
+	ADD CONSTRAINT PK_equipement PRIMARY KEY (idequipement);
+	
+	
+ALTER TABLE sort
+	ADD CONSTRAINT PK_sort PRIMARY KEY (idsort);
+
+
+ALTER TABLE inventaire
+	ADD CONSTRAINT PK_inventaire PRIMARY KEY (idinventaire);
+
+
+ALTER TABLE typeinventaire
+	ADD CONSTRAINT PK_typeinventaire PRIMARY KEY (idtypeinventaire);
+
+
+ALTER TABLE equipe
+	ADD CONSTRAINT PK_equipe PRIMARY KEY (idequipe);
+
+
+ALTER TABLE typeaction
+	ADD CONSTRAINT PK_typeaction PRIMARY KEY (idtypeaction);
+
+
+ALTER TABLE action
+	ADD CONSTRAINT PK_action PRIMARY KEY (idaction);
+
+
+ALTER TABLE des
+	ADD CONSTRAINT PK_action PRIMARY KEY (iddes);
+
+
+ALTER TABLE combat
+	ADD CONSTRAINT PK_action PRIMARY KEY (idcombat);
+
+
+ALTER TABLE ennemi
+	ADD CONSTRAINT PK_action PRIMARY KEY (idennemi);
+
+
+
+
+/*------------------------------------------------------------------------------
+ Création des clés étrangères 
+------------------------------------------------------------------------------*/
+
+
+ALTER TABLE equipepersonnage
+	ADD CONSTRAINT fk_idequipe FOREIGN KEY (idequipe) REFERENCES equipe(idequipe); /*ok*/
+
+ALTER TABLE personnagesort
+	ADD CONSTRAINT fk_idpersonnage FOREIGN KEY (idpersonnage) REFERENCES personnage(idpersonnage); /*ok*/
+
+ALTER TABLE personnagesort
+	ADD CONSTRAINT fk_idsort FOREIGN KEY (idsort) REFERENCES sort(idsort); /*ok*/
+
+ALTER TABLE pnjcompagnon
+	ADD CONSTRAINT fk_idcompagnon FOREIGN KEY (idpersonnage) REFERENCES personnage(idpersonnage); /*ok*/
+
+/*ALTER TABLE inventaire
+	ADD CONSTRAINT fk_idpersonnage FOREIGN KEY (idpersonnage) REFERENCES personnage(idpersonnage); ERREUR : Ecriture impossible, doublon dans une clé de la table  FALSE*/
+
+/*ALTER TABLE inventaire
+	ADD CONSTRAINT fk_idtypeinventaire FOREIGN KEY (idtypeinventaire) REFERENCES typeinventaire (idtypeinventaire); à tester*/
+
+ALTER TABLE desaventure
+	ADD CONSTRAINT fk_iddes FOREIGN KEY (iddes) REFERENCES des(iddes)/*ok*/;
+
+ALTER TABLE desaventure
+	ADD CONSTRAINT fk_idaventure FOREIGN KEY (idaventure) REFERENCES aventure(idaventure)/*ok*/;
+
+ALTER TABLE inventaireequipement
+	ADD CONSTRAINT fk_idinventaire FOREIGN KEY (idinventaire) REFERENCES inventaire(idinventaire);/*ok*/
+
+ALTER TABLE inventaireequipement
+	ADD CONSTRAINT fk_idequipement FOREIGN KEY (idequipement) REFERENCES equipement(idequipement);/*ok*/
+
+/*ALTER TABLE equipement
+	ADD CONSTRAINT fk_idtypeequipement FOREIGN KEY (idtypeequipement) REFERENCES typeequipement(idtypeequipement); à tester*/
+
+/*ALTER TABLE paragraphe
+	ADD CONSTRAINT fk_idaventure FOREIGN KEY (idaventure) REFERENCES aventure(idaventure); à tester*/
+
+ALTER TABLE paragraphe
+	ADD CONSTRAINT fk_idaction FOREIGN KEY (idaction) REFERENCES action(idaction);/*Erreur clé idaction n'existe pas : a voir plus tard*/
+
+/*ALTER TABLE action
+	ADD CONSTRAINT fk_idparagraphe FOREIGN KEY (idparagraphe) REFERENCES paragraphe(idparagraphe);*/
+
+ALTER TABLE action
+	ADD CONSTRAINT fk_idparagraphesuite FOREIGN KEY (paragraphesuite) REFERENCES paragraphe(idparagraphe);/*Impossible d'ajouter des contraintes d'index*/
+
+ALTER TABLE action
+	ADD CONSTRAINT fk_idparagrapheorigine FOREIGN KEY (paragrapheorigine) REFERENCES paragraphe(idparagraphe);/*Impossible d'ajouter des contraintes d'index*/
+
+ALTER TABLE action
+	ADD CONSTRAINT fk_idtypeaction FOREIGN KEY (idtypeaction) REFERENCES typeaction(idtypeaction);/*à tester*/
+
+ALTER TABLE combatennemi
+	ADD CONSTRAINT fk_idcombat FOREIGN KEY (idcombat) REFERENCES combat(idcombat); /*ok*/
+
+ALTER TABLE combatennemi
+	ADD CONSTRAINT fk_idennemi FOREIGN KEY (idennemi) REFERENCES ennemi(idennemi);/*ok*/
+
+ALTER TABLE rechercher
+	ADD CONSTRAINT fk_idparagraphe FOREIGN KEY (idparagraphe) REFERENCES paragraphe(idparagraphe);/*ok*/
+
+ALTER TABLE rechercher
+	ADD CONSTRAINT fk_idequipement FOREIGN KEY (idequipement) REFERENCES equipement(idequipement);/*Ecriture impossible, doublon dans la clé de la table*/
+
+
+
+
