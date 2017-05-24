@@ -1,61 +1,43 @@
-#------------------------------------------------------------
-#        Script SQLite  
-#------------------------------------------------------------
-
-
-#------------------------------------------------------------
-# Table: avt_aventure
-#------------------------------------------------------------
 CREATE TABLE avt_aventure(
-	idaventure     INTEGER autoincrement NOT NULL ,
+	idaventure     INTEGER  NOT NULL ,
 	nom            TEXT NOT NULL ,
 	auteur         TEXT NOT NULL ,
-	isbnserie      TEXT NOT NULL ,
+	isbnserie      TEXT ,
 	synopsis       TEXT ,
 	nbparagraphe   INTEGER NOT NULL ,
 	nvrequis       INTEGER ,
 	classerequise  TEXT ,
-	dictionnaire   INTEGER NOT NULL ,
+	dictionnaire   BIT ,
 	version        TEXT ,
-	codtheme       TEXT ,
+	codetheme      TEXT ,
 	isbnaventure   TEXT ,
-	idtheme        INTEGER NOT NULL ,
-	idseries       INTEGER NOT NULL ,
 	PRIMARY KEY (idaventure) ,
-	
-	FOREIGN KEY (idtheme) REFERENCES avt_theme(idtheme),
-	FOREIGN KEY (idseries) REFERENCES avt_series(idseries)
+
+	FOREIGN KEY (codetheme) REFERENCES avt_theme(codetheme),
+	FOREIGN KEY (isbnserie) REFERENCES avt_series(isbnserie)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_paragraphe
-#------------------------------------------------------------
+
 CREATE TABLE avt_paragraphe(
-	idparagraphe             INTEGER autoincrement NOT NULL ,
+	idparagraphe             INTEGER  NOT NULL ,
 	texte                    TEXT NOT NULL ,
 	nbevenement              INTEGER ,
 	numparagraphe            INTEGER NOT NULL ,
-	idaventure               INTEGER ,
-	idaventure_avt_aventure  INTEGER NOT NULL ,
+	idaventure               INTEGER NOT NULL,
 	PRIMARY KEY (idparagraphe) ,
-	
-	FOREIGN KEY (idaventure_avt_aventure) REFERENCES avt_aventure(idaventure)
+
+	FOREIGN KEY (idaventure) REFERENCES avt_aventure(idaventure)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_personnage
-#------------------------------------------------------------
+
 CREATE TABLE pers_personnage(
-	permadeath                   INTEGER ,
-	hommeDeFer                   INTEGER ,
-	idpersonnage                 INTEGER autoincrement NOT NULL ,
-	nom                          TEXT NOT NULL ,
-	race                         INTEGER NOT NULL ,
-	classe                       INTEGER NOT NULL ,
-	sexe                         INTEGER NOT NULL ,
-	genre                        INTEGER NOT NULL ,
+	permadeath                   BIT ,
+	hommeDeFer                   BIT ,
+	idpersonnage                 INTEGER  NOT NULL ,
+	nom                          TEXT NOT NULL UNIQUE ,
+	
 	niveau                       INTEGER NOT NULL ,
 	richesse                     REAL ,
 	experience                   REAL ,
@@ -64,31 +46,28 @@ CREATE TABLE pers_personnage(
 	dexteritep                   INTEGER NOT NULL ,
 	endurance                    INTEGER NOT NULL ,
 	intelligence                 INTEGER NOT NULL ,
-	estactif                     INTEGER ,
-	idequipe                     INTEGER NOT NULL ,
-	idpersonnage_pers_pjpctempo  INTEGER NOT NULL ,
-	idtyperace                   INTEGER NOT NULL ,
-	idtypeclasse                 INTEGER NOT NULL ,
-	idtypesexe                   INTEGER NOT NULL ,
-	idtypegenre                  INTEGER NOT NULL ,
+	moral			     INTEGER NOT NULL ,	
+	estactif                     BIT ,
+	codeequipe                   TEXT ,
+	coderace                     TEXT NOT NULL ,
+	codeclasse                   TEXT NOT NULL ,
+	codesexe                     TEXT NOT NULL ,
+	codegenre                    TEXT NOT NULL ,
 	PRIMARY KEY (idpersonnage) ,
-	
-	FOREIGN KEY (idequipe) REFERENCES pers_equipe(idequipe),
-	FOREIGN KEY (idpersonnage_pers_pjpctempo) REFERENCES pers_pjpctempo(idpersonnage),
-	FOREIGN KEY (idtyperace) REFERENCES pers_typerace(idtyperace),
-	FOREIGN KEY (idtypeclasse) REFERENCES pers_typeclasse(idtypeclasse),
-	FOREIGN KEY (idtypesexe) REFERENCES pers_typesexe(idtypesexe),
-	FOREIGN KEY (idtypegenre) REFERENCES pers_typegenre(idtypegenre)
+
+	FOREIGN KEY (codeequipe) REFERENCES pers_equipe(codeequipe),
+	FOREIGN KEY (coderace) REFERENCES pers_typerace(coderace),
+	FOREIGN KEY (codeclasse) REFERENCES pers_typeclasse(codeclasse),
+	FOREIGN KEY (codesexe) REFERENCES pers_typesexe(codesexe),
+	FOREIGN KEY (codegenre) REFERENCES pers_typegenre(codegenre)
 );
 
 
-#------------------------------------------------------------
-# Table: lot_equipement
-#------------------------------------------------------------
+
 CREATE TABLE lot_equipement(
-	idequipement      INTEGER autoincrement NOT NULL ,
+	idequipement      INTEGER  NOT NULL ,
 	nomequipement     TEXT NOT NULL ,
-	classeequipement  TEXT NOT NULL ,
+	codeequipement    TEXT NOT NULL ,
 	description       TEXT NOT NULL ,
 	niveau            INTEGER NOT NULL ,
 	classerequise     TEXT NOT NULL ,
@@ -96,207 +75,181 @@ CREATE TABLE lot_equipement(
 	attribut2         TEXT ,
 	attribut3         TEXT ,
 	codelot           TEXT ,
-	idtypeequiment    INTEGER NOT NULL ,
-	idlotequipement   INTEGER NOT NULL ,
-	PRIMARY KEY (idequipement) ,
 	
-	FOREIGN KEY (idtypeequiment) REFERENCES lot_typeequipement(idtypeequiment),
-	FOREIGN KEY (idlotequipement) REFERENCES lot_lotequipement(idlotequipement)
+	
+	PRIMARY KEY (idequipement) ,
+
+	FOREIGN KEY (codeequipement) REFERENCES lot_typeequipement(codeequipement),
+	FOREIGN KEY (codelot) REFERENCES lot_lotequipement(codelot)
 );
 
 
-#------------------------------------------------------------
-# Table: lot_typeequipement
-#------------------------------------------------------------
+
 CREATE TABLE lot_typeequipement(
-	idtypeequiment  INTEGER autoincrement NOT NULL ,
-	PRIMARY KEY (idtypeequiment)
+	idtypeequipement  	INTEGER  NOT NULL ,
+	codeequipement 		TEXT NOT NULL UNIQUE ,
+	nom 			TEXT NOT NULL ,
+	PRIMARY KEY (idtypeequipement)
 );
 
 
-#------------------------------------------------------------
-# Table: parametresaffichage
-#------------------------------------------------------------
+
 CREATE TABLE parametresaffichage(
-	idparamaffichage  INTEGER autoincrement NOT NULL ,
+	idparamaffichage  INTEGER  NOT NULL ,
 	PRIMARY KEY (idparamaffichage)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_enemie
-#------------------------------------------------------------
-CREATE TABLE avt_enemie(
-	idenemie  INTEGER autoincrement NOT NULL ,
-	PRIMARY KEY (idenemie)
+
+CREATE TABLE avt_ennemi(
+	idenemi  	INTEGER  NOT NULL ,
+	coderace 	TEXT NOT NULL ,
+	codeclasse 	TEXT NOT NULL ,
+	niveau 		INTEGER NOT NULL ,
+	forcep		INTEGER NOT NULL ,
+	dexteritep	INTEGER NOT NULL ,
+	endurance	INTEGER NOT NULL ,
+	intelligence	INTEGER NOT NULL ,
+	moral		INTEGER NOT NULL ,
+	PRIMARY KEY (idenemi),
+
+FOREIGN KEY (coderace) REFERENCES avt_typerace(coderace),
+FOREIGN KEY (codeclasse) REFERENCES avt_typeclasse(codeclasse)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_action
-#------------------------------------------------------------
+
 CREATE TABLE avt_action(
-	idaction         INTEGER autoincrement NOT NULL ,
+	idaction         INTEGER  NOT NULL ,
 	description      TEXT NOT NULL ,
-	typeaction       INTEGER NOT NULL ,
 	effet            TEXT NOT NULL ,
 	paragraphesuite  INTEGER NOT NULL ,
-	idcombat         INTEGER NOT NULL ,
-	idtypeaction     INTEGER NOT NULL ,
+	codeaction       TEXT NOT NULL ,
+	codecombat	 TEXT ,
 	PRIMARY KEY (idaction) ,
-	
-	FOREIGN KEY (idcombat) REFERENCES avt_combat(idcombat),
-	FOREIGN KEY (idtypeaction) REFERENCES avt_typeaction(idtypeaction)
+
+	FOREIGN KEY (codeaction) REFERENCES avt_typeaction(codeaction),
+	FOREIGN KEY (codecombat) REFERENCES avt_combat(codecombat)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_combat
-#------------------------------------------------------------
+
 CREATE TABLE avt_combat(
-	idcombat  INTEGER autoincrement NOT NULL ,
+	idcombat  	INTEGER  NOT NULL ,
+	codecombat 	TEXT NOT NULL ,
 	PRIMARY KEY (idcombat)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_parametreaventure
-#------------------------------------------------------------
+
 CREATE TABLE avt_parametreaventure(
-	idparamaventure  INTEGER autoincrement NOT NULL ,
+	idparamaventure  INTEGER  NOT NULL ,
 	idaventure       INTEGER NOT NULL ,
+	nomvariable 	 TEXT NOT NULL ,
+	valeur		 TEXT NOT NULL ,
 	PRIMARY KEY (idparamaventure) ,
-	
+
 	FOREIGN KEY (idaventure) REFERENCES avt_aventure(idaventure)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_equipe
-#------------------------------------------------------------
+
 CREATE TABLE pers_equipe(
-	idequipe  INTEGER autoincrement NOT NULL ,
+	idequipe 	  INTEGER  NOT NULL ,
+	nom		  TEXT NOT NULL ,
+	codeequipe	  TEXT NOT NULL,
 	PRIMARY KEY (idequipe)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_des
-#------------------------------------------------------------
+
 CREATE TABLE avt_des(
-	iddes  INTEGER autoincrement NOT NULL ,
+	iddes 		 INTEGER NOT NULL ,
+	nombredefaces	 INTEGER NOT NULL ,
+	nom		 TEXT NOT NULL ,
 	PRIMARY KEY (iddes)
 );
 
 
-#------------------------------------------------------------
-# Table: lot_sorts
-#------------------------------------------------------------
+
 CREATE TABLE lot_sorts(
-	idsort        INTEGER autoincrement NOT NULL ,
+	idsort        INTEGER  NOT NULL ,
 	nomsort       TEXT NOT NULL ,
 	capacite      TEXT NOT NULL ,
 	ecoledemagie  TEXT NOT NULL ,
 	description   TEXT NOT NULL ,
 	duree         INTEGER ,
 	codelot       TEXT ,
-	idlotsort     INTEGER NOT NULL ,
 	PRIMARY KEY (idsort) ,
-	
-	FOREIGN KEY (idlotsort) REFERENCES lot_lotsort(idlotsort)
+
+	FOREIGN KEY (codelot) REFERENCES lot_lotsort(codelot)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_inventaire
-#------------------------------------------------------------
+
 CREATE TABLE pers_inventaire(
-	idinventaire                  INTEGER autoincrement NOT NULL ,
+	idinventaire                  INTEGER  NOT NULL ,
 	typeinventaire                TEXT NOT NULL ,
 	nom                           TEXT NOT NULL ,
 	nbemplacement                 INTEGER NOT NULL ,
-	idpersonnage                  INTEGER ,
-	idpersonnage_pers_personnage  INTEGER NOT NULL ,
-	idtypeinventaire              INTEGER NOT NULL ,
+	idpersonnage                  INTEGER NOT NULL ,
+	codeinventaire                TEXT NOT NULL ,
 	PRIMARY KEY (idinventaire) ,
-	
-	FOREIGN KEY (idpersonnage_pers_personnage) REFERENCES pers_personnage(idpersonnage),
-	FOREIGN KEY (idtypeinventaire) REFERENCES pers_typeDInventaire(idtypeinventaire)
+
+	FOREIGN KEY (idpersonnage) REFERENCES pers_personnage(idpersonnage),
+	FOREIGN KEY (codeinventaire) REFERENCES pers_typeDInventaire(codeinventaire)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_typeDInventaire
-#------------------------------------------------------------
-CREATE TABLE pers_typeDInventaire(
-	idtypeinventaire  INTEGER autoincrement NOT NULL ,
-	code              TEXT NOT NULL ,
+
+CREATE TABLE pers_typeinventaire(
+	idtypeinventaire  INTEGER  NOT NULL ,
+	codeinventaire    TEXT NOT NULL UNIQUE ,
 	nom               TEXT NOT NULL ,
 	PRIMARY KEY (idtypeinventaire)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_compagnons
-#------------------------------------------------------------
-CREATE TABLE pers_compagnons(
-	estjoueur     INTEGER ,
-	idpersonnage  INTEGER NOT NULL ,
-	PRIMARY KEY (idpersonnage) ,
-	
-	FOREIGN KEY (idpersonnage) REFERENCES pers_personnage(idpersonnage)
-);
 
 
-#------------------------------------------------------------
-# Table: avt_typeaction
-#------------------------------------------------------------
 CREATE TABLE avt_typeaction(
-	idtypeaction  INTEGER autoincrement NOT NULL ,
-	code          TEXT NOT NULL ,
+	idtypeaction  INTEGER  NOT NULL ,
+	codeaction    TEXT NOT NULL UNIQUE ,
 	nom           TEXT NOT NULL ,
 	PRIMARY KEY (idtypeaction)
 );
 
 
-#------------------------------------------------------------
-# Table: lot_lotequipement
-#------------------------------------------------------------
+
 CREATE TABLE lot_lotequipement(
-	idlotequipement  INTEGER autoincrement NOT NULL ,
-	codlot           TEXT NOT NULL ,
+	idlotequipement  INTEGER  NOT NULL ,
+	codelot          TEXT NOT NULL UNIQUE ,
 	nom              TEXT NOT NULL ,
 	PRIMARY KEY (idlotequipement)
 );
 
 
-#------------------------------------------------------------
-# Table: lot_lotsort
-#------------------------------------------------------------
+
 CREATE TABLE lot_lotsort(
-	idlotsort  INTEGER autoincrement NOT NULL ,
-	codlot     TEXT NOT NULL ,
+	idlotsort  INTEGER  NOT NULL ,
+	codelot    TEXT NOT NULL UNIQUE ,
 	nom        TEXT NOT NULL ,
 	PRIMARY KEY (idlotsort)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_theme
-#------------------------------------------------------------
+
 CREATE TABLE avt_theme(
-	idtheme   INTEGER autoincrement NOT NULL ,
+	idtheme   INTEGER  NOT NULL ,
 	nomtheme  TEXT NOT NULL ,
-	codtheme  TEXT NOT NULL ,
+	codetheme TEXT NOT NULL UNIQUE ,
 	PRIMARY KEY (idtheme)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_pjpctempo
-#------------------------------------------------------------
+
 CREATE TABLE pers_pjpctempo(
-	idpersonnage                  INTEGER autoincrement NOT NULL ,
+	idpersonnage                  INTEGER  NOT NULL ,
 	richesse                      REAL ,
 	experience                    REAL ,
 	pv                            INTEGER NOT NULL ,
@@ -304,103 +257,86 @@ CREATE TABLE pers_pjpctempo(
 	dexteritep                    INTEGER NOT NULL ,
 	endurance                     INTEGER NOT NULL ,
 	intelligence                  INTEGER NOT NULL ,
+	moral			      INTEGER NOT NULL ,
 	background                    TEXT NOT NULL ,
-	idpersonnage_pers_personnage  INTEGER NOT NULL ,
 	PRIMARY KEY (idpersonnage) ,
-	
-	FOREIGN KEY (idpersonnage_pers_personnage) REFERENCES pers_personnage(idpersonnage)
+
+	FOREIGN KEY (idpersonnage) REFERENCES pers_personnage(idpersonnage)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_typesexe
-#------------------------------------------------------------
+
 CREATE TABLE pers_typesexe(
-	idtypesexe  INTEGER autoincrement NOT NULL ,
-	codesexe    TEXT ,
+	idtypesexe  INTEGER  NOT NULL ,
+	codesexe    TEXT UNIQUE ,
 	nom         TEXT ,
 	PRIMARY KEY (idtypesexe)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_typeclasse
-#------------------------------------------------------------
+
 CREATE TABLE pers_typeclasse(
-	idtypeclasse  INTEGER autoincrement NOT NULL ,
-	codeclasse    TEXT ,
+	idtypeclasse  INTEGER  NOT NULL ,
+	codeclasse    TEXT UNIQUE ,
 	nom           TEXT ,
 	PRIMARY KEY (idtypeclasse)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_typerace
-#------------------------------------------------------------
+
 CREATE TABLE pers_typerace(
-	idtyperace  INTEGER autoincrement NOT NULL ,
-	coderace    TEXT ,
+	idtyperace  INTEGER  NOT NULL ,
+	coderace    TEXT UNIQUE ,
 	nom         TEXT ,
 	PRIMARY KEY (idtyperace)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_typegenre
-#------------------------------------------------------------
+
 CREATE TABLE pers_typegenre(
-	idtypegenre  INTEGER autoincrement NOT NULL ,
-	codegenre    TEXT ,
+	idtypegenre  INTEGER  NOT NULL ,
+	codegenre    TEXT UNIQUE ,
 	nom          TEXT ,
 	PRIMARY KEY (idtypegenre)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_series
-#------------------------------------------------------------
+
 CREATE TABLE avt_series(
-	idseries   INTEGER autoincrement NOT NULL ,
-	isbnserie  TEXT ,
-	nomserie   TEXT ,
+	idseries   INTEGER  NOT NULL ,
+	isbnserie  TEXT NOT NULL UNIQUE ,
+	nomserie   TEXT NOT NULL ,
 	PRIMARY KEY (idseries)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_sort
-#------------------------------------------------------------
+
 CREATE TABLE pers_sort(
-	idsort        INTEGER autoincrement NOT NULL ,
+	idsort        INTEGER  NOT NULL ,
 	nomsort       TEXT NOT NULL ,
 	capacite      TEXT NOT NULL ,
 	ecoledemagie  TEXT NOT NULL ,
 	description   TEXT NOT NULL ,
 	duree         INTEGER ,
 	codelot       TEXT ,
-	idlotsort     INTEGER NOT NULL ,
 	PRIMARY KEY (idsort) ,
-	
-	FOREIGN KEY (idlotsort) REFERENCES pers_lotsort(idlotsort)
+
+	FOREIGN KEY (codelot) REFERENCES pers_lotsort(codelot)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_lotsort
-#------------------------------------------------------------
+
 CREATE TABLE pers_lotsort(
-	idlotsort  INTEGER autoincrement NOT NULL ,
-	codlot     TEXT NOT NULL ,
+	idlotsort  INTEGER  NOT NULL ,
+	codelot     TEXT NOT NULL UNIQUE ,
 	nom        TEXT NOT NULL ,
 	PRIMARY KEY (idlotsort)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_equipement
-#------------------------------------------------------------
+
 CREATE TABLE pers_equipement(
-	idequipement      INTEGER autoincrement NOT NULL ,
+	idequipement      INTEGER  NOT NULL ,
 	nomequipement     TEXT NOT NULL ,
 	classeequipement  TEXT NOT NULL ,
 	description       TEXT NOT NULL ,
@@ -409,109 +345,96 @@ CREATE TABLE pers_equipement(
 	attribut1         TEXT ,
 	attribut2         TEXT ,
 	attribut3         TEXT ,
-	codelot           TEXT ,
-	idtypeequiment    INTEGER NOT NULL ,
-	idlotequipement   INTEGER NOT NULL ,
+	codelot           TEXT NOT NULL ,
+	codeequipement    TEXT NOT NULL ,
 	PRIMARY KEY (idequipement) ,
-	
-	FOREIGN KEY (idtypeequiment) REFERENCES pers_typeequipement(idtypeequiment),
-	FOREIGN KEY (idlotequipement) REFERENCES pers_lotequipement(idlotequipement)
+
+	FOREIGN KEY (codeequipement) REFERENCES pers_typeequipement(codeequipement),
+	FOREIGN KEY (codelot) REFERENCES pers_lotequipement(codelot)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_typeequipement
-#------------------------------------------------------------
+
 CREATE TABLE pers_typeequipement(
-	idtypeequiment  INTEGER autoincrement NOT NULL ,
-	PRIMARY KEY (idtypeequiment)
+	idtypeequipement	INTEGER  NOT NULL ,
+	nom			TEXT NOT NULL ,
+	codeequipement 		TEXT NOT NULL ,
+	PRIMARY KEY (idtypeequipement)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_lotequipement
-#------------------------------------------------------------
+
 CREATE TABLE pers_lotequipement(
-	idlotequipement  INTEGER autoincrement NOT NULL ,
-	codlot           TEXT NOT NULL ,
+	idlotequipement  INTEGER  NOT NULL ,
+	codelot          TEXT NOT NULL UNIQUE ,
 	nom              TEXT NOT NULL ,
 	PRIMARY KEY (idlotequipement)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_combatenemis
-#------------------------------------------------------------
-CREATE TABLE avt_combatenemis(
+
+CREATE TABLE avt_combatennemi(
 	idcombat  INTEGER NOT NULL ,
-	idenemie  INTEGER NOT NULL ,
-	PRIMARY KEY (idcombat,idenemie) ,
-	
+	idennemi  INTEGER NOT NULL ,
+	PRIMARY KEY (idcombat,idennemi) ,
+
 	FOREIGN KEY (idcombat) REFERENCES avt_combat(idcombat),
-	FOREIGN KEY (idenemie) REFERENCES avt_enemie(idenemie)
+	FOREIGN KEY (idennemi) REFERENCES avt_ennemi(idennemi)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_desaventure
-#------------------------------------------------------------
+
 CREATE TABLE avt_desaventure(
 	iddes       INTEGER NOT NULL ,
 	idaventure  INTEGER NOT NULL ,
-	PRIMARY KEY (iddes,idaventure) ,
 	
+	PRIMARY KEY (iddes,idaventure) ,
+
 	FOREIGN KEY (iddes) REFERENCES avt_des(iddes),
 	FOREIGN KEY (idaventure) REFERENCES avt_aventure(idaventure)
 );
 
 
-#------------------------------------------------------------
-# Table: avt_parageapheaction
-#------------------------------------------------------------
-CREATE TABLE avt_parageapheaction(
-	idaction      INTEGER NOT NULL ,
-	idparagraphe  INTEGER NOT NULL ,
-	PRIMARY KEY (idaction,idparagraphe) ,
-	
+
+CREATE TABLE avt_paragrapheaction(
+	idparagrapheaction 	 INTEGER NOT NULL ,
+	idaction     		 INTEGER NOT NULL ,
+	idparagraphe		 INTEGER NOT NULL ,
+	PRIMARY KEY (idparagrapheaction) ,
+
 	FOREIGN KEY (idaction) REFERENCES avt_action(idaction),
 	FOREIGN KEY (idparagraphe) REFERENCES avt_paragraphe(idparagraphe)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_restrictionsexegenre
-#------------------------------------------------------------
+
 CREATE TABLE pers_restrictionsexegenre(
-	idtypegenre  INTEGER NOT NULL ,
-	idtypesexe   INTEGER NOT NULL ,
-	PRIMARY KEY (idtypegenre,idtypesexe) ,
-	
-	FOREIGN KEY (idtypegenre) REFERENCES pers_typegenre(idtypegenre),
-	FOREIGN KEY (idtypesexe) REFERENCES pers_typesexe(idtypesexe)
+	codegenre  INTEGER NOT NULL ,
+	codesexe   INTEGER NOT NULL ,
+	PRIMARY KEY (codegenre,codesexe) ,
+
+	FOREIGN KEY (codegenre) REFERENCES pers_typegenre(codegenre),
+	FOREIGN KEY (codesexe) REFERENCES pers_typesexe(codesexe)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_personnagesort
-#------------------------------------------------------------
+
 CREATE TABLE pers_personnagesort(
 	idinventaire  INTEGER NOT NULL ,
 	idsort        INTEGER NOT NULL ,
 	PRIMARY KEY (idinventaire,idsort) ,
-	
+
 	FOREIGN KEY (idinventaire) REFERENCES pers_inventaire(idinventaire),
 	FOREIGN KEY (idsort) REFERENCES pers_sort(idsort)
 );
 
 
-#------------------------------------------------------------
-# Table: pers_inventaireequipement
-#------------------------------------------------------------
+
 CREATE TABLE pers_inventaireequipement(
 	idinventaire  INTEGER NOT NULL ,
 	idequipement  INTEGER NOT NULL ,
 	PRIMARY KEY (idinventaire,idequipement) ,
-	
+
 	FOREIGN KEY (idinventaire) REFERENCES pers_inventaire(idinventaire),
 	FOREIGN KEY (idequipement) REFERENCES pers_equipement(idequipement)
 );
