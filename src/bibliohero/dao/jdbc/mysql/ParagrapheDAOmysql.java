@@ -3,9 +3,9 @@ package bibliohero.dao.jdbc.mysql;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ParagrapheDAO {
+public class ParagrapheDAOmysql {
 	
-	private ConnectionDAO dao = ConnectionDAO.getConnectionDAO();
+	private ConnectionDAOmysql dao = ConnectionDAOmysql.getConnectionDAO();
 	
 	
 	public void recupererTexte(){

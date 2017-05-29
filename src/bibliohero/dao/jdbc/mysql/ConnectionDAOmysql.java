@@ -5,14 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class ConnectionDAO {
-    private static ConnectionDAO instanceConnection;
+public class ConnectionDAOmysql {
+    private static ConnectionDAOmysql instanceConnection;
     private static Connection connection;
     
     /**
     * m�thode pour se connecter � la base de donn�es 
     */
-    private ConnectionDAO() {
+    private ConnectionDAOmysql() {
     	
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -32,9 +32,9 @@ public class ConnectionDAO {
         }
     }
     
-    public static ConnectionDAO getConnectionDAO(){
+    public static ConnectionDAOmysql getConnectionDAO(){
     	if(instanceConnection == null){
-    		instanceConnection = new ConnectionDAO();
+    		instanceConnection = new ConnectionDAOmysql();
     	}
         return instanceConnection;
     }
