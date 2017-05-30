@@ -18,7 +18,7 @@ public class PersonnageDao{
 
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		System.out.println("Essai d'envoi de donn�es");
+		
 
 		while(rs.next()){
 			Personnage personnage = new Personnage();
@@ -26,7 +26,7 @@ public class PersonnageDao{
 			personnage.setNom(rs.getString("nom"));
 
 			//-----------
-			//Comp�tences
+			//Competences
 			//------------
 			personnage.setPvMax(rs.getShort("pv"));
 			personnage.setForce(rs.getShort("forcep"));
@@ -48,7 +48,7 @@ public class PersonnageDao{
 			personnage.setHommedefer(rs.getBoolean("hommeDeFer"));
 			personnage.setEstJoueur(rs.getBoolean("estJoueur"));
 			//------------
-			//Code � aller chercher en base
+			//Code a aller chercher en base
 			//------------
 			TypeRaceDao typeRD = new TypeRaceDao();
 			personnage.setRace(typeRD.recupererRaceViaCode(rs.getString("coderace")));
@@ -72,7 +72,6 @@ public class PersonnageDao{
 		afficherPersonnage(listePersonnages);
 		rs.close();
 		return listePersonnages;
-
 	}
 
 	public void afficherPersonnage(ArrayList <Personnage> listePersonnages){
@@ -80,5 +79,17 @@ public class PersonnageDao{
 			System.out.println(pers.toString());
 		}
 	}
+	
+	//--------------
+	//Insert en cours
+	//--------------
+	
+	/*public void insererPersonnage() throws DaoException, ClassNotFoundException, SQLException{
+		String sql = "INSERT INTO pers_personnage (permadeath, hommeDeFer, estactif, "
+				+ "estJoueur, nom, niveau, richesse, experience, pv, forcep, dexteritep, "
+				+ "endurance, intelligence, moral, codeequipe, coderace, codeclasse, "
+				+ "codesexe, codegenre)"+
+				"VALUES (false, false, true, true,?, 1, 0, 0, 20, 10, 10, 10, 100,?, ?, ?, ?, ?);";
+	}*/
 
 }
