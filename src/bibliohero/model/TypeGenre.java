@@ -1,23 +1,13 @@
 package bibliohero.model;
 
-public class TypeGenre {
-
+public class TypeGenre
+{
 	private String codeGenre;
 	private String nomGenre;
-	
-	
-	public String getCodeGenre() {
-		return codeGenre;
-	}
-	public void setCodeGenre(String codeGenre) {
-		this.codeGenre = codeGenre;
-	}
-	public String getNomGenre() {
-		return nomGenre;
-	}
-	public void setNomGenre(String nomGenre) {
-		this.nomGenre = nomGenre;
-	}
-	
-	
+
+	public String getCodeGenre() { return codeGenre; }
+	public String getNomGenre() { return nomGenre; }
+
+	public void setCodeGenre(String codeGenre) { this.codeGenre = codeGenre; }
+	public void setNomGenre(String nomGenre) { this.nomGenre = nomGenre; }
 }

@@ -1,43 +1,64 @@
 package bibliohero.model;
 
-public class Personnage {
-
-	//Liste des attributs de la classe personnage
-	
+public class Personnage
+{
 	int idPersonnage;
-    boolean permadeath = false;
+
+	boolean permadeath = false;
     boolean hommedefer = false;
     boolean estJoueur = false;
     boolean estActif = false;
+
     String nom;
     String race;
     String classe;
     String sexe;
     String genre;
+
     String equipe;
     double richesse;
     double experience;
+
     byte niveau;
-    short pv;
+    short pvmax;
+    short pvactu; //dans la table temporaire
     short force;
     short dexterite;
     short endurance;
     short intelligence;
     short moral;
-    
-    
-    
-    
+
 	@Override
-	public String toString() {
-		return "Personnage [idPersonnage=" + idPersonnage + ", permadeath=" + permadeath + ", hommedefer=" + hommedefer
+	public String toString()
+	{
+		String retour = "";
+		retour += "Personnage n°" + idPersonnage + " : ";
+		if (permadeath)
+			retour += "mode mort permanente ; ";
+		if (hommedefer)
+			retour += "mode homme de fer ; ";
+		if (!estJoueur)
+			retour += "compagnon ;";
+		if (estActif)
+			retour += "utilisable ; ";
+		else retour += "désactivé ; ";
+		retour += nom + " est un " + classe + " de race " + race + "de sexe "
+				+ sexe + "se définissant " + genre +". ";
+		if (equipe !=null || equipe != "")
+			retour += "Il appartient à l'équipe " + equipe + ". ";
+		retour += "Il est de niveau " + niveau + ", dispose de " + richesse +
+				" pièces d'or. Sa force est de " + force + ", sa dextérité de " + dexterite +
+				", son endurance de " + endurance + " et d'une intelligence de " + intelligence +
+				". Son état de santé est de " + " / " + pvmax + "et son moral est à " + moral;
+		/*
+		return "Personnage n°" + idPersonnage + ", permadeath=" + permadeath + ", hommedefer=" + hommedefer
 				+ ", estJoueur=" + estJoueur + ", estActif=" + estActif + ", nom=" + nom + ", race=" + race
 				+ ", classe=" + classe + ", sexe=" + sexe + ", genre=" + genre + ", equipe=" + equipe + ", richesse="
 				+ richesse + ", experience=" + experience + ", niveau=" + niveau + ", pv=" + pv + ", force=" + force
 				+ ", dexterite=" + dexterite + ", endurance=" + endurance + ", intelligence=" + intelligence
-				+ ", moral=" + moral + "]";
+				+ ", moral=" + moral + "]";*/
 	}
-	
+
 	public int getIdPersonnage() {
 		return idPersonnage;
 	}
@@ -68,7 +89,7 @@ public class Personnage {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public boolean isEstJoueur() {
 		return estJoueur;
 	}
@@ -159,6 +180,6 @@ public class Personnage {
 	public void setMoral(short moral) {
 		this.moral = moral;
 	}
-    
-    
+
+
 }
