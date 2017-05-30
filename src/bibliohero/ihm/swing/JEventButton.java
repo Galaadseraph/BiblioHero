@@ -1,4 +1,4 @@
-package bibliohero.ihm;
+package bibliohero.ihm.swing;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
