@@ -1,6 +1,5 @@
 package bibliohero.dao.request;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,25 +10,25 @@ import bibliohero.model.Personnage;
 import exceptions.DaoException;
 
 public class PersonnageDao{
-	
-	
+
+
 	public ArrayList <Personnage> recupererPersonnage() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_personnage;";
 		ArrayList<Personnage> listePersonnages = new ArrayList();
-		
+
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		System.out.println("Essai d'envoi de données");
-		
+		System.out.println("Essai d'envoi de donnï¿½es");
+
 		while(rs.next()){
 			Personnage personnage = new Personnage();
 			personnage.setIdPersonnage(rs.getInt("idpersonnage"));
 			personnage.setNom(rs.getString("nom"));
-			
+
 			//-----------
-			//Compétences
+			//Compï¿½tences
 			//------------
-			personnage.setPv(rs.getShort("pv"));
+			personnage.setPvMax(rs.getShort("pv"));
 			personnage.setForce(rs.getShort("forcep"));
 			personnage.setDexterite(rs.getShort("dexteritep"));
 			personnage.setEndurance(rs.getShort("endurance"));
@@ -49,37 +48,37 @@ public class PersonnageDao{
 			personnage.setHommedefer(rs.getBoolean("hommeDeFer"));
 			personnage.setEstJoueur(rs.getBoolean("estJoueur"));
 			//------------
-			//Code à aller chercher en base
+			//Code ï¿½ aller chercher en base
 			//------------
 			TypeRaceDao typeRD = new TypeRaceDao();
 			personnage.setRace(typeRD.recupererRaceViaCode(rs.getString("coderace")));
-			
+
 			TypeClasseDao typeClasseD = new TypeClasseDao();
 			personnage.setClasse(typeClasseD.recupererClasseeViaCode(rs.getString("codeclasse")));
-			
+
 			TypeSexeDao typeSexeD = new TypeSexeDao();
 			personnage.setSexe(typeSexeD.recupererSexeViaCode(rs.getString("codesexe")));
-			
+
 			TypeGenreDao typeGenreD = new TypeGenreDao();
 			personnage.setGenre(typeGenreD.recupererGenreViaCode(rs.getString("codegenre")));
-			
+
 			EquipeDao equipeD = new EquipeDao();
 			personnage.setEquipe(equipeD.recupererEquipeViaCode(rs.getString("codeequipe")));
-			
-			
+
+
 			listePersonnages.add(personnage);
-			
+
 		}
 		afficherPersonnage(listePersonnages);
 		rs.close();
 		return listePersonnages;
-		
+
 	}
-	
+
 	public void afficherPersonnage(ArrayList <Personnage> listePersonnages){
 		for(Personnage pers : listePersonnages){
 			System.out.println(pers.toString());
 		}
 	}
-	
+
 }

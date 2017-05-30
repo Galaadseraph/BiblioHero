@@ -20,8 +20,8 @@ public class Personnage
     double experience;
 
     byte niveau;
-    short pvmax;
-    short pvactu; //dans la table temporaire
+    short pvMax;
+    short pvActu; //dans la table temporaire
     short force;
     short dexterite;
     short endurance;
@@ -49,7 +49,7 @@ public class Personnage
 		retour += "Il est de niveau " + niveau + ", dispose de " + richesse +
 				" pièces d'or. Sa force est de " + force + ", sa dextérité de " + dexterite +
 				", son endurance de " + endurance + " et d'une intelligence de " + intelligence +
-				". Son état de santé est de " + " / " + pvmax + "et son moral est à " + moral;
+				". Son état de santé est de " + pvActu + " / " + pvMax + "et son moral est à " + moral;
 		/*
 		return "Personnage n°" + idPersonnage + ", permadeath=" + permadeath + ", hommedefer=" + hommedefer
 				+ ", estJoueur=" + estJoueur + ", estActif=" + estActif + ", nom=" + nom + ", race=" + race
@@ -57,6 +57,7 @@ public class Personnage
 				+ richesse + ", experience=" + experience + ", niveau=" + niveau + ", pv=" + pv + ", force=" + force
 				+ ", dexterite=" + dexterite + ", endurance=" + endurance + ", intelligence=" + intelligence
 				+ ", moral=" + moral + "]";*/
+		return retour;
 	}
 
 	public int getIdPersonnage() {
@@ -144,11 +145,11 @@ public class Personnage
 	public void setNiveau(byte niveau) {
 		this.niveau = niveau;
 	}
-	public short getPv() {
-		return pv;
+	public short getPvMAx() {
+		return pvMax;
 	}
-	public void setPv(short pv) {
-		this.pv = pv;
+	public void setPvMax(short pvMax) {
+		this.pvMax = pvMax;
 	}
 	public short getForce() {
 		return force;
