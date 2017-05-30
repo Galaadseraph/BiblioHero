@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.sql.ConnectionPoolDataSource;
+
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
 import bibliohero.model.Personnage;
 import exceptions.DaoException;
@@ -79,17 +81,18 @@ public class PersonnageDao{
 			System.out.println(pers.toString());
 		}
 	}
+
+	public void insererPersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
+		String sql = "INSERT INTO pers_personnage ("
+				+ "permadeath, hommeDeFer, estactif, estJoueur, nom, niveau, richesse, experience, pv, forcep, "
+				+ "dexteritep, endurance, intelligence, moral, codeequipe, coderace, codeclasse, codesexe, codegenre)"
+				+ "VALUES (0, 0, 1, 1, ?, 1, 0, 0, 20, 10, 10, 10, 10, 100, ?, ?, ?, ?, ?)";
 	
-	//--------------
-	//Insert en cours
-	//--------------
-	
-	/*public void insererPersonnage() throws DaoException, ClassNotFoundException, SQLException{
-		String sql = "INSERT INTO pers_personnage (permadeath, hommeDeFer, estactif, "
-				+ "estJoueur, nom, niveau, richesse, experience, pv, forcep, dexteritep, "
-				+ "endurance, intelligence, moral, codeequipe, coderace, codeclasse, "
-				+ "codesexe, codegenre)"+
-				"VALUES (false, false, true, true,?, 1, 0, 0, 20, 10, 10, 10, 100,?, ?, ?, ?, ?);";
-	}*/
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		//---------------
+		//point dinterrogation a definir
+		//---------------
+		
+	}
 
 }
