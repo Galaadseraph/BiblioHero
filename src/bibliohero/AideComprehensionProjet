@@ -1,7 +1,10 @@
 /*
-AIDE A LA COMPREHENSION DU PROJET
+AIDE A LA COMPREHENSION DU PROJET : Remy
 
 Nom de la base de données : biblioheros.sqlite (Le nom sera peut être amené à changer mais la terminaison est en .sqlite).
+
+Le package bin (poubelle) est utilisé pour mettre toutes les classes, et fichiers dont on ne connait pas l'utilité 
+mais qu'on ne veut pas supprimer.
 
 Le package DAO (Data Access Object) contient deux packages importants :
 -----------------------------------------------------------------------

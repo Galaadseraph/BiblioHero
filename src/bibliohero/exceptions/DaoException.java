@@ -1,4 +1,4 @@
-package exceptions;
+package bibliohero.exceptions;
 
 public class DaoException extends Exception{
 

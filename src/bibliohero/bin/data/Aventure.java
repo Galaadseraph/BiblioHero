@@ -1,4 +1,4 @@
-package bibliohero.data;
+package bibliohero.bin.data;
 
 /**
  *

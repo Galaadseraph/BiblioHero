@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
+import bibliohero.exceptions.DaoException;
 import bibliohero.model.TypeClasse;
 import bibliohero.model.TypeRace;
-import exceptions.DaoException;
 
 public class TypeClasseDao {
 	

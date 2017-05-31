@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import javax.sql.ConnectionPoolDataSource;
 
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
+import bibliohero.exceptions.DaoException;
 import bibliohero.model.Personnage;
-import exceptions.DaoException;
 
 public class PersonnageDao{
 

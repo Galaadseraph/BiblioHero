@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
+import bibliohero.exceptions.DaoException;
 import bibliohero.model.LotSort;
 import bibliohero.model.LotSort;
-import exceptions.DaoException;
 
 public class LotSortDao {
 

@@ -3,7 +3,7 @@ package bibliohero;
 import java.sql.SQLException;
 
 import bibliohero.dao.request.PersonnageDao;
-import exceptions.DaoException;
+import bibliohero.exceptions.DaoException;
 
 public class Main {
 	public static void main(String[] args){

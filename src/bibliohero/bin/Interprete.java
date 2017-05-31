@@ -1,4 +1,4 @@
-package bibliohero;
+package bibliohero.bin;
 //import java.io;
 
 /**

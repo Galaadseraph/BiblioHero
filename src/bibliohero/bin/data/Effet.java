@@ -1,17 +1,17 @@
-package bibliohero.data;
+package bibliohero.bin.data;
 
 /**
  *
  * @author arnaud
  */
-public class Evenement 
+public class Effet 
 {
 	//Region Proprietes
     // <editor-fold defaultstate="collapsed" desc="Propriétés">
-    String Type;
-    String Description;
-    char NbEffet;
-    Effet[] Listeeffet = new Effet[NbEffet];
+    String TypeEffet;
+    //String Description;
+    String Value1;
+    String Value2;
     // </editor-fold>
     //EndRegion
 }
