@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="bibliohero.ihm.android.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <Button
+        android:id="@+id/buttonParametre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Paramètres" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttonPlay"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_alignBaseline="@+id/buttonContinue"
+            android:layout_alignBottom="@+id/buttonContinue"
+            android:layout_alignLeft="@+id/buttonImport"
+            android:layout_alignStart="@+id/buttonImport"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:text="Jouer"
+            android:textColor="Green" />
+
+        <Button
+            android:id="@+id/buttonContinue"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_alignParentTop="true"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:text="Continuer" />
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/buttonParametre"
+            android:layout_column="0"
+            android:layout_marginTop="175dp"
+            android:layout_row="3"
+            android:text="Sauvegarder"
+            android:textColor="Green" />
+
+        <Button
+            android:id="@+id/buttonImport"
+            android:layout_width="396dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/buttonGestion"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_column="0"
+            android:layout_row="4"
+            android:text="Importer" />
+
+        <Button
+            android:id="@+id/buttonGestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonSave"
+            android:layout_column="0"
+            android:layout_row="5"
+            android:layout_toEndOf="@+id/buttonImport"
+            android:layout_toRightOf="@+id/buttonImport"
+            android:text="Gestion" />
+
+    </LinearLayout>
+</RelativeLayout>

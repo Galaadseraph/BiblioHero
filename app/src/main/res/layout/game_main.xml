@@ -1,17 +1,499 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editText"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="60dp"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="75dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/buttonParam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:accessibilityTraversalBefore="@+id/buttonObjets"
+                    android:rotation="90"
+                    android:text="paramètres"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/buttonperso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:rotation="90"
+                    android:text="personnage" />
+
+                <Button
+                    android:id="@+id/buttonObjets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:rotation="90"
+                    android:text="Equipement" />
+
+                <Button
+                    android:id="@+id/buttonContexte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:rotation="90"
+                    android:text="Contexte" />
+            </LinearLayout>
+
+        </TabWidget>
+
+        <FrameLayout
+            android:id="@+id/TabPersonnage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/Personnage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/nomPerso"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Nom du personnage"
+                        android:textAlignment="center" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/nomPerso">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <EditText
+                                android:id="@+id/editText9"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="Race : " />
+
+                            <EditText
+                                android:id="@+id/RacePerso"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="Nom de la race" />
+
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <EditText
+                                android:id="@+id/editText12"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="Classe : " />
+
+                            <EditText
+                                android:id="@+id/ClassePerso"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="nom de la classe" />
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <EditText
+                                android:id="@+id/editText16"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="sexe : " />
+
+                            <EditText
+                                android:id="@+id/SexePerso"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="sexe du personnage" />
+
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <EditText
+                                android:id="@+id/editText18"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="genre :" />
+
+                            <EditText
+                                android:id="@+id/GenrePerso"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="genre du personnage" />
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <EditText
+                                android:id="@+id/editText19"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="Santé :" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ProgressBar
+                                    android:id="@+id/barreVie"
+                                    style="?android:attr/progressBarStyleHorizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:hapticFeedbackEnabled="false"
+                                    android:max="12"
+                                    android:progress="10"
+                                    android:textAlignment="center" />
+
+                                <TextView
+                                    android:id="@+id/textView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text=" 10 / 12"
+                                    android:textAlignment="center" />
+
+                            </LinearLayout>
+
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <LinearLayout
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/editText21"
+                                    android:layout_width="75dp"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="Niveau : " />
+
+                                <EditText
+                                    android:id="@+id/NiveauPerso"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="1"
+                                    android:textAlignment="center" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/editText23"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="Expérience : " />
+
+                                <EditText
+                                    android:id="@+id/ExpPerso"
+                                    android:layout_width="75dp"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="150 xp"
+                                    android:textAlignment="textEnd" />
+                            </LinearLayout>
+
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/editText25"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="Force : " />
+
+                                <EditText
+                                    android:id="@+id/ForcePerso"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="10"
+                                    android:textAlignment="center" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/editText27"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="Dextérité : "
+                                    android:layout_weight="0.39" />
+
+                                <EditText
+                                    android:id="@+id/editText26"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="8"
+                                    android:textAlignment="center" />
+                            </LinearLayout>
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <LinearLayout
+                                android:layout_width="95dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/editText29"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="Endurance : " />
+
+                                <EditText
+                                    android:id="@+id/editText28"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="5"
+                                    android:textAlignment="center" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/editText31"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.38"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="Intelligence : " />
+
+                                <EditText
+                                    android:id="@+id/editText30"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:accessibilityTraversalAfter="@+id/ClassePerso"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="7"
+                                    android:textAlignment="center" />
+                            </LinearLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </TableLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/TabHistoire"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/principal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/descrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="15dp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="textMultiLine|textImeMultiLine"
+                    android:paddingTop="0dp"
+                    android:scrollbars="vertical"
+                    android:text="texte de démonstration de la maquette"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:visibility="visible" />
+
+                <TableLayout
+                    android:id="@+id/tableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignEnd="@+id/descrip"
+                    android:layout_alignLeft="@+id/descrip"
+                    android:layout_alignRight="@+id/descrip"
+                    android:layout_alignStart="@+id/descrip"
+                    android:layout_below="@+id/descrip"
+                    android:visibility="visible">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/event1"
+                            android:layout_width="145dp"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="5dp"
+                            android:text="Button" />
+
+                        <Button
+                            android:id="@+id/event2"
+                            android:layout_width="145dp"
+                            android:layout_height="75dp"
+                            android:text="Button" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/event3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="5dp"
+                            android:text="Button" />
+
+                        <Button
+                            android:id="@+id/event4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:text="Button" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/event5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="5dp"
+                            android:text="Button" />
+
+                        <Button
+                            android:id="@+id/event6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:text="Button" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tab3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
 </RelativeLayout>
