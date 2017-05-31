@@ -31,6 +31,7 @@ public class EquipeDao {
 		return listeEquipe;
 	}
 	
+	//Methode pour recuperer une equipe via le code
 	public String recupererEquipeViaCode(String codeEquipe) throws SQLException, DaoException, ClassNotFoundException{
 		String sql = "Select nom from pers_Equipe where pers_Equipe.codeEquipe = ?;";
 		
