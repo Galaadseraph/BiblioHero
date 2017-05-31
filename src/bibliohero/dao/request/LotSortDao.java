@@ -12,6 +12,7 @@ import exceptions.DaoException;
 
 public class LotSortDao {
 
+	//Methode pour recuperer les lots de sorts
 	public ArrayList <LotSort> recupererLotSort() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_typeLotSort;";
 		ArrayList<LotSort> listeLotSort = new ArrayList();

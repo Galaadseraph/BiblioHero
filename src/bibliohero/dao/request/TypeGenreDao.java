@@ -10,7 +10,8 @@ import bibliohero.model.TypeGenre;
 import exceptions.DaoException;
 
 public class TypeGenreDao {
-
+	
+	//Methode pour recuprer les genres
 	public ArrayList <TypeGenre> recupererGenre() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_typegenre;";
 		ArrayList<TypeGenre> listeTypeGenre = new ArrayList();
@@ -29,6 +30,7 @@ public class TypeGenreDao {
 		return listeTypeGenre;
 	}
 	
+	//Methode pour recuperer le genre via le code genre
 	public String recupererGenreViaCode(String codeGenre) throws SQLException, DaoException, ClassNotFoundException{
 		String sql = "Select nom from pers_typegenre where pers_typegenre.codegenre = ?;";
 		

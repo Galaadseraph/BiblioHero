@@ -11,7 +11,8 @@ import bibliohero.model.Sort;
 import exceptions.DaoException;
 
 public class SortDao {
-
+	
+	//Methode pour recuperer un sort
 	public ArrayList <Sort> recupererSort() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_sort;";
 		ArrayList<Sort> listeSort = new ArrayList();

@@ -11,7 +11,8 @@ import bibliohero.model.TypeRace;
 import exceptions.DaoException;
 
 public class TypeClasseDao {
-
+	
+	//Methode pour recuperer une classe
 	public ArrayList <TypeClasse> recupererClasse() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_typeclasse;";
 		ArrayList<TypeClasse> listeTypeClasse = new ArrayList();

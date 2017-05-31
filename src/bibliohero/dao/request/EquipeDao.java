@@ -11,7 +11,8 @@ import exceptions.DaoException;
 
 public class EquipeDao {
 
-		
+	//Methode pour selectionner toutes les equipes
+	
 	public ArrayList <Equipe> recupererEquipe() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_equipe;";
 		ArrayList<Equipe> listeEquipe = new ArrayList();

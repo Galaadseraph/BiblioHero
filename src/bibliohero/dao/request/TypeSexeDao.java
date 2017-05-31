@@ -11,6 +11,7 @@ import exceptions.DaoException;
 
 public class TypeSexeDao {
 	
+	//Methode pour recuperer le sexe
 	public ArrayList <TypeSexe> recupererSexe() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_typesexe;";
 		ArrayList<TypeSexe> listeTypeSexe = new ArrayList();

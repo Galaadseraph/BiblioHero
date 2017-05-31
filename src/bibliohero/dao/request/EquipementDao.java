@@ -11,6 +11,7 @@ import exceptions.DaoException;
 
 public class EquipementDao {
 
+	//Methode pour recuperer les equipements
 	public ArrayList <Equipement> recupererEquipement() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_equipement;";
 		ArrayList<Equipement> listeEquipement = new ArrayList();

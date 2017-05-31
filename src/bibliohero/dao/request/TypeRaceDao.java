@@ -12,6 +12,7 @@ import exceptions.DaoException;
 
 public class TypeRaceDao {
 
+	//Methode pour recuperer les races
 	public ArrayList <TypeRace> recupererRaces() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_typerace;";
 		ArrayList<TypeRace> listeTypeRace = new ArrayList();

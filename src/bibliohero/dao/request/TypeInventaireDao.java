@@ -11,6 +11,7 @@ import exceptions.DaoException;
 
 public class TypeInventaireDao {
 
+	//Methode pour récuprer le type des inventaires
 	public ArrayList <TypeInventaire> recupererTypeInventaire() throws DaoException, SQLException, ClassNotFoundException{
 		
 		String sql = "Select * from pers_Typeinventaire;";

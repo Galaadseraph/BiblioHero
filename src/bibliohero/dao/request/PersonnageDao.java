@@ -13,7 +13,7 @@ import exceptions.DaoException;
 
 public class PersonnageDao{
 
-
+	//Methodes pour recuperer un personnage
 	public ArrayList <Personnage> recupererPersonnage() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "SELECT * FROM pers_personnage;";
 		ArrayList<Personnage> listePersonnages = new ArrayList();
@@ -76,6 +76,7 @@ public class PersonnageDao{
 		return listePersonnages;
 	}
 	
+	//Methode pour recuperer un id de personnage grace à un nom
 	private int recupererIdPersonnageViaNom(String nom) throws DaoException, SQLException, ClassNotFoundException {
 		String sql = "SELECT idpersonnage FROM pers_personnage WHERE nom = ? ;";
 		int id = -128;
@@ -88,13 +89,15 @@ public class PersonnageDao{
 		}
 		return id;
 	}
-
+	
+	//Methode pour afficher les personnages avec la methode toString
 	public void afficherPersonnage(ArrayList <Personnage> listePersonnages){
 		for(Personnage pers : listePersonnages){
 			System.out.println(pers.toString());
 		}
 	}
-
+	
+	//Methode pour inserer un personnage
 	public int insererPersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
 		String sql = "INSERT INTO pers_personnage ("
 				+ "niveau, experience, richesse, estactif, estjoueur, permadeath, hommeDeFer,"
@@ -127,7 +130,7 @@ public class PersonnageDao{
 		return recupererIdPersonnageViaNom(pers.getNom());
 	}
 	
-
+	//Methode pour supprimer un personnage
 	public void supprimerPersonnage(int idPersonnage) throws DaoException, ClassNotFoundException, SQLException{
 		String sql = "DELETE FROM pers_personnage WHERE idpersonnage = ? AND estactif = false;";
 		
@@ -136,6 +139,7 @@ public class PersonnageDao{
 		ps.executeUpdate();
 	}
 	
+	//Methode pour desactiver un personnage
 	public void desactiverPersonnage(int idpersonnage) throws DaoException, ClassNotFoundException, SQLException{
 		String sql = "UPDATE pers_personnageset SET estactif = false WHERE idpersonnage = ?;";
 		
@@ -144,6 +148,7 @@ public class PersonnageDao{
 		ps.executeUpdate();
 	}
 	
+	//Methode pour la montee de niveau
 	public void updateMonterNiveau(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
 		String sql = "UPDATE pers_personnage SET column1 = value1, column2 = value2...., columnN = valuesN WHERE [condition];";
 		
