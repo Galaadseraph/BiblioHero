@@ -15,7 +15,7 @@ public class PersonnageDao{
 
 
 	public ArrayList <Personnage> recupererPersonnage() throws DaoException, SQLException, ClassNotFoundException{
-		String sql = "Select * from pers_personnage;";
+		String sql = "SELECT * FROM pers_personnage;";
 		ArrayList<Personnage> listePersonnages = new ArrayList();
 
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
@@ -75,6 +75,19 @@ public class PersonnageDao{
 		rs.close();
 		return listePersonnages;
 	}
+	
+	private int recupererIdPersonnageViaNom(String nom) throws DaoException, SQLException, ClassNotFoundException {
+		String sql = "SELECT idpersonnage FROM pers_personnage WHERE nom = ? ;";
+		int id = -128;
+
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()){
+			id = rs.getInt("idpersonnage");
+		}
+		return id;
+	}
 
 	public void afficherPersonnage(ArrayList <Personnage> listePersonnages){
 		for(Personnage pers : listePersonnages){
@@ -82,7 +95,7 @@ public class PersonnageDao{
 		}
 	}
 
-	public void insererPersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
+	public int insererPersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
 		String sql = "INSERT INTO pers_personnage ("
 				+ "niveau, experience, richesse, estactif, estjoueur, permadeath, hommeDeFer,"
 				+ " nom,  codeequipe, coderace, codeclasse, codesexe, codegenre,"
@@ -111,11 +124,32 @@ public class PersonnageDao{
 		ps.setShort(14,  pers.getPvMAx());
 		ps.executeUpdate();
 		
+		return recupererIdPersonnageViaNom(pers.getNom());
 	}
 	
-	public void updatePersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
-		String sql = "Update";
+
+	public void supprimerPersonnage(int idPersonnage) throws DaoException, ClassNotFoundException, SQLException{
+		String sql = "DELETE FROM pers_personnage WHERE idpersonnage = ? AND estactif = false;";
 		
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ps.setInt(1, idPersonnage);
+		ps.executeUpdate();
 	}
+	
+	public void desactiverPersonnage(int idpersonnage) throws DaoException, ClassNotFoundException, SQLException{
+		String sql = "UPDATE pers_personnageset SET estactif = false WHERE idpersonnage = ?;";
+		
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ps.setInt(1, idpersonnage);
+		ps.executeUpdate();
+	}
+	
+	public void updateMonterNiveau(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
+		String sql = "UPDATE pers_personnage SET column1 = value1, column2 = value2...., columnN = valuesN WHERE [condition];";
+		
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);	
+	}
+	
+	
 
 }

@@ -13,7 +13,7 @@ public class TypeEquipementDao {
 	
 public ArrayList <TypeEquipement> recupererTypeEquipement() throws DaoException, SQLException, ClassNotFoundException{
 		
-		String sql = "Select * from pers_Typeequipement;";
+		String sql = "Select * from pers_typeequipement;";
 		ArrayList<TypeEquipement> listeTypeEquipement = new ArrayList();
 
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);

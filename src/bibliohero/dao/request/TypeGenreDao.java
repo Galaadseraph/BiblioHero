@@ -12,7 +12,7 @@ import exceptions.DaoException;
 public class TypeGenreDao {
 
 	public ArrayList <TypeGenre> recupererGenre() throws DaoException, SQLException, ClassNotFoundException{
-		String sql = "Select * from pers_typeGenre;";
+		String sql = "Select * from pers_typegenre;";
 		ArrayList<TypeGenre> listeTypeGenre = new ArrayList();
 		
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
@@ -30,7 +30,7 @@ public class TypeGenreDao {
 	}
 	
 	public String recupererGenreViaCode(String codeGenre) throws SQLException, DaoException, ClassNotFoundException{
-		String sql = "Select nom from pers_typeGenre where pers_typeGenre.codeGenre = ?;";
+		String sql = "Select nom from pers_typegenre where pers_typegenre.codegenre = ?;";
 		
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 		ps.setString(1, codeGenre);
