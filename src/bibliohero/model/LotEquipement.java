@@ -8,6 +8,10 @@ public class LotEquipement {
 		
 		
 		
+		@Override
+		public String toString() {
+			return "LotEquipement [idlotequipement=" + idlotequipement + ", codeLot=" + codeLot + ", nom=" + nom + "]";
+		}
 		public int getIdlotequipement() {
 			return idlotequipement;
 		}

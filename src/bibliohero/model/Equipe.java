@@ -8,6 +8,10 @@ public class Equipe
 
 	
 	
+	@Override
+	public String toString() {
+		return "Equipe [idEquipe=" + idEquipe + ", nomEquipe=" + nomEquipe + ", codeEquipe=" + codeEquipe + "]";
+	}
 	public int getIdEquipe() {
 		return idEquipe;
 	}

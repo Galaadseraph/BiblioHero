@@ -34,4 +34,6 @@ public class InventaireDao {
 		rs.close();
 		return listeInventaire;
 	}
+	
+	
 }

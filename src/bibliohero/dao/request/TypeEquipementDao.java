@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
 import bibliohero.exceptions.DaoException;
+import bibliohero.model.Personnage;
 import bibliohero.model.TypeEquipement;
 
 public class TypeEquipementDao {
@@ -32,8 +33,15 @@ public class TypeEquipementDao {
 		
 			listeTypeEquipement.add(typeEquipement);
 		}
-		
+		afficherTypeEquipement(listeTypeEquipement);
 		rs.close();
 		return listeTypeEquipement;
 	}
+	
+	//Methode pour afficher les types equipements avec la methode toString
+		public void afficherTypeEquipement(ArrayList <TypeEquipement> listeTypeEquipement){
+			for(TypeEquipement typeEquip : listeTypeEquipement){
+				System.out.println(typeEquip.toString());
+			}
+		}
 }

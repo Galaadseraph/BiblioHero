@@ -8,6 +8,12 @@ public class TypeSexe
 
 	
 	
+	@Override
+	public String toString() {
+		return "TypeSexe [idTypeSexe=" + idTypeSexe + ", codeSexe=" + codeSexe + ", nomSexe=" + nomSexe + "]";
+	}
+	
+	
 	public int getIdTypeSexe() {
 		return idTypeSexe;
 	}

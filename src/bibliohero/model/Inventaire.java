@@ -9,6 +9,13 @@ public class Inventaire {
 		private int idPersonnage;
 		
 		
+		
+		
+		@Override
+		public String toString() {
+			return "Inventaire [idInventaire=" + idInventaire + ", typeInventaire=" + typeInventaire + ", nom=" + nom
+					+ ", nbEmplacement=" + nbEmplacement + ", idPersonnage=" + idPersonnage + "]";
+		}
 		public int getIdInventaire() {
 			return idInventaire;
 		}

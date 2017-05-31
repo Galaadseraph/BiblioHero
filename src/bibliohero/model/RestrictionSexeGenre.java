@@ -6,6 +6,12 @@ public class RestrictionSexeGenre {
 		private int codeSexe;
 		
 		
+		
+		@Override
+		public String toString() {
+			return "RestrictionSexeGenre [codeGenre=" + codeGenre + ", codeSexe=" + codeSexe + "]";
+		}
+		
 		public int getCodeGenre() {
 			return codeGenre;
 		}

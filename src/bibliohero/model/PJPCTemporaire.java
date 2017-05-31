@@ -15,6 +15,14 @@ public class PJPCTemporaire {
 	private String background;
 	
 	
+	
+	@Override
+	public String toString() {
+		return "PJPCTemporaire [idpersonnage=" + idpersonnage + ", richesse=" + richesse + ", experience=" + experience
+				+ ", pv=" + pv + ", force=" + force + ", dexterite=" + dexterite + ", endurance=" + endurance
+				+ ", intelligence=" + intelligence + ", moral=" + moral + ", background=" + background + "]";
+	}
+	
 	public int getIdpersonnage() {
 		return idpersonnage;
 	}

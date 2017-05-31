@@ -7,6 +7,11 @@ public class LotSort {
 	private String nom;
 	
 	
+	
+	@Override
+	public String toString() {
+		return "LotSort [idLotSort=" + idLotSort + ", codeLot=" + codeLot + ", nom=" + nom + "]";
+	}
 	public int getIdLotSort() {
 		return idLotSort;
 	}

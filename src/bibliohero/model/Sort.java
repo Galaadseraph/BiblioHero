@@ -11,6 +11,7 @@ public class Sort {
 	private String codeLot;
 	
 	
+	
 	public int getIdSort() {
 		return idSort;
 	}

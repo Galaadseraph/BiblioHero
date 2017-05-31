@@ -7,6 +7,11 @@ public class TypeInventaire {
 		private String nom;
 		
 		
+		@Override
+		public String toString() {
+			return "TypeInventaire [idTypeInventaire=" + idTypeInventaire + ", code=" + code + ", nom=" + nom + "]";
+		}
+		
 		public int getIdTypeInventaire() {
 			return idTypeInventaire;
 		}

@@ -2,6 +2,7 @@ package bibliohero.model;
 
 public class Equipement {
 
+
 	private int idEquipement;
 	private String nomEquipement;
 	private String classeEquipement;
@@ -13,6 +14,14 @@ public class Equipement {
 	private String codeLot;
 	private int niveau;
 	
+	
+	@Override
+	public String toString() {
+		return "Equipement [idEquipement=" + idEquipement + ", nomEquipement=" + nomEquipement + ", classeEquipement="
+				+ classeEquipement + ", description=" + description + ", classeRequise=" + classeRequise
+				+ ", attribut1=" + attribut1 + ", attribut2=" + attribut2 + ", attribut3=" + attribut3 + ", codeLot="
+				+ codeLot + ", niveau=" + niveau + "]";
+	}
 	
 	public int getIdEquipement() {
 		return idEquipement;

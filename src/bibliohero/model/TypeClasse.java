@@ -8,6 +8,12 @@ public class TypeClasse
 	
 	
 
+	@Override
+	public String toString() {
+		return "TypeClasse [idTypeClasse=" + idTypeClasse + ", codeClasse=" + codeClasse + ", nomClasse=" + nomClasse
+				+ "]";
+	}
+	
 	public int getIdTypeClasse() {
 		return idTypeClasse;
 	}

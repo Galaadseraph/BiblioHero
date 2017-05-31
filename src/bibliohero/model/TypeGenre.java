@@ -8,6 +8,11 @@ public class TypeGenre
 
 	
 	
+	@Override
+	public String toString() {
+		return "TypeGenre [idTypeGenre=" + idTypeGenre + ", codeGenre=" + codeGenre + ", nomGenre=" + nomGenre + "]";
+	}
+	
 	public int getIdTypeGenre() {
 		return idTypeGenre;
 	}

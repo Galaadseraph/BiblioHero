@@ -7,6 +7,13 @@ public class TypeRace
 	private String nomRace;
 	
 	
+	
+	
+	@Override
+	public String toString() {
+		return "TypeRace [idTypeRace=" + idTypeRace + ", codeRace=" + codeRace + ", nomRace=" + nomRace + "]";
+	}
+	
 	public int getIdTypeRace() {
 		return idTypeRace;
 	}

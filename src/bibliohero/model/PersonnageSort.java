@@ -7,6 +7,11 @@ public class PersonnageSort {
 		private int idSort;
 		
 		
+		
+		@Override
+		public String toString() {
+			return "PersonnageSort [idInventaire=" + idInventaire + ", idSort=" + idSort + "]";
+		}
 		public int getIdInventaire() {
 			return idInventaire;
 		}

@@ -7,6 +7,13 @@ public class InventaireEquipement {
 		private int idEquipement;
 		
 		
+		
+		
+		@Override
+		public String toString() {
+			return "InventaireEquipement [idInventaireEquipement=" + idInventaireEquipement + ", idInventaire="
+					+ idInventaire + ", idEquipement=" + idEquipement + "]";
+		}
 		public int getIdInventaireEquipement() {
 			return idInventaireEquipement;
 		}

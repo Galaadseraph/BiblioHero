@@ -7,6 +7,13 @@ public class TypeEquipement {
 		private String nom;
 		
 		
+		
+		@Override
+		public String toString() {
+			return "TypeEquipement [idTypeEquipement=" + idTypeEquipement + ", codeEquipement=" + codeEquipement
+					+ ", nom=" + nom + "]";
+		}
+		
 		public int getIdTypeEquipement() {
 			return idTypeEquipement;
 		}
