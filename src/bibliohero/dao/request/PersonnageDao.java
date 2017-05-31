@@ -84,14 +84,37 @@ public class PersonnageDao{
 
 	public void insererPersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
 		String sql = "INSERT INTO pers_personnage ("
-				+ "permadeath, hommeDeFer, estactif, estJoueur, nom, niveau, richesse, experience, pv, forcep, "
-				+ "dexteritep, endurance, intelligence, moral, codeequipe, coderace, codeclasse, codesexe, codegenre)"
-				+ "VALUES (0, 0, 1, 1, ?, 1, 0, 0, 20, 10, 10, 10, 10, 100, ?, ?, ?, ?, ?)";
+				+ "niveau, experience, richesse, estactif, estjoueur, permadeath, hommeDeFer,"
+				+ " nom,  codeequipe, coderace, codeclasse, codesexe, codegenre,"
+				+ " forcep, dexteritep, endurance, intelligence, pv, pvmax,  moral)"
+				+ "VALUES ("
+				+ "1, 0, 0, 1, 1, ?, ?, "
+				+ "?, ?, ?, ?, ?, ?, "
+				+ "?, ?, ?, ?, ?, ?, 100)";
 	
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
-		//---------------
-		//point dinterrogation a definir
-		//---------------
+		ps.setBoolean(1, pers.isPermadeath());
+		ps.setBoolean(2, pers.isHommedefer());
+		
+		ps.setString(3, pers.getNom());
+		ps.setString(4, pers.getEquipe());
+		ps.setString(5, pers.getRace());
+		ps.setString(6, pers.getClasse());
+		ps.setString(7, pers.getSexe());
+		ps.setString(8, pers.getGenre());
+		
+		ps.setShort(9, pers.getForce());
+		ps.setShort(10, pers.getDexterite());
+		ps.setShort(11, pers.getEndurance());
+		ps.setShort(12, pers.getIntelligence());
+		ps.setShort(13, pers.getPvActu());
+		ps.setShort(14,  pers.getPvMAx());
+		ps.executeUpdate();
+		
+	}
+	
+	public void updatePersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
+		String sql = "Update";
 		
 	}
 

@@ -131,6 +131,15 @@ public class Personnage
 	public void setPvMax(short pvMax) {
 		this.pvMax = pvMax;
 	}
+	public short getPvActu() {
+		return pvActu;
+	}
+	public void setPvActu(short pvActu) {
+		this.pvActu = pvActu;
+	}
+	public short getPvMax() {
+		return pvMax;
+	}
 	public short getForce() {
 		return force;
 	}
