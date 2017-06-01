@@ -7,12 +7,11 @@ import java.util.ArrayList;
 
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
 import bibliohero.exceptions.DaoException;
-import bibliohero.model.pers_.Personnage;
 import bibliohero.model.pers_.TypeEquipement;
 
 public class TypeEquipementDao {
 	
-	//Methode pour recueprer un type d'équipement
+	//Methode pour recueprer un type d'equipement
 	public ArrayList <TypeEquipement> recupererTypeEquipement() throws DaoException, SQLException, ClassNotFoundException{
 		
 		String sql = "Select * from pers_typeequipement;";
@@ -29,7 +28,7 @@ public class TypeEquipementDao {
 			typeEquipement.setNom(rs.getString("nom"));
 			typeEquipement.setCodeEquipement(rs.getString("codeequipement"));
 
-			//Lié le code de typeEquipement avec la table Equipement via le nom
+			//Lie le code de typeEquipement avec la table Equipement via le nom
 		
 			listeTypeEquipement.add(typeEquipement);
 		}

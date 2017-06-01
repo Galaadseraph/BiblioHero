@@ -15,7 +15,6 @@ public class Main {
 		
 		try{
 		//personnageDAO.recupererPersonnage();
-		
 		ennemiDao.recupererEnnemi();
 		
 		}

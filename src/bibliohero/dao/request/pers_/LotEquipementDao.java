@@ -11,7 +11,7 @@ import bibliohero.model.pers_.LotEquipement;
 
 public class LotEquipementDao {
 
-	//Methode pour recuperer les lots d'équipements
+	//Methode pour recuperer les lots d'equipements
 	public ArrayList <LotEquipement> recupererlotEquipement() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "Select * from pers_lotequipement;";
 		ArrayList<LotEquipement> listeLotEquipement = new ArrayList();

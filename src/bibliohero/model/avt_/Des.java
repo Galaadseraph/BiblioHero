@@ -2,21 +2,22 @@ package bibliohero.model.avt_;
 
 public class Des {
 		
-	private int iddes;
+	private int idDes;
 	private int nbDeFaces;
 	private String nom;
 	
 	
+	
 	@Override
 	public String toString() {
-		return "Des [iddes=" + iddes + ", nbDeFaces=" + nbDeFaces + ", nom=" + nom + "]";
+		return "Des [idDes=" + idDes + ", nbDeFaces=" + nbDeFaces + ", nom=" + nom + "]";
 	}
 	
-	public int getIddes() {
-		return iddes;
+	public int getIdDes() {
+		return idDes;
 	}
-	public void setIddes(int iddes) {
-		this.iddes = iddes;
+	public void setIdDes(int idDes) {
+		this.idDes = idDes;
 	}
 	public int getNbDeFaces() {
 		return nbDeFaces;

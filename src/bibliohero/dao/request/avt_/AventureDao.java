@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
-import bibliohero.dao.request.pers_.TypeRaceDao;
 import bibliohero.exceptions.DaoException;
 import bibliohero.model.avt_.Aventure;
 
@@ -14,7 +13,7 @@ import bibliohero.model.avt_.Aventure;
 public class AventureDao {
 
 	
-	//Methodes pour recuperer un aventure
+		//Methodes pour recuperer un aventure
 		public ArrayList <Aventure> recupererAventure() throws DaoException, SQLException, ClassNotFoundException{
 			String sql = "SELECT * FROM avt_aventure;";
 			ArrayList<Aventure> listeaventures = new ArrayList();
@@ -29,12 +28,14 @@ public class AventureDao {
 				
 				aventure.setNom(rs.getString("nom"));
 				aventure.setAuteur(rs.getString("auteur"));
-				aventure.setIsbnseries(rs.getString("isbnserie"));
 				aventure.setIsbnAventure(rs.getString("isbnaventure"));
 				aventure.setClasseRequise(rs.getString("classerequise"));
 				aventure.setSynopsis(rs.getString("synopsis"));
 				aventure.setVersion(rs.getString("version"));
+				aventure.setIsbnseries(rs.getString("isbnserie"));
 				
+				SeriesDao seriesDao = new SeriesDao();
+				aventure.setIsbnseries(seriesDao.recupererSeriesViaISBN(rs.getString("isbnserie")));
 				ThemeDao themeDao = new ThemeDao();
 				aventure.setCodeTheme(themeDao.recupererThemeViaCode(rs.getString("codetheme")));
 				

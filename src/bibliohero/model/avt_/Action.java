@@ -3,9 +3,9 @@ package bibliohero.model.avt_;
 public class Action {
 
 	private int idAction;
-	private int typeAction;
 	private int paragrapheSuite;
 	
+	private String codeAction;
 	private String effet;
 	private String description;
 	private String codeCombat;
@@ -13,7 +13,7 @@ public class Action {
 	
 	@Override
 	public String toString() {
-		return "Action [idAction=" + idAction + ", typeAction=" + typeAction + ", paragrapheSuite=" + paragrapheSuite
+		return "Action [idAction=" + idAction + ", typeAction=" + codeAction + ", paragrapheSuite=" + paragrapheSuite
 				+ ", effet=" + effet + ", description=" + description + ", codeCombat=" + codeCombat + "]";
 	}
 	
@@ -23,12 +23,14 @@ public class Action {
 	public void setIdAction(int idAction) {
 		this.idAction = idAction;
 	}
-	public int getTypeAction() {
-		return typeAction;
+	public String getCodeAction() {
+		return codeAction;
 	}
-	public void setTypeAction(int typeAction) {
-		this.typeAction = typeAction;
+
+	public void setCodeAction(String codeAction) {
+		this.codeAction = codeAction;
 	}
+
 	public int getParagrapheSuite() {
 		return paragrapheSuite;
 	}
