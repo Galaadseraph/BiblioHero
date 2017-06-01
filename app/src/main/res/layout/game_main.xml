@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +63,7 @@
             android:id="@+id/TabPersonnage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/Personnage"
@@ -72,12 +75,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <EditText
+                    <TextView
                         android:id="@+id/nomPerso"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
+                        android:layout_height="50dp"
+                        android:ems="500"
                         android:inputType="textPersonName"
+                        android:padding="15dp"
                         android:text="Nom du personnage"
                         android:textAlignment="center" />
 
@@ -92,94 +96,108 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <EditText
-                                android:id="@+id/editText9"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
+                            <TextView
+                                android:id="@+id/TextView9"
+                                android:layout_width="20dp"
+                                android:layout_height="45dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
-                                android:text="Race : " />
+                                android:padding="15dp"
+                                android:text="Race : "
+                                android:textAlignment="textStart" />
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/RacePerso"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
+                                android:padding="15dp"
                                 android:text="Nom de la race" />
 
                         </TableRow>
+
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:layout_height="match_parent">
 
-                            <EditText
-                                android:id="@+id/editText12"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
+                            <TextView
+                                android:id="@+id/TextView12"
+                                android:layout_width="20dp"
+                                android:layout_height="45dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
+                                android:padding="15dp"
                                 android:text="Classe : " />
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/ClassePerso"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="45dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
+                                android:padding="15dp"
                                 android:text="nom de la classe" />
                         </TableRow>
+
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:layout_height="match_parent">
 
-                            <EditText
-                                android:id="@+id/editText16"
+                            <TextView
+                                android:id="@+id/TextView16"
                                 android:layout_width="50dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="45dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
+                                android:padding="15dp"
                                 android:text="sexe : " />
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/SexePerso"
                                 android:layout_width="50dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="45dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
+                                android:padding="15dp"
                                 android:text="sexe du personnage" />
 
                         </TableRow>
+
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:layout_height="match_parent">
 
-                            <EditText
-                                android:id="@+id/editText18"
+                            <TextView
+                                android:id="@+id/TextView18"
                                 android:layout_width="100dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="45dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
+                                android:padding="15dp"
                                 android:text="genre :" />
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/GenrePerso"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="150dp"
+                                android:layout_height="45dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
+                                android:padding="15dp"
                                 android:text="genre du personnage" />
                         </TableRow>
+
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:layout_height="match_parent">
 
-                            <EditText
-                                android:id="@+id/editText19"
+                            <TextView
+                                android:id="@+id/TextView19"
                                 android:layout_width="50dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
+                                android:padding="15dp"
                                 android:text="Santé :" />
 
                             <LinearLayout
@@ -190,17 +208,19 @@
                                 <ProgressBar
                                     android:id="@+id/barreVie"
                                     style="?android:attr/progressBarStyleHorizontal"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="130dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:hapticFeedbackEnabled="false"
                                     android:max="12"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
                                     android:progress="10"
                                     android:textAlignment="center" />
 
                                 <TextView
                                     android:id="@+id/textView"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="150dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text=" 10 / 12"
@@ -209,82 +229,93 @@
                             </LinearLayout>
 
                         </TableRow>
+
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:layout_height="match_parent">
 
                             <LinearLayout
-                                android:layout_width="50dp"
-                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
-                                <EditText
-                                    android:id="@+id/editText21"
+                                <TextView
+                                    android:id="@+id/TextView21"
                                     android:layout_width="75dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="50dp"
                                     android:ems="10"
                                     android:inputType="textPersonName"
+                                    android:padding="15dp"
                                     android:text="Niveau : " />
 
-                                <EditText
+                                <TextView
                                     android:id="@+id/NiveauPerso"
                                     android:layout_width="50dp"
                                     android:layout_height="wrap_content"
                                     android:ems="10"
                                     android:inputType="textPersonName"
+                                    android:padding="15dp"
                                     android:text="1"
                                     android:textAlignment="center" />
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
 
-                                <EditText
-                                    android:id="@+id/editText23"
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
+                                <TextView
+                                    android:id="@+id/TextView23"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
                                     android:layout_weight="0"
                                     android:ems="10"
                                     android:inputType="textPersonName"
-                                    android:text="Expérience : " />
+                                    android:padding="0dp"
+                                    android:text="Expérience : "
+                                    android:textAlignment="center" />
 
-                                <EditText
+                                <TextView
                                     android:id="@+id/ExpPerso"
-                                    android:layout_width="75dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:ems="10"
                                     android:inputType="textPersonName"
                                     android:text="150 xp"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="center" />
                             </LinearLayout>
 
                         </TableRow>
+
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:layout_height="match_parent">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
 
-                                <EditText
-                                    android:id="@+id/editText25"
+                                <TextView
+                                    android:id="@+id/TextView25"
                                     android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="35dp"
                                     android:ems="10"
                                     android:inputType="textPersonName"
+                                    android:paddingBottom="10dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingTop="10dp"
                                     android:text="Force : " />
 
-                                <EditText
+                                <TextView
                                     android:id="@+id/ForcePerso"
                                     android:layout_width="50dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="35dp"
                                     android:ems="10"
                                     android:inputType="textPersonName"
+                                    android:paddingBottom="10dp"
+                                    android:paddingTop="10dp"
                                     android:text="10"
                                     android:textAlignment="center" />
                             </LinearLayout>
@@ -295,50 +326,61 @@
                                 android:orientation="horizontal"
                                 android:weightSum="1">
 
-                                <EditText
-                                    android:id="@+id/editText27"
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
+                                <TextView
+                                    android:id="@+id/TextView27"
+                                    android:layout_width="75dp"
+                                    android:layout_height="35dp"
+                                    android:layout_weight="0.39"
                                     android:ems="10"
                                     android:inputType="textPersonName"
-                                    android:text="Dextérité : "
-                                    android:layout_weight="0.39" />
+                                    android:paddingBottom="10dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingTop="10dp"
+                                    android:text="Dextérité : " />
 
-                                <EditText
-                                    android:id="@+id/editText26"
+                                <TextView
+                                    android:id="@+id/TextView26"
                                     android:layout_width="50dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="35dp"
                                     android:ems="10"
                                     android:inputType="textPersonName"
+                                    android:paddingBottom="10dp"
+                                    android:paddingTop="10dp"
                                     android:text="8"
                                     android:textAlignment="center" />
                             </LinearLayout>
                         </TableRow>
+
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:layout_height="match_parent">
 
                             <LinearLayout
                                 android:layout_width="95dp"
-                                android:layout_height="match_parent"
+                                android:layout_height="35dp"
                                 android:orientation="horizontal">
 
-                                <EditText
-                                    android:id="@+id/editText29"
+                                <TextView
+                                    android:id="@+id/TextView29"
                                     android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="35dp"
                                     android:layout_weight="1"
                                     android:ems="10"
                                     android:inputType="textPersonName"
+                                    android:paddingBottom="10dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingTop="10dp"
                                     android:text="Endurance : " />
 
-                                <EditText
-                                    android:id="@+id/editText28"
+                                <TextView
+                                    android:id="@+id/TextView28"
                                     android:layout_width="50dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:ems="10"
                                     android:inputType="textPersonName"
+                                    android:paddingBottom="10dp"
+                                    android:paddingTop="10dp"
                                     android:text="5"
                                     android:textAlignment="center" />
                             </LinearLayout>
@@ -349,22 +391,27 @@
                                 android:orientation="horizontal"
                                 android:weightSum="1">
 
-                                <EditText
-                                    android:id="@+id/editText31"
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
+                                <TextView
+                                    android:id="@+id/TextView31"
+                                    android:layout_width="75dp"
+                                    android:layout_height="35dp"
                                     android:layout_weight="0.38"
                                     android:ems="10"
                                     android:inputType="textPersonName"
+                                    android:paddingBottom="10dp"
+                                    android:paddingLeft="26dp"
+                                    android:paddingTop="10dp"
                                     android:text="Intelligence : " />
 
-                                <EditText
-                                    android:id="@+id/editText30"
+                                <TextView
+                                    android:id="@+id/TextView30"
                                     android:layout_width="50dp"
                                     android:layout_height="wrap_content"
                                     android:accessibilityTraversalAfter="@+id/ClassePerso"
                                     android:ems="10"
                                     android:inputType="textPersonName"
+                                    android:paddingBottom="10dp"
+                                    android:paddingTop="10dp"
                                     android:text="7"
                                     android:textAlignment="center" />
                             </LinearLayout>
@@ -372,7 +419,43 @@
 
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/TextView2"
+                                    android:layout_width="75dp"
+                                    android:layout_height="35dp"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="10dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingTop="10dp"
+                                    android:text="Moral :" />
+
+                                <TextView
+                                    android:id="@+id/TextView"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="10dp"
+                                    android:paddingTop="10dp"
+                                    android:text="100"
+                                    android:textAlignment="center" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"></LinearLayout>
+                        </TableRow>
 
                         <TableRow
                             android:layout_width="match_parent"
@@ -387,7 +470,7 @@
             android:id="@+id/TabHistoire"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:id="@+id/principal"
@@ -396,7 +479,7 @@
                 android:orientation="vertical"
                 android:visibility="visible">
 
-                <EditText
+                <TextView
                     android:id="@+id/descrip"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
@@ -405,7 +488,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
                     android:ems="10"
                     android:enabled="false"
                     android:inputType="textMultiLine|textImeMultiLine"
@@ -426,6 +511,7 @@
                     android:layout_alignRight="@+id/descrip"
                     android:layout_alignStart="@+id/descrip"
                     android:layout_below="@+id/descrip"
+                    android:paddingRight="10dp"
                     android:visibility="visible">
 
                     <TableRow
@@ -486,13 +572,408 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/tab3"
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/TabEquip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="gone">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:visibility="visible">
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/TextView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:paddingTop="15dp"
+                    android:text="Equipement"
+                    android:textAlignment="center" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_below="@+id/TextView3"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/TextView4"
+                        android:layout_width="70dp"
+                        android:layout_height="75dp"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="25dp"
+                        android:text="porter :" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_weight="0.08"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/Equip1Nom"
+                                android:layout_width="100dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="Equipement 1" />
+
+                            <Button
+                                android:id="@+id/equip1btn"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="retirer" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_weight="0.08"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/equip2nom"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+                                android:text="Equipement 2" />
+
+                            <Button
+                                android:id="@+id/equip2btn"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="retirer" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/linearLayout"
+                    android:textAlignment="center" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/spinner">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/NomObj1"
+                                android:layout_width="120dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:text="TextView" />
+
+                            <Button
+                                android:id="@+id/BtnUse1"
+                                android:layout_width="85dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="equiper" />
+
+                            <Button
+                                android:id="@+id/btndetail1"
+                                android:layout_width="75dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="Detail" />
+
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/NomObj2"
+                                android:layout_width="120dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:text="TextView" />
+
+                            <Button
+                                android:id="@+id/BtnUse2"
+                                android:layout_width="85dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="equiper" />
+
+                            <Button
+                                android:id="@+id/btndetail2"
+                                android:layout_width="75dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="Detail" />
+
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/NomObj3"
+                                android:layout_width="120dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:text="TextView" />
+
+                            <Button
+                                android:id="@+id/BtnUse3"
+                                android:layout_width="85dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="equiper" />
+
+                            <Button
+                                android:id="@+id/btndetail3"
+                                android:layout_width="75dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="Detail" />
+
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/NomObj4"
+                                android:layout_width="120dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:text="TextView" />
+
+                            <Button
+                                android:id="@+id/BtnUse4"
+                                android:layout_width="85dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="equiper" />
+
+                            <Button
+                                android:id="@+id/BtnDetail4"
+                                android:layout_width="75dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="Detail" />
+
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/NomObj5"
+                                android:layout_width="120dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:text="TextView" />
+
+                            <Button
+                                android:id="@+id/BtnUse5"
+                                android:layout_width="85dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="equiper" />
+
+                            <Button
+                                android:id="@+id/btndetail5"
+                                android:layout_width="75dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="Detail" />
+
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/NomObj6"
+                                android:layout_width="120dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:text="TextView" />
+
+                            <Button
+                                android:id="@+id/BtnUse6"
+                                android:layout_width="85dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="equiper" />
+
+                            <Button
+                                android:id="@+id/btndetail6"
+                                android:layout_width="75dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="Detail" />
+
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/NomObj7"
+                                android:layout_width="120dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:text="TextView" />
+
+                            <Button
+                                android:id="@+id/BtnUse7"
+                                android:layout_width="85dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="equiper" />
+
+                            <Button
+                                android:id="@+id/btndetail7"
+                                android:layout_width="75dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="Detail" />
+
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/NomObj8"
+                                android:layout_width="120dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:text="TextView" />
+
+                            <Button
+                                android:id="@+id/BtnUse8"
+                                android:layout_width="85dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="equiper" />
+
+                            <Button
+                                android:id="@+id/btndetail8"
+                                android:layout_width="75dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:text="Detail" />
+
+                        </LinearLayout>
+                    </TableRow>
+                </TableLayout>
+
+            </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
 

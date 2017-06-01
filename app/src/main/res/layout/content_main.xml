@@ -61,7 +61,7 @@
 
         <Button
             android:id="@+id/buttonImport"
-            android:layout_width="396dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/buttonGestion"
             android:layout_alignParentLeft="true"
