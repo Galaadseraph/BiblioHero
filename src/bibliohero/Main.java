@@ -2,26 +2,20 @@ package bibliohero;
 
 import java.sql.SQLException;
 
-import bibliohero.bin.data.Equipement;
-import bibliohero.dao.request.EquipeDao;
-import bibliohero.dao.request.EquipementDao;
-import bibliohero.dao.request.PersonnageDao;
-import bibliohero.dao.request.TypeEquipementDao;
+
+import bibliohero.dao.request.avt_.AventureDao;
+
 import bibliohero.exceptions.DaoException;
-import bibliohero.model.TypeEquipement;
 
 public class Main {
 	public static void main(String[] args){
 		
-		PersonnageDao personnageDAO = new PersonnageDao();
-		EquipementDao equip = new EquipementDao();
-		TypeEquipementDao typeEquipement = new TypeEquipementDao();
-		EquipeDao equipe = new EquipeDao();
+		AventureDao aventureDao = new AventureDao();
 		
 		try{
 		//personnageDAO.recupererPersonnage();
-		equipe.recupererEquipe();
-		typeEquipement.recupererTypeEquipement();
+		
+		aventureDao.recupereraventure();
 		
 		}
 		catch(SQLException e){

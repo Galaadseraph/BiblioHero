@@ -22,7 +22,7 @@ Le deuxième Request :
 Ce fichier contient toutes les classes DAO (accès aux bases de données) elle même reliée au package Model.
 Chacune de ces classes contient le ou les requêtes nécessaires à l'insertion, la récupération de données,
 ou encore la modification de la base de données.
-
+Ce package est divisé en 3 avec les classes pers_, avt_et lot_
 
 
 Le package Model :
