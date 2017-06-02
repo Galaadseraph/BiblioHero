@@ -1,6 +1,7 @@
 package bibliohero.controller;
 
-import bibliohero.ihm.consoletest.cuiTest;
+import bibliohero.ihm.consoletest.cuiAdventure;
+import bibliohero.ihm.consoletest.cuiGame;
 import bibliohero.ihm.consoletest.KeyValue;
 
 import java.util.Observable;
@@ -51,11 +52,15 @@ public class GameEngine implements Observer {
     {
 
         // Permettre au moteur du jeu d'écouter les event provenant de l'interface Utilisateur
-        // TODO : Remplacer cuiTest par la CUI ou la GUI
+        // TODO : Remplacer cuiGame par la CUI ou la GUI
         // Test de passage
-        System.out.println("init - GameEngine Class");
+        System.out.println("DEBUG - init - GameEngine Class");
 
-        cuiTest.getInstance().addObserver(this);
+        // Le moteur de jeu est à l'écoute des events provenant de la CUI Moteur de jeu (Principal)
+        cuiGame.getInstance().addObserver(this);
+        // Le moteur de l'aventure est à l'écoute des events provenant de la CUI Moteur de l'aventure
+        cuiAdventure.getInstance().addObserver(AdventureEngine.getInstance());
+
         // TODO : Tester si 1er démarrage ou non
 
     }
@@ -74,29 +79,76 @@ public class GameEngine implements Observer {
         // Si premier démarrage -> Création du joueur
 
         //TEST : Lancement du moteur de l'aventure
-        AdventureEngine.getInstance().run();
+        //AdventureEngine.getInstance().run();
 
     }
 
+    /**
+     * Affichage du Menu principal
+     */
     protected void displayMainMenu()
     {
-        // TODO : Affichage du menu en mode console
-        cuiTest.getInstance().displayMainMenu();
+        // TODO : Affichage du menu en mode console / Switch avec le mode Android/Swing
+        cuiGame.getInstance().displayMainMenu();
     }
 
-    //region Evt GUI
+    //region Evt from UI
 
     // On écoute les événements issus de l'interface utilisateur (via Observable)
 
     @Override
     public void update(Observable observable, Object o) {
-        // Events provenants de la CUI
-        if(observable instanceof cuiTest){
+        // Events provenants de la UI
+        // Test
+        //System.out.println("Event reçu de la UI (Jeu)");
+
+        if(observable instanceof cuiGame){
             // On vérifie qu'il s'agisse bien d'un objet KeyValue qui est transmit.
             if (o instanceof KeyValue) {
-                // Détection de l'écran CUI qui génère l'event
+                // TODO Détection de l'écran CUI qui génère l'event
                 // TODO : Créer un Enum pour lister tous les types d'écran.
-                System.out.println("Event reçu de la CUI : " + ((KeyValue) o).getValue());
+                // On vérifie la provenance de source (Ecran)
+                switch (((KeyValue<String, String>) o).getKey()) {
+                    case "CUI_GAME_MAINMENU_CHOICE":
+                        // Test
+                        //System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getValue());
+                        // On "switch" d'écran
+                        // TODO : Utiliser des ENUM
+                        switch (((KeyValue<String, String>) o).getValue()) {
+                            // -> JOUER
+                            case "1":
+                                System.out.println(" -> JOUER");
+                                // On lance le moteur d'aventure
+                                AdventureEngine.getInstance().run();
+                                break;
+                            // -> CONTINUER
+                            case "2":
+                                System.out.println(" -> JOUER");
+                                break;
+                            // -> GESTION
+                            case "3":
+                                System.out.println(" -> GESTION");
+                                break;
+                            // -> SAUVEGARDER
+                            case "4":
+                                System.out.println(" -> SAUVEGARDER");
+                                break;
+                            // -> IMPORTER
+                            case "5":
+                                System.out.println(" -> IMPORTER");
+                                break;
+                            // -> PARAMETRES
+                            case "6":
+                                System.out.println(" -> PARAMETRES");
+                                break;
+                        }
+
+                        break;
+                    case "CUI_GAME_TODO_CHOICE":
+                        System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getValue());
+                        break;
+                }
+
             }
         }
     }

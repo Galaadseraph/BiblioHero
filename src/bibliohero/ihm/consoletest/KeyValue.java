@@ -1,28 +1,29 @@
 package bibliohero.ihm.consoletest;
 
 /**
+ * Objet de type Clé/Valeur / Key/Value Object Type
  * Created by jiolle.cdi04 on 01/06/2017.
  */
-public class KeyValue {
+public class KeyValue<keyType, valueType> {
 
     // Attributes
-    private String key;
-    private String value;
+    private keyType key;
+    private valueType value;
 
     // Getter / Setter
-    public String getKey() {
+    public keyType getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(keyType key) {
         this.key = key;
     }
 
-    public String getValue() {
+    public valueType getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(valueType value) {
         this.value = value;
     }
 
@@ -33,7 +34,7 @@ public class KeyValue {
 
     }
 
-    public KeyValue(String key, String value)
+    public KeyValue(keyType key, valueType value)
     {
         this.key = key;
         this.value = value;
