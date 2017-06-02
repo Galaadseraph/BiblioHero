@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
 import bibliohero.exceptions.DaoException;
 import bibliohero.model.pers_.Equipement;
-import bibliohero.model.pers_.Personnage;
+
 
 public class EquipementDao {
 
@@ -28,12 +28,18 @@ public class EquipementDao {
 			equipement.setClasseEquipement(rs.getString("classeequipement"));
 			equipement.setDescription(rs.getString("equipement"));
 			equipement.setClasseRequise(rs.getString("classerequise"));
-			equipement.setCodeLot(rs.getString("codelot"));
 			equipement.setAttribut1(rs.getString("attribut1"));
 			equipement.setAttribut2(rs.getString("attribut2"));
 			equipement.setAttribut3(rs.getString("attribut3"));
 			equipement.setNiveau(rs.getInt("niveau"));
-
+			
+			LotEquipementDao lotEquipementDao = new LotEquipementDao();
+			equipement.setCodeLot(lotEquipementDao.recupererLotEquipementViaCode(rs.getString("codelot")));
+			
+			TypeEquipementDao typeEquipDao = new TypeEquipementDao();
+			equipement.setCodeEquipement(typeEquipDao.recupererTypeEquipementViaCode(rs.getString("codeequipement")));
+			
+			
 			listeEquipement.add(equipement);
 		}
 		afficherEquipement(listeEquipement);

@@ -12,7 +12,9 @@ public class Equipement {
 	private String attribut2;
 	private String attribut3;
 	private String codeLot;
+	private String codeEquipement;
 	private int niveau;
+	
 	
 	
 	@Override
@@ -20,9 +22,14 @@ public class Equipement {
 		return "Equipement [idEquipement=" + idEquipement + ", nomEquipement=" + nomEquipement + ", classeEquipement="
 				+ classeEquipement + ", description=" + description + ", classeRequise=" + classeRequise
 				+ ", attribut1=" + attribut1 + ", attribut2=" + attribut2 + ", attribut3=" + attribut3 + ", codeLot="
-				+ codeLot + ", niveau=" + niveau + "]";
+				+ codeLot + ", codeEquipement=" + codeEquipement + ", niveau=" + niveau + "]";
 	}
-	
+	public String getCodeEquipement() {
+		return codeEquipement;
+	}
+	public void setCodeEquipement(String codeEquipement) {
+		this.codeEquipement = codeEquipement;
+	}
 	public int getIdEquipement() {
 		return idEquipement;
 	}

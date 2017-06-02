@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
 import bibliohero.exceptions.DaoException;
+import bibliohero.model.pers_.PJPCTemporaire;
 import bibliohero.model.pers_.Personnage;
 
 public class PersonnageDao{
@@ -74,7 +75,7 @@ public class PersonnageDao{
 		return listePersonnages;
 	}
 	
-	//Methode pour recuperer un id de personnage grace ‡ un nom
+	//Methode pour recuperer un id de personnage grace a un nom
 	private int recupererIdPersonnageViaNom(String nom) throws DaoException, SQLException, ClassNotFoundException {
 		String sql = "SELECT idpersonnage FROM pers_personnage WHERE nom = ? ;";
 		int id = -128;
@@ -97,6 +98,7 @@ public class PersonnageDao{
 	
 	//Methode pour inserer un personnage
 	public int insererPersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
+		//Verifier si le nom existe
 		String sql = "INSERT INTO pers_personnage ("
 				+ "niveau, experience, richesse, estactif, estjoueur, permadeath, hommeDeFer,"
 				+ " nom,  codeequipe, coderace, codeclasse, codesexe, codegenre,"
@@ -125,34 +127,59 @@ public class PersonnageDao{
 		ps.setShort(14,  pers.getPvMAx());
 		ps.executeUpdate();
 		
-		return recupererIdPersonnageViaNom(pers.getNom());
+		PJPCTemporaireDao persoTemporaire = new PJPCTemporaireDao();
+		pers.setIdPersonnage(recupererIdPersonnageViaNom(pers.getNom()));
+		
+		persoTemporaire.insererPersonnagePJPCTemporaire(pers);
+		
+		
+		
+		return pers.getIdPersonnage();
+	
 	}
 	
 	//Methode pour supprimer un personnage
-	public void supprimerPersonnage(int idPersonnage) throws DaoException, ClassNotFoundException, SQLException{
+	public void supprimerPersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
 		String sql = "DELETE FROM pers_personnage WHERE idpersonnage = ? AND estactif = false;";
 		
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
-		ps.setInt(1, idPersonnage);
+		ps.setInt(1, pers.getIdPersonnage());
 		ps.executeUpdate();
 	}
 	
 	//Methode pour desactiver un personnage
-	public void desactiverPersonnage(int idpersonnage) throws DaoException, ClassNotFoundException, SQLException{
+	public void desactiverPersonnage(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
 		String sql = "UPDATE pers_personnageset SET estactif = false WHERE idpersonnage = ?;";
 		
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
-		ps.setInt(1, idpersonnage);
+		ps.setInt(1, pers.getIdPersonnage());
 		ps.executeUpdate();
 	}
 	
 	//Methode pour la montee de niveau
 	public void updateMonterNiveau(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
-		String sql = "UPDATE pers_personnage SET column1 = value1, column2 = value2...., columnN = valuesN WHERE [condition];";
+		String sql = "UPDATE pers_personnage SET niveau = ? WHERE idpersonnage = ? ;";
 		
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);	
+		ps.setInt(1, pers.getNiveau());
+		ps.setInt(2, pers.getIdPersonnage());
+		ps.executeUpdate();
 	}
 	
+	//Methode pour modifier la richesse, l'experience et le moral d'un personnage en sortie d'aventure.
+	public void mettreAJourPersonnage(PJPCTemporaire persoTemporaire) throws ClassNotFoundException, SQLException, DaoException{
+		//pjpcdao donne les donn√©es
+		
+		String sql = "UPDATE pers_personnage SET richesse = ?, experience = ?, moral = ? WHERE idpersonnage = ? ";
+		
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ps.setDouble(1, persoTemporaire.getRichesse());
+		ps.setDouble(2, persoTemporaire.getExperience());
+		ps.setDouble(3, persoTemporaire.getMoral());
+		ps.setDouble(4, persoTemporaire.getIdpersonnage());
+		ps.executeUpdate();
+		
+	}
 	
 
 }

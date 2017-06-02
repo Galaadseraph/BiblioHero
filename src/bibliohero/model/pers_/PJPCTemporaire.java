@@ -4,8 +4,10 @@ public class PJPCTemporaire {
 
 	
 	private int idpersonnage;
+	
 	private double richesse;
 	private double experience;
+	
 	private int pv;
 	private int force;
 	private int dexterite;
