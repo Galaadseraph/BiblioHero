@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
-import bibliohero.exceptions.DaoException;
 import bibliohero.model.Equipe;
+import exceptions.DaoException;
 
 public class EquipeDao {
 
 		
 	public ArrayList <Equipe> recupererEquipe() throws DaoException, SQLException, ClassNotFoundException{
-		String sql = "Select * from pers_Equipe;";
+		String sql = "Select * from pers_equipe;";
 		ArrayList<Equipe> listeEquipe = new ArrayList();
 		
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
