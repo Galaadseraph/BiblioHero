@@ -9,7 +9,7 @@ public class Aventure {
 	private String synopsis;
 	private String classeRequise;
 	private String version;
-	private String codeTheme;
+	private String theme;
 	private String isbnAventure;
 	private int nbParagraphe;
 	private int nvRequis;
@@ -21,7 +21,7 @@ public class Aventure {
 	public String toString() {
 		return "Aventure [idaventure=" + idaventure + ", nom=" + nom + ", auteur=" + auteur + ", isbnseries="
 				+ isbnseries + ", synopsis=" + synopsis + ", classeRequise=" + classeRequise + ", version=" + version
-				+ ", codeTheme=" + codeTheme + ", isbnAventure=" + isbnAventure + ", nbParagraphe=" + nbParagraphe
+				+ ", codeTheme=" + theme + ", isbnAventure=" + isbnAventure + ", nbParagraphe=" + nbParagraphe
 				+ ", nvRequis=" + nvRequis + ", dictionnaire=" + dictionnaire + "]";
 	}
 
@@ -81,12 +81,12 @@ public class Aventure {
 		this.version = version;
 	}
 
-	public String getCodeTheme() {
-		return codeTheme;
+	public String getTheme() {
+		return theme;
 	}
 
-	public void setCodeTheme(String codeTheme) {
-		this.codeTheme = codeTheme;
+	public void setCodeTheme(String theme) {
+		this.theme = theme;
 	}
 
 	public String getIsbnAventure() {

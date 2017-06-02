@@ -17,7 +17,7 @@ public class ConnectionDAOsqlite {
 		try{
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:biblioheros.sqlite");
-			System.out.println("Connexion à la base de données réussie! ");
+			System.out.println("Connexion ï¿½ la base de donnï¿½es rï¿½ussie! ");
 		}
 		
 		catch(SQLException e){
@@ -33,7 +33,7 @@ public class ConnectionDAOsqlite {
 			
 				Class.forName("org.sqlite.JDBC");
 				connection = DriverManager.getConnection("jdbc:sqlite:biblioheros.sqlite");
-				System.out.println("Connexion à la base de données réussie! ");
+				
 				return connection;
 			
 		}
