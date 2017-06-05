@@ -9,7 +9,7 @@ import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
 import bibliohero.exceptions.DaoException;
 import bibliohero.model.pers_.Personnage;
 
-public class PersonnageDao{
+public class PersonnageDao {
 
 	//Methodes pour recuperer un personnage
 	public ArrayList <Personnage> recupererPersonnage() throws DaoException, SQLException, ClassNotFoundException{
@@ -74,7 +74,7 @@ public class PersonnageDao{
 		return listePersonnages;
 	}
 	
-	//Methode pour recuperer un id de personnage grace à un nom
+	//Methode pour recuperer un id de personnage grace ï¿½ un nom
 	private int recupererIdPersonnageViaNom(String nom) throws DaoException, SQLException, ClassNotFoundException {
 		String sql = "SELECT idpersonnage FROM pers_personnage WHERE nom = ? ;";
 		int id = -128;

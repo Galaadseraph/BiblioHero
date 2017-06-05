@@ -10,20 +10,12 @@ import java.util.ArrayList;
  * -> Utilisé par le moteur d'aventure
  * Created by jiolle.cdi04 on 02/06/2017.
  */
-public class ParagrapheObj {
+public class ParagrapheObj extends Paragraphe {
 
     // Attributes
-    Paragraphe paragraphe;          // Paragraphe
     ArrayList<Action> actionList;   // Liste des actions liées au paragraphe
 
     // Getter/Setter
-    public Paragraphe getParagraphe() {
-        return paragraphe;
-    }
-
-    public void setParagraphe(Paragraphe paragraphe) {
-        this.paragraphe = paragraphe;
-    }
 
     public ArrayList<Action> getActionList() {
         return actionList;
@@ -37,7 +29,6 @@ public class ParagrapheObj {
     public ParagrapheObj()
     {
         // Instantiation des objets
-        this.paragraphe = new Paragraphe();
         this.actionList = new ArrayList<Action>();
     }
 
