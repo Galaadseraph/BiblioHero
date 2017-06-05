@@ -3,6 +3,7 @@ package bibliohero.controller;
 import bibliohero.ihm.consoletest.KeyValue;
 import bibliohero.ihm.consoletest.cuiAdventure;
 import bibliohero.ihm.consoletest.cuiGame;
+import bibliohero.service.SrvAdventure;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -50,6 +51,8 @@ public class AdventureEngine  implements Observer {
     //region Méthodes
 
     /**
+     * Méthode appelée dans le constructeur
+     * -> initialisation
      * Intialisation
      */
     private void init()
@@ -63,10 +66,10 @@ public class AdventureEngine  implements Observer {
      */
     protected void run()
     {
-        //TODO : Gestion du moteur d'aventure
+        // Gestion du moteur d'aventure
 
         // TODO : Chargement des Beans à partir de la base de donnée
-        // Chargement du joueur (table pers_pjpctempo)
+        // Chargement du joueur (table pers_personnage + pers_pjpctempo)
         loadPlayer();
         // Chargement de l'aventure sélectionnée
         loadAdventure();
@@ -74,14 +77,12 @@ public class AdventureEngine  implements Observer {
     }
 
     /**
-     * Chargement du joueur
+     * Chargement du joueur de l'aventure
      */
     protected void loadPlayer() {
-        // TODO : Vérifier si la table pers_pjpctempo est POPULE
-        // Si c'est le cas, on charge la table pers_pjpctempo et on la stocke dans PJoueurObj
-        // Sinon, on la POPULE dans un premier temps
 
-        //
+        // Fait appel au service
+        SrvAdventure.loadPlayer();
 
     }
 
