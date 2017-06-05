@@ -43,6 +43,8 @@ public class AdventureEngine  implements Observer {
 
     private boolean testMode;       // Test
 
+
+
     //endregion
 
     //region Méthodes
@@ -65,16 +67,40 @@ public class AdventureEngine  implements Observer {
 
         // TODO : Chargement des Beans à partir de la base de donnée
         // Chargement du joueur (table pers_pjpctempo)
-        //load();
+        loadPlayer();
         // Chargement de l'aventure sélectionnée
         loadAdventure();
 
     }
 
+    /**
+     * Chargement du joueur
+     */
+    protected void loadPlayer() {
+        // TODO : Vérifier si la table pers_pjpctempo est POPULE
+        // Si c'est le cas, on charge la table pers_pjpctempo et on la stocke dans PJoueurObj
+        // Sinon, on la POPULE dans un premier temps
+
+        //
+
+    }
+
+    /**
+     * Chargement de l'aventure
+     * + Affichage du premier Ecran
+     */
     protected void loadAdventure()
     {
         //TODO Appel du service
         // On récupère le background à partir de PJPCtempo
+        // Le Background permet de récupérer le numéro d'aventure et le numéro du dernier paragraphe
+
+        // à partir du background
+        // TODO : (1) Chargement de l'aventure
+
+        // TODO : (2) Chargement des paragraphes associés à l'aventure
+
+        // TODO : (3) Chargement des actions associées à chaque paragraphe
 
         // TODO : Pour le test Seulement
         ArrayList<String> actionList = new ArrayList<>();
@@ -82,10 +108,15 @@ public class AdventureEngine  implements Observer {
         actionList.add("Manger tranquillement");
         actionList.add("Refaitre ses lacets");
         ArrayList<String> optionList = new ArrayList<>();
-        optionList.add("Paramètres");
+        /*optionList.add("Paramètres");
         optionList.add("Personnage");
         optionList.add("Equipement");
-        optionList.add("Contexte");
+        optionList.add("Contexte");*/
+
+        for (EnumAdventureOptions option : EnumAdventureOptions.values()) {
+            //
+            optionList.add(option.getNom());
+        }
 
         // Affichage de l'écran d'aventure
         cuiAdventure.getInstance().displayGame("Ceci est le premier paragraphe", actionList, optionList);

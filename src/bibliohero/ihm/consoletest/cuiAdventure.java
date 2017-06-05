@@ -82,8 +82,8 @@ public class cuiAdventure extends Observable {
         System.out.println("Vous avez saisi : " + choice);
 
         // (5) Notify user choice to the game Engine
-        // TODO : Peut être factorisé
-        // TODO : Détecter s'il s'agit d'une ACTION ou d'une OPTION
+
+        // Détecter s'il s'agit d'une ACTION ou d'une OPTION
 
         KeyValue eventObj = new KeyValue("", "");   // Intialisation d'une variable de type Clé/Valeur
 
