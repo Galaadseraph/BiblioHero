@@ -2,31 +2,31 @@ package bibliohero.model.pers_;
 
 public class Personnage
 {
-	int idPersonnage;
+	private int idPersonnage;
 
-	boolean permadeath = false;
-    boolean hommedefer = false;
-    boolean estJoueur = false;
-    boolean estActif = false;
+	private boolean permadeath = false;
+	private boolean hommedefer = false;
+	private boolean estJoueur = false;
+	private boolean estActif = false;
 
-    String nom;
-    String race;
-    String classe;
-    String sexe;
-    String genre;
+	private String nom;
+	private String race;
+	private String classe;
+	private String sexe;
+	private String genre;
 
-    String equipe;
-    double richesse;
-    double experience;
+	private String equipe;
+	private double richesse;
+	private double experience;
 
-    byte niveau;
-    short pvMax;
-    short pvActu; //dans la table temporaire
-    short force;
-    short dexterite;
-    short endurance;
-    short intelligence;
-    short moral;
+	private byte niveau;
+	private short pvMax;
+	private short pvActu; //dans la table temporaire
+	private short force;
+	private short dexterite;
+	private short endurance;
+	private short intelligence;
+	private short moral;
 
 
 	@Override
