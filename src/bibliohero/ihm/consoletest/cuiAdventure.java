@@ -31,7 +31,7 @@ public class cuiAdventure extends Observable {
     //endregion
 
     /**
-     * Affichage "Mode Aventure"
+     * Affichage "Mode Aventure" -> Paragraphe
      */
     public void displayGame(String paragraphe, ArrayList<String> actionList, ArrayList<String> optionList) {
 
@@ -81,26 +81,39 @@ public class cuiAdventure extends Observable {
         // Test
         System.out.println("Vous avez saisi : " + choice);
 
-        // (5) Notify user choice to the game Engine
+        // (5) Notify user choice to the Adventure Engine
+
+
 
         // Détecter s'il s'agit d'une ACTION ou d'une OPTION
 
         KeyValue eventObj = new KeyValue("", "");   // Intialisation d'une variable de type Clé/Valeur
 
+        // Définition du nom de l'écran (Info nécessaire pour le Ctrl)
+        eventObj.setKey("CUI_ADVENTURE_PARAGRAPHE");
+
+        String value = "";
+
         // S'il s'agit d'une action
         if (choice >= actionNumMin && choice <= actionNumMax)
         {
-            eventObj.setKey("CUI_ADVENTURE_ACTION_CHOICE");
+            //eventObj.setKey("CUI_ADVENTURE_ACTION_CHOICE");
+            value += "A";
+            value += ",";
+            value += String.valueOf(choice);
         }
 
         // S'il s'agit d'une option
         if (choice >= optionNumMin && choice <= optionNumMax)
         {
-            eventObj.setKey("CUI_ADVENTURE_OPTION_CHOICE");
+            //eventObj.setKey("CUI_ADVENTURE_OPTION_CHOICE");
+            value += "O";
+            value += ",";
+            value += String.valueOf(choice - (optionNumMin - 1));
         }
 
         // Association de la valeur (Choix de l'utilisateur)
-        eventObj.setValue(String.valueOf(choice));
+        eventObj.setValue(value);
 
         // Notification du choix de l'utilisateur au moteur d'aventure (Event)
         setChanged();

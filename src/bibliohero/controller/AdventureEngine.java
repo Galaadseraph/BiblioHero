@@ -2,9 +2,11 @@ package bibliohero.controller;
 
 import bibliohero.controller.AdventureEngineObj.AventureObj;
 import bibliohero.controller.AdventureEngineObj.PJoueurObj;
+import bibliohero.controller.AdventureEngineObj.ParagrapheObj;
 import bibliohero.ihm.consoletest.KeyValue;
 import bibliohero.ihm.consoletest.cuiAdventure;
 import bibliohero.ihm.consoletest.cuiGame;
+import bibliohero.model.avt_.Action;
 import bibliohero.service.SrvAdventure;
 
 import java.util.ArrayList;
@@ -54,7 +56,11 @@ public class AdventureEngine  implements Observer {
     private PJoueurObj joueur;      // Objet Joueur + infos temporaires + liste des inventaires.
     private AventureObj aventure;   // Objet Aventure + Paragraphes et actions associées
 
-    private int numParagrapheEnCours;    // Numéro du paragraphe courant
+    private int numParagrapheEnCours;           // Numéro du paragraphe courant
+    private ParagrapheObj paragrapheEnCours;    // Paragraphe courant
+
+    private Action actionEnCours;               // Action en cours
+    private EnumActionType typeActionEnCours;   // Type de l'action en cours
 
     //endregion
 
@@ -146,7 +152,7 @@ public class AdventureEngine  implements Observer {
 
         // TODO : (3) Chargement des actions associées à chaque paragraphe
 
-        // Fait appel au service pour récupérer le joueur en base de données.
+        // Fait appel au service pour récupérer l'aventure en base de données.
         return SrvAdventure.loadAdventure(isbnAventure);
 
     }
@@ -157,33 +163,51 @@ public class AdventureEngine  implements Observer {
      */
     protected void runAdventure(int numParagrapheEnCours) {
 
-        // TODO : Pour le test Seulement (paragraphe et liste d'actions en dur)
+        // (1) Paragraphe (Récupération du texte à afficher)
 
-        // (1) Paragraphe
-        String paragraphe = "Ceci est le premier paragraphe";
-        // TODO : Get Paragraphe String
+        // Récupération du paragraphe en cours à partir de l'aventure
+        for (ParagrapheObj paragrapheObj : this.aventure.getParagrapheList()) {
+            if ( paragrapheObj.getNumParagraphe() == numParagrapheEnCours )
+            {
+                this.paragrapheEnCours = paragrapheObj;
+            }
+        }
 
-        // (2) Liste d'actions.
-        ArrayList<String> actionList = new ArrayList<>();
-        actionList.add("Combattre le Gobelin");
-        actionList.add("Manger tranquillement");
-        actionList.add("Refaire ses lacets");
-        // TODO : Get Paragraphe Actions
+        // Récupération du texte du paragraphe
+        String texteParagraphe = this.paragrapheEnCours.getTexte();
+        // TODO : pour Test seulement (Exemple) (paragraphe et liste d'actions en dur)
+        texteParagraphe = "Ceci est le premier paragraphe";
 
-        // (3) Chargement de la liste d'options affichées à l'écran.
+
+        // (2) Liste d'actions. (Récupération de la liste des actions à afficher)
+
+        ArrayList<Action> actionList = new ArrayList<>();
+        actionList = this.paragrapheEnCours.getActionList();
+        // (2.a) Liste d'actions (Texte)
+        ArrayList<String> actionListText = new ArrayList<>();
+        // On récupère la liste des noms d'action (Champ description en base)
+        for (Action action :actionList) {
+            actionListText.add(action.getDescription());
+        }
+        // TODO : pour Test seulement (Exemple) (paragraphe et liste d'actions en dur)
+        actionListText.add("Combattre le Gobelin");
+        actionListText.add("Manger tranquillement");
+        actionListText.add("Refaire ses lacets");
+
+
+        // (3) Chargement de la liste d'options à afficher à l'écran.
+
         ArrayList<String> optionList = new ArrayList<>();
-        /*optionList.add("Paramètres");
-        optionList.add("Personnage");
-        optionList.add("Equipement");
-        optionList.add("Contexte");*/
-
+        // Récupération de la liste à partir d'un enum (codé en dur Aie Aie Aie -> vue avec Arnaud)
         for (EnumAdventureOptions option : EnumAdventureOptions.values()) {
             // Ajout de chaque option dans la liste
             optionList.add(option.getNom());
         }
 
         // (4) Affichage de l'écran d'aventure (Paragraphe + liste d'actions + liste d'options)
-        cuiAdventure.getInstance().displayGame(paragraphe, actionList, optionList);
+        // TODO : switch case en fonction du type d'affichage (CUI/SWING/Android)
+        // CUI pour le test
+        cuiAdventure.getInstance().displayGame(texteParagraphe, actionListText, optionList);
 
     }
 
@@ -197,46 +221,110 @@ public class AdventureEngine  implements Observer {
         // Test
         System.out.println("Event reçu de la UI (Aventure)");
 
+        // Si c'est la CUI Aventure qui renvoie l'info (Choixutilisateur)
         if(observable instanceof cuiAdventure){
             // On vérifie qu'il s'agisse bien d'un objet KeyValue qui est transmit.
             if (o instanceof KeyValue) {
                 // TODO : Créer un Enum pour lister tous les types d'écran.
                 // On vérifie la provenance de source (Ecran)
                 switch (((KeyValue<String, String>) o).getKey()) {
-                    case "CUI_ADVENTURE_ACTION_CHOICE":
-                        System.out.println("Event reçu de la UI (Aventure) : " + ((KeyValue) o).getValue());
-                        // TODO :
+                    // -> Ecran PARAGRAPHE
+                    case "CUI_ADVENTURE_PARAGRAPHE":
 
-                        // On "switch" d'écran
-                        // TODO : Utiliser des ENUM
-                        switch (((KeyValue<String, String>) o).getValue()) {
-                            // -> JOUER
-                            case "1":
-                                System.out.println(" -> JOUER");
-                                // On lance le moteur d'aventure
-                                AdventureEngine.getInstance().run();
-                                break;
-                            // -> CONTINUER
-                            case "2":
-                                System.out.println(" -> JOUER");
-                                break;
-                            // -> GESTION
-                            case "3":
-                                System.out.println(" -> GESTION");
-                                break;
-                            // -> SAUVEGARDER
-                            case "4":
-                                System.out.println(" -> SAUVEGARDER");
-                                break;
-                            // -> IMPORTER
-                            case "5":
-                                System.out.println(" -> IMPORTER");
-                                break;
-                            // -> PARAMETRES
-                            case "6":
-                                System.out.println(" -> PARAMETRES");
-                                break;
+                        System.out.println("Event reçu de la UI : " + ((KeyValue<String, String>) o).getKey() + ((KeyValue) o).getValue());
+
+                        // TODO (1) : Détermination du type de choix (Action ou Option)
+                        // TODO -> utiliser des enums
+                        String value = ((KeyValue<String, String>) o).getValue();
+
+                        /* Formatage de la valeur issue d'un paragraphe : Char n°1 ([A]ction/[O]ption) + "," + Char n°2 */
+                        /* ATTENTION : Une seule lettre pour le type de choix + un chiffre (Max 9) pour sa valeur */
+                        /* Exemple 1 : A,1-> Choix de type Action n°1  */
+                        /* Exemple 2 : O,4-> Choix de type Option n°4 (Contexte)  */
+
+                        // Cas d'une action
+                        if (value.charAt(0) == 'A')
+                        {
+                            // Il s'agit d'une action
+                            // TODO Action : Détermination du type d'action (à partir de la liste d'action)
+                            String action = value.substring(2);
+                            // Action Choisit
+                            this.actionEnCours = this.paragrapheEnCours.getActionList().get(Integer.parseInt(action));  // TODO Vérifier si début index = 0 (action -1)
+                            // Type de l'action choisit
+                            this.typeActionEnCours = EnumActionType.values()[Integer.parseInt(this.actionEnCours.getCodeAction())]; // TODO : vérifier la correspondance
+
+                            // On "switch" d'écran en fonction du type d'action et de l'action
+                            // TODO : Utiliser des ENUM
+                            switch (this.typeActionEnCours) {
+                                // -> paraSuivant
+                                case paraSuivant:
+                                    System.out.println(" -> paraSuivant");
+                                    //
+                                    break;
+                                // -> testPassageSnippet
+                                case testPassageSnippet:
+                                    System.out.println(" -> testPassageSnippet");
+                                    break;
+                                // -> COMBAT
+                                case combat:
+                                    System.out.println(" -> combat");
+                                    break;
+                                // -> TODO
+                                case todo:
+                                    System.out.println(" -> todo");
+                                    break;
+                                // -> TEMPLATE
+                                case template:
+                                    System.out.println(" -> template");
+                                    break;
+                                // -> ajoutObj
+                                case ajoutObj:
+                                    System.out.println(" -> ajoutObj");
+                                    break;
+                                //
+                                case avtFille:
+                                    System.out.println(" -> avtFille");
+                                    break;
+                                //
+                                case avtMere:
+                                    System.out.println(" -> avtMere");
+                                    break;
+                            }
+
                         }
+
+                        // Cas d'une option
+                        if (value.charAt(0) == 'O')
+                        {
+                            // Il s'agit d'une option
+                            // TODO : Détermination de l'option
+                            String option = value.substring(2);
+
+                            // On "switch" d'écran
+                            // TODO : Utiliser des ENUM
+                            switch (option) {
+                                // -> PARAMETRE
+                                case "1":
+                                    System.out.println(" -> PARAMETRE");
+                                    // 
+                                    break;
+                                // -> PERSONNAGE
+                                case "2":
+                                    System.out.println(" -> PERSONNAGE");
+                                    break;
+                                // -> EQUIPEMENT
+                                case "3":
+                                    System.out.println(" -> EQUIPEMENT");
+                                    break;
+                                // -> CONTEXTE
+                                case "4":
+                                    System.out.println(" -> CONTEXTE");
+                                    break;
+                            }
+                        }
+
+
+
 
                         break;
                     case "CUI_ADVENTURE_OPTION_CHOICE":

@@ -33,8 +33,8 @@ public enum EnumActionType {
 
     // Constructeur
     EnumActionType(String code, String nom){
-        this .code = code;
-        this .nom = nom;
+        this.code = code;
+        this.nom = nom;
     }
 
 }
