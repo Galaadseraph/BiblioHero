@@ -306,7 +306,7 @@ public class AdventureEngine  implements Observer {
                                 // -> PARAMETRE
                                 case "1":
                                     System.out.println(" -> PARAMETRE");
-                                    // 
+                                    //
                                     break;
                                 // -> PERSONNAGE
                                 case "2":
