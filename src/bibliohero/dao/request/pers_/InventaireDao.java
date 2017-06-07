@@ -37,11 +37,11 @@ public class InventaireDao {
 	}
 	
 	//Methode pour recuperer l'inventaire d'un personnage
-		public Inventaire recupererInventaireViaIdPersonnage(int idPersonnage) throws DaoException, ClassNotFoundException, SQLException{
+		public ArrayList<Inventaire> recupererInventaireViaIdPersonnage(int idPersonnage) throws DaoException, ClassNotFoundException, SQLException{
 			String sql = "SELECT * FROM pers_inventaire where idpersonnage = ?";
 			
 			PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
-			
+			ArrayList<Inventaire> listeInventaires = new ArrayList<Inventaire>();
 			ps.setInt(1,idPersonnage);
 			ResultSet rs = ps.executeQuery();
 			
@@ -52,12 +52,10 @@ public class InventaireDao {
 				inventaire.setTypeInventaire(rs.getString("typeinventaire"));
 				inventaire.setIdInventaire(rs.getInt("idinventaire"));
 				inventaire.setIdPersonnage(rs.getInt("idpersonnage"));
-				
-			return inventaire;
-				
+				listeInventaires.add(inventaire);
 			}
-			return null;
-			
+			return listeInventaires;
 		}
+		
 	
 }
