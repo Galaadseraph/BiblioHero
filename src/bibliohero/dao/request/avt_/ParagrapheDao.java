@@ -45,5 +45,49 @@ public class ParagrapheDao {
 					System.out.println(paragraphe.toString());
 				}
 			}
-	
+			
+		//Methodes pour recuperer un Paragraphe
+		public ArrayList <Paragraphe> recupererParagrapheViaIdAventure(int idAventure) throws DaoException, SQLException, ClassNotFoundException{
+			String sql = "SELECT * FROM avt_paragraphe WHERE idaventure = ?;";
+			ArrayList<Paragraphe> listeParagraphes = new ArrayList();
+
+			PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+			ps.setInt(1, idAventure);
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()){
+				Paragraphe paragraphe = new Paragraphe();
+				paragraphe.setIdParagraphe(rs.getInt("idparagraphe"));
+				
+				paragraphe.setTexte(rs.getString("texte"));
+				
+				paragraphe.setNbEvenement(rs.getInt("nbevenement"));
+				paragraphe.setNumParagraphe(rs.getInt("numparagraphe"));
+				paragraphe.setIdAventure(rs.getInt("idaventure"));
+
+
+				listeParagraphes.add(paragraphe);
+
+			}
+			afficherParagraphe(listeParagraphes);
+			rs.close();
+			return listeParagraphes;
+		}
+		
+		//Methode pour recuperer un Paragraphe via NumParagraphe et IdAventure
+		public int recupererIdParagrapheViaNumParagraphe(int idAventure, int numParagraphe) throws DaoException, SQLException, ClassNotFoundException{
+			String sql = "SELECT idparagraphe FROM avt_paragraphe WHERE idaventure = ? AND numparagraphe = ?;";
+			int idParagraphe;
+
+			PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+			ps.setInt(1, idAventure);
+			ps.setInt(2, numParagraphe);
+			ResultSet rs = ps.executeQuery();
+
+			idParagraphe = rs.getInt("idparagraphe");
+				
+			rs.close();
+			return idParagraphe;
+		}
+
 }

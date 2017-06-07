@@ -95,7 +95,7 @@ public class PJPCTemporaireDao {
 	
 	//Selectionner PJPCTemporaire en fonction de l'idpersonnage pr-selectionné par un nom
 	
-	public PJPCTemporaire selectionnerPJPCTempoViaIdPersonnage(String nomPersonnage) throws ClassNotFoundException, SQLException, DaoException{
+	public PJPCTemporaire selectionnerPJPCTempoViaNomPersonnage(String nomPersonnage) throws ClassNotFoundException, SQLException, DaoException{
 		
 		String sql = "SELECT * FROM pers_pjpctempo WHERE idpersonnage = (SELECT idpersonnage FROM pers_personnage WHERE nom = ?);";
 		

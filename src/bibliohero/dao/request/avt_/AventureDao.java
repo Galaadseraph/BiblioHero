@@ -60,4 +60,20 @@ public class AventureDao {
 				System.out.println(avt.toString());
 			}
 		}
+		
+		
+		//Methodes pour recuperer un aventure
+		public Aventure recupererAventureViaISBN(int isbn) throws DaoException, SQLException, ClassNotFoundException{
+			String sql = "SELECT idaventure FROM avt_aventure WHERE isbnaventure = ?;";
+			
+			Aventure aventure = new Aventure();
+
+			PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+			ps.setInt(1, isbn);
+			ResultSet rs = ps.executeQuery();
+			
+			aventure.setIdaventure(rs.getInt("idaventure"));
+			
+			return aventure;
+		}
 }	
