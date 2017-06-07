@@ -1,0 +1,39 @@
+/*
+AIDE A LA COMPREHENSION DU PROJET : Remy
+
+Nom de la base de données : biblioheros.sqlite (Le nom sera peut être amené à changer mais la terminaison est en .sqlite).
+
+Le package bin (poubelle) est utilisé pour mettre toutes les classes, et fichiers dont on ne connait pas l'utilité 
+mais qu'on ne veut pas supprimer.
+
+Le package DAO (Data Access Object) contient deux packages importants :
+-----------------------------------------------------------------------
+
+Le premier JDBC : 
+-----------------
+
+- Un package MYSQL avec une connexion vers mysql-server
+- Un package SQLite avec une connexion vers le fichier SQLite qui sert de base de données dans l'application
+
+
+Le deuxième Request :
+---------------------
+
+Ce fichier contient toutes les classes DAO (accès aux bases de données) elle même reliée au package Model.
+Chacune de ces classes contient le ou les requêtes nécessaires à l'insertion, la récupération de données,
+ou encore la modification de la base de données.
+Ce package est divisé en 3 avec les classes pers_, avt_et lot_
+
+
+Le package Model :
+------------------
+
+Ce package comprend toutes les classes Java contenant les variables, les getters et les setters afin d'accéder aux attributs (private).
+
+
+
+Le package Exceptions:
+----------------------
+
+Ce package est destinée à recevoir toutes les exceptions que nous rencontrerons dans ce projet.
+*/ 
