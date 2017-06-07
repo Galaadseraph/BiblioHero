@@ -1,4 +1,7 @@
-kage bibliohero.dao.request.avt_;
+package bibliohero.dao.request.avt_;
+
+import bibliohero.dao.request.avt_.TypeActionDao;
+import bibliohero.model.avt_.Action;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,12 +10,11 @@ import java.util.ArrayList;
 
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
 import bibliohero.exceptions.DaoException;
-import bibliohero.model.avt_.Action;
 
 public class ActionDao {
 
 	//Methodes pour recuperer un Action
-	public ArrayList <Action> recupererAction() throws DaoException, SQLException, ClassNotFoundException{
+	public ArrayList<Action> recupererAction() throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "SELECT * FROM avt_action;";
 		ArrayList<Action> listeActions = new ArrayList();
 
