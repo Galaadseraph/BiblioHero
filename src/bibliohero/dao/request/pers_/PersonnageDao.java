@@ -168,7 +168,7 @@ public class PersonnageDao{
 	
 	//Methode pour modifier la richesse, l'experience et le moral d'un personnage en sortie d'aventure.
 	public void mettreAJourPersonnage(PJPCTemporaire persoTemporaire) throws ClassNotFoundException, SQLException, DaoException{
-		//pjpcdao donne les données
+		//pjpcdao donne les donnees
 		
 		String sql = "UPDATE pers_personnage SET richesse = ?, experience = ?, moral = ? WHERE idpersonnage = ? ";
 		
@@ -181,5 +181,103 @@ public class PersonnageDao{
 		
 	}
 	
+	//Methode pour recuperer un personnage via son idEquipe
+	public ArrayList<Personnage> recupererPersonnageViaIdEquipe(int idequipe)throws DaoException, ClassNotFoundException, SQLException{
+		String sql = "SELECT * FROM pers_personnage WHERE codeequipe =(SELECT codeequipe FROM pers_equipe WHERE idequipe = ?);";
+					
+		ArrayList<Personnage> listePersonnages = new ArrayList();
+		
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ps.setInt(1, idequipe);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()){
+			Personnage personnage = new Personnage();
+			personnage.setIdPersonnage(rs.getInt("idpersonnage"));
+			personnage.setNom(rs.getString("nom"));
 
+			personnage.setPvMax(rs.getShort("pv"));
+			personnage.setForce(rs.getShort("forcep"));
+			personnage.setDexterite(rs.getShort("dexteritep"));
+			personnage.setEndurance(rs.getShort("endurance"));
+			personnage.setIntelligence(rs.getShort("intelligence"));
+			personnage.setMoral(rs.getShort("moral"));
+			
+			personnage.setRichesse(rs.getDouble("richesse"));
+			personnage.setExperience(rs.getDouble("experience"));
+			personnage.setNiveau(rs.getByte("niveau"));
+			
+			personnage.setEstActif(rs.getBoolean("estactif"));
+			personnage.setPermadeath(rs.getBoolean("permadeath"));
+			personnage.setHommedefer(rs.getBoolean("hommeDeFer"));
+			personnage.setEstJoueur(rs.getBoolean("estJoueur"));
+		
+			TypeRaceDao typeRD = new TypeRaceDao();
+			personnage.setRace(typeRD.recupererRaceViaCode(rs.getString("coderace")));
+
+			TypeClasseDao typeClasseD = new TypeClasseDao();
+			personnage.setClasse(typeClasseD.recupererClasseeViaCode(rs.getString("codeclasse")));
+
+			TypeSexeDao typeSexeD = new TypeSexeDao();
+			personnage.setSexe(typeSexeD.recupererSexeViaCode(rs.getString("codesexe")));
+
+			TypeGenreDao typeGenreD = new TypeGenreDao();
+			personnage.setGenre(typeGenreD.recupererGenreViaCode(rs.getString("codegenre")));
+
+			EquipeDao equipeD = new EquipeDao();
+			personnage.setEquipe(equipeD.recupererEquipeViaCode(rs.getString("codeequipe")));
+		}
+		rs.close();
+		return listePersonnages;
+	}
+	
+	//Methode pour recuperer un personnage via son nom d'equipe
+		public ArrayList<Personnage> recupererPersonnageViaNomEquipe(String nomEquipe)throws DaoException, ClassNotFoundException, SQLException{
+			String sql = "SELECT * FROM pers_personnage WHERE codeequipe =(SELECT codeequipe FROM pers_equipe WHERE nom = ?);";
+						
+			ArrayList<Personnage> listePersonnages = new ArrayList();
+			
+			PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+			ps.setString(1, nomEquipe);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				Personnage personnage = new Personnage();
+				personnage.setIdPersonnage(rs.getInt("idpersonnage"));
+				personnage.setNom(rs.getString("nom"));
+
+				personnage.setPvMax(rs.getShort("pv"));
+				personnage.setForce(rs.getShort("forcep"));
+				personnage.setDexterite(rs.getShort("dexteritep"));
+				personnage.setEndurance(rs.getShort("endurance"));
+				personnage.setIntelligence(rs.getShort("intelligence"));
+				personnage.setMoral(rs.getShort("moral"));
+				
+				personnage.setRichesse(rs.getDouble("richesse"));
+				personnage.setExperience(rs.getDouble("experience"));
+				personnage.setNiveau(rs.getByte("niveau"));
+				
+				personnage.setEstActif(rs.getBoolean("estactif"));
+				personnage.setPermadeath(rs.getBoolean("permadeath"));
+				personnage.setHommedefer(rs.getBoolean("hommeDeFer"));
+				personnage.setEstJoueur(rs.getBoolean("estJoueur"));
+			
+				TypeRaceDao typeRD = new TypeRaceDao();
+				personnage.setRace(typeRD.recupererRaceViaCode(rs.getString("coderace")));
+
+				TypeClasseDao typeClasseD = new TypeClasseDao();
+				personnage.setClasse(typeClasseD.recupererClasseeViaCode(rs.getString("codeclasse")));
+
+				TypeSexeDao typeSexeD = new TypeSexeDao();
+				personnage.setSexe(typeSexeD.recupererSexeViaCode(rs.getString("codesexe")));
+
+				TypeGenreDao typeGenreD = new TypeGenreDao();
+				personnage.setGenre(typeGenreD.recupererGenreViaCode(rs.getString("codegenre")));
+
+				EquipeDao equipeD = new EquipeDao();
+				personnage.setEquipe(equipeD.recupererEquipeViaCode(rs.getString("codeequipe")));
+			}
+			rs.close();
+			return listePersonnages;
+		}
 }

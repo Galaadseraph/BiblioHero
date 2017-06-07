@@ -70,12 +70,37 @@ public class PJPCTemporaireDao {
 	
 	//Recuperer un personnage via son id
 	public PJPCTemporaire retrouverPJPCPersonnageViaId(int idPersonnage) throws DaoException, ClassNotFoundException, SQLException{
-		String sql = "SELECT * FROM pers_pjpctempo WHERE id = ?;";
+		String sql = "SELECT * FROM pers_pjpctempo WHERE idpersonnage = ?;";
 		
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 		
 		ps.setInt(1,idPersonnage);
+		ResultSet rs = ps.executeQuery();
 		
+		PJPCTemporaire pjpcTemp = new PJPCTemporaire();
+		pjpcTemp.setForce(rs.getShort("forcep"));
+		pjpcTemp.setDexterite(rs.getShort("dexteritep"));
+		pjpcTemp.setEndurance(rs.getShort("endurance"));
+		pjpcTemp.setIntelligence(rs.getShort("intelligence"));
+		pjpcTemp.setPv(rs.getShort("pv"));
+		pjpcTemp.setMoral(rs.getInt("moral"));
+		
+		pjpcTemp.setRichesse(rs.getDouble("richesse"));
+		pjpcTemp.setExperience(rs.getDouble("experience"));
+		
+		pjpcTemp.setBackground(rs.getString("background"));
+		pjpcTemp.setIdpersonnage(idPersonnage);
+		return pjpcTemp;
+	}
+	
+	//Selectionner PJPCTemporaire en fonction de l'idpersonnage pr-selectionné par un nom
+	
+	public PJPCTemporaire selectionnerPJPCTempoViaIdPersonnage(String nomPersonnage) throws ClassNotFoundException, SQLException, DaoException{
+		
+		String sql = "SELECT * FROM pers_pjpctempo WHERE idpersonnage = (SELECT idpersonnage FROM pers_personnage WHERE nom = ?);";
+		
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ps.setString(1, nomPersonnage);
 		ResultSet rs = ps.executeQuery();
 		PJPCTemporaire pjpcTemp = new PJPCTemporaire();
 		pjpcTemp.setForce(rs.getShort("forcep"));
@@ -83,12 +108,13 @@ public class PJPCTemporaireDao {
 		pjpcTemp.setEndurance(rs.getShort("endurance"));
 		pjpcTemp.setIntelligence(rs.getShort("intelligence"));
 		pjpcTemp.setPv(rs.getShort("pv"));
+		pjpcTemp.setMoral(rs.getInt("moral"));
 		
 		pjpcTemp.setRichesse(rs.getDouble("richesse"));
 		pjpcTemp.setExperience(rs.getDouble("experience"));
 		
 		pjpcTemp.setBackground(rs.getString("background"));
-		pjpcTemp.setIdpersonnage(idPersonnage);
+		
 		return pjpcTemp;
 	}
 }
