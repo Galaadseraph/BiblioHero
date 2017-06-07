@@ -19,6 +19,7 @@ public class LotSortDao {
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
+		
 		while(rs.next()){
 		LotSort lotSort = new LotSort();
 		

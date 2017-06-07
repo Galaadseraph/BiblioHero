@@ -37,22 +37,6 @@ public class TypeEquipementDao {
 		return listeTypeEquipement;
 	}
 	
-	//Methode pour recuperer le genre via le codeEquipement
-		public String recupererTypeEquipementViaCode(String codeEquipement) throws SQLException, DaoException, ClassNotFoundException{
-			String sql = "SELECT nom FROM pers_typeequipement WHERE pers_typeequipement.codeequipement = ?;";
-			
-			PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
-			ps.setString(1, codeEquipement);
-			ResultSet rs = ps.executeQuery();
-			
-			if(rs.next()){
-				return rs.getString(1);
-			}
-			else{
-				return null;
-			}
-		}
-	
 	//Methode pour afficher les types equipements avec la methode toString
 		public void afficherTypeEquipement(ArrayList <TypeEquipement> listeTypeEquipement){
 			for(TypeEquipement typeEquip : listeTypeEquipement){
