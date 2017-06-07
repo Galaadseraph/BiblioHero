@@ -33,7 +33,7 @@ public class cuiAdventure extends Observable {
     /**
      * Affichage "Mode Aventure" -> Paragraphe
      */
-    public void displayGame(String paragraphe, ArrayList<String> actionList, ArrayList<String> optionList) {
+    public void displayParagraphe(String paragraphe, ArrayList<String> actionList, ArrayList<String> optionList) {
 
         // Variables
         int idx;            // Index pour compteurs

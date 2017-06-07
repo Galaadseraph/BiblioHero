@@ -5,7 +5,6 @@ import bibliohero.controller.AdventureEngineObj.PJoueurObj;
 import bibliohero.controller.AdventureEngineObj.ParagrapheObj;
 import bibliohero.ihm.consoletest.KeyValue;
 import bibliohero.ihm.consoletest.cuiAdventure;
-import bibliohero.ihm.consoletest.cuiGame;
 import bibliohero.model.avt_.Action;
 import bibliohero.service.SrvAdventure;
 
@@ -109,7 +108,7 @@ public class AdventureEngine  implements Observer {
     protected PJoueurObj loadPlayer(String nomJoueur) {
 
         // Fait appel au service pour récupérer le joueur en base de données.
-        return SrvAdventure.loadPlayer(nomJoueur);
+        return SrvAdventure.getPlayer(nomJoueur);
     }
 
     /**
@@ -153,7 +152,7 @@ public class AdventureEngine  implements Observer {
         // TODO : (3) Chargement des actions associées à chaque paragraphe
 
         // Fait appel au service pour récupérer l'aventure en base de données.
-        return SrvAdventure.loadAdventure(isbnAventure);
+        return SrvAdventure.getAdventure(isbnAventure);
 
     }
 
@@ -207,7 +206,7 @@ public class AdventureEngine  implements Observer {
         // (4) Affichage de l'écran d'aventure (Paragraphe + liste d'actions + liste d'options)
         // TODO : switch case en fonction du type d'affichage (CUI/SWING/Android)
         // CUI pour le test
-        cuiAdventure.getInstance().displayGame(texteParagraphe, actionListText, optionList);
+        cuiAdventure.getInstance().displayParagraphe(texteParagraphe, actionListText, optionList);
 
     }
 
@@ -281,11 +280,11 @@ public class AdventureEngine  implements Observer {
                                 case ajoutObj:
                                     System.out.println(" -> ajoutObj");
                                     break;
-                                //
+                                // -> avtFille
                                 case avtFille:
                                     System.out.println(" -> avtFille");
                                     break;
-                                //
+                                // -> avtMere
                                 case avtMere:
                                     System.out.println(" -> avtMere");
                                     break;
@@ -322,9 +321,6 @@ public class AdventureEngine  implements Observer {
                                     break;
                             }
                         }
-
-
-
 
                         break;
                     case "CUI_ADVENTURE_OPTION_CHOICE":
