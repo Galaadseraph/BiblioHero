@@ -49,9 +49,16 @@ public class ActionDao {
 			System.out.println(action.toString());
 		}
 	}
-	
-	//Methode pour recuperer les actions d'un paragraphe
-	public ArrayList<Action> recupererActionViaIdParagraphe(int idParagraphe) throws ClassNotFoundException, SQLException, DaoException{
+
+	/**
+	 * Methode pour recuperer les actions d'un paragraphe
+	 * @param idParagraphe
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws DaoException
+	 */
+	public ArrayList<Action> recupererListeActionViaIdParagraphe(int idParagraphe) throws ClassNotFoundException, SQLException, DaoException{
 		
 		String sql = "SELECT * FROM avt_action WHERE idaction IN (SELECT idaction FROM avt_paragrapheaction WHERE idparagraphe = ?);";
 		ArrayList<Action> listeActions = new ArrayList();

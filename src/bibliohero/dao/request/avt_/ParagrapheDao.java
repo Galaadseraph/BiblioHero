@@ -74,8 +74,15 @@ public class ParagrapheDao {
 		return listeParagraphes;
 	}
 
-	//Methodes pour recuperer un Paragraphe via un id
-	public ArrayList<Paragraphe> recupererParagrapheViaIsbn(int isbn) throws DaoException, SQLException, ClassNotFoundException {
+	/**
+	 * Methodes pour recuperer un Paragraphe via un id
+	 * @param isbn
+	 * @return
+	 * @throws DaoException
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public ArrayList<Paragraphe> recupererListeParagrapheViaIsbnAventure(int isbn) throws DaoException, SQLException, ClassNotFoundException {
 		String sql = "SELECT * FROM avt_paragraphe WHERE idaventure = (SELECT idaventure FROM avt_aventure WHERE isbnaventure = ?);";
 		ArrayList<Paragraphe> listeParagraphes = new ArrayList();
 
