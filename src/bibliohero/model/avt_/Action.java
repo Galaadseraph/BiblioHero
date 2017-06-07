@@ -5,7 +5,7 @@ public class Action {
 	private int idAction;
 	private int paragrapheSuite;
 	
-	private String codeAction;
+	private String codeTypeAction; //Terme adéquat : codeTypeAction
 	private String effet;
 	private String description;
 	private String codeCombat;
@@ -13,7 +13,7 @@ public class Action {
 	
 	@Override
 	public String toString() {
-		return "Action [idAction=" + idAction + ", typeAction=" + codeAction + ", paragrapheSuite=" + paragrapheSuite
+		return "Action [idAction=" + idAction + ", typeAction=" + codeTypeAction + ", paragrapheSuite=" + paragrapheSuite
 				+ ", effet=" + effet + ", description=" + description + ", codeCombat=" + codeCombat + "]";
 	}
 	
@@ -24,11 +24,11 @@ public class Action {
 		this.idAction = idAction;
 	}
 	public String getCodeAction() {
-		return codeAction;
+		return codeTypeAction;
 	}
 
 	public void setCodeAction(String codeAction) {
-		this.codeAction = codeAction;
+		this.codeTypeAction = codeAction;
 	}
 
 	public int getParagrapheSuite() {

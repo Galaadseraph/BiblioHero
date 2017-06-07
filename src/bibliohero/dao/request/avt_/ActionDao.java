@@ -30,7 +30,7 @@ public class ActionDao {
 			
 			
 			TypeActionDao typeActionDao = new TypeActionDao();
-			action.setCodeAction(typeActionDao.recupererTypeActionViaCode(rs.getString("codeaction")));
+			action.setCodeAction(typeActionDao.recupererTypeActionViaCode(rs.getString("codetypeaction")));
 			action.setParagrapheSuite(rs.getInt("paragraphesuite"));
 
 			listeActions.add(action);
@@ -46,6 +46,38 @@ public class ActionDao {
 		for(Action action : listeActions){
 			System.out.println(action.toString());
 		}
+	}
+	
+	//Methode pour recuperer les actions d'un paragraphe
+	public ArrayList<Action> recupererActionViaIdParagraphe(int idParagraphe) throws ClassNotFoundException, SQLException, DaoException{
+		
+		String sql = "SELECT * FROM avt_action WHERE idaction IN (SELECT idaction FROM avt_paragrapheaction WHERE idparagraphe = ?);";
+		ArrayList<Action> listeActions = new ArrayList();
+
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ps.setInt(1, idParagraphe);
+		ResultSet rs = ps.executeQuery();
+		
+
+		while(rs.next()){
+			Action action = new Action();
+			
+			action.setIdAction(rs.getInt("idaction"));
+			action.setDescription(rs.getString("description"));
+			action.setEffet(rs.getString("effet"));
+			action.setCodeCombat(rs.getString("codecombat"));
+			
+			
+			TypeActionDao typeActionDao = new TypeActionDao();
+			action.setCodeAction(typeActionDao.recupererTypeActionViaCode(rs.getString("codetypeaction")));
+			action.setParagrapheSuite(rs.getInt("paragraphesuite"));
+
+			listeActions.add(action);
+
+		}
+		afficherAction(listeActions);
+		rs.close();
+		return listeActions;
 	}
 		
 }
