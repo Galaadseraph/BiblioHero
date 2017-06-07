@@ -108,7 +108,10 @@ public class AdventureEngine  implements Observer {
     protected PJoueurObj loadPlayer(String nomJoueur) {
 
         // Fait appel au service pour récupérer le joueur en base de données.
-        return SrvAdventure.getPlayer(nomJoueur);
+        // TODO
+        //return SrvAdventure.getPlayer(nomJoueur);
+        // UTILISE POUR TEST SEULEMENT
+        return SrvAdventure.getPlayerTest(nomJoueur);
     }
 
     /**

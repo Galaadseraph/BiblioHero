@@ -31,7 +31,7 @@ public class SrvAdventure {
      * @param nomPersonnage
      * @return
      */
-    public static PJoueurObj getPlayer(String nomPersonnage)
+    /*public static PJoueurObj getPlayer(String nomPersonnage)
     {
         // TODO : Vérifier si la table pers_pjpctempo est POPULE (déjà réalisé lors de la création du person en BDD)
         // Si c'est le cas, on charge la table pers_pjpctempo et on la stocke dans PJoueurObj
@@ -56,14 +56,14 @@ public class SrvAdventure {
         // On retourne l'objet Joueur
         return pjoueur;
 
-    }
+    }*/
 
     /**
      * Objet Aventure : Requêtes DAO + Contruction des objets
      * @param isbnAdventure
      * @return
      */
-    public static AventureObj getAdventure(String isbnAdventure)
+    /*public static AventureObj getAdventure(String isbnAdventure)
     {
 
         // TODO 1 : Requête DAO : Récupération de l'aventure d'après son identifiant "isbn"
@@ -88,12 +88,13 @@ public class SrvAdventure {
 
         // Renvoie de l'objet aventure complet (Aventure + Liste des paragraphes associés + Liste des actions associées à chaque paragraphe.
         return aventureObj;
-    }
+    }*/
 
     //region Test
 
     /**
      * Objet Joueur : Requêtes DAO + Construction des objets
+     * Chargement du jeu d'essai Manuellement pour TEST (Bypass DAO Access)
      * @param nomPersonnage
      * @return
      */
@@ -126,7 +127,7 @@ public class SrvAdventure {
 
     /**
      * Objet Aventure : Requêtes DAO + Contruction des objets
-     * TEST : On remplit les objets manuellement en ByPassant
+     * Chargement du jeu d'essai Manuellement pour TEST (Bypass DAO Access)
      * @param isbnAdventure
      * @return
      */
@@ -134,7 +135,19 @@ public class SrvAdventure {
     {
 
         // TODO 1 : Requête DAO : Récupération de l'aventure d'après son identifiant "isbn"
-        Aventure aventure =  AventureDao.recupererAventureViaNom(isbnAdventure);
+        Aventure aventure =  new Aventure();
+        aventure.setAuteur();
+        aventure.setClasseRequise();
+        aventure.setCodeTheme();
+        aventure.setDictionnaire();
+        aventure.setIdaventure();
+        aventure.setIsbnAventure();
+        aventure.setIsbnseries();
+        aventure.setNbParagraphe();
+        aventure.setNom();
+        aventure.setNvRequis();
+        aventure.setSynopsis();
+        aventure.setVersion();
 
         // Création de l'objet aventure à partir de l'aventure en base
         AventureObj aventureObj = (AventureObj) aventure;
