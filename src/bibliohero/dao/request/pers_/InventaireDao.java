@@ -56,6 +56,4 @@ public class InventaireDao {
 			}
 			return listeInventaires;
 		}
-		
-	
 }
