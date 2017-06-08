@@ -57,7 +57,7 @@ public class SrvAdventure {
         }
 
         // Création de l'objet personnage joueur à partir du personnage en base
-        PJoueurObj pjoueur = (PJoueurObj) personnage;
+        PJoueurObj pjoueur = new PJoueurObj(personnage);
 
         // TODO 2 : Requête DAO : Récupération des attributs variables du joueur (d'après son nom)
         PJPCTemporaireDao pJPCTemporaireDao = new PJPCTemporaireDao();
@@ -119,13 +119,10 @@ public class SrvAdventure {
         }
 
         // Création de l'objet aventure à partir de l'aventure en base
-        AventureObj aventureObj = (AventureObj) aventure;
+        AventureObj aventureObj = new AventureObj(aventure);
 
         // TODO 2 : Requête DAO : Récupération de la liste des paragraphes de l'aventure (d'après l'identifiant du paragraphe)
         ParagrapheDao paragrapheDao = new ParagrapheDao();
-
-        Paragraphe p = new Paragraphe();
-        ParagrapheObj po = (ParagrapheObj) p;
 
         ArrayList<ParagrapheObj> listeParagraphe = null;
         try {
@@ -135,7 +132,7 @@ public class SrvAdventure {
             // Cast Paragraphe -> ParagrapheObj (pour chaque paragraphe
             for (Paragraphe paragrapheTmp : listeParagrapheTmp)
             {
-                listeParagraphe.add((ParagrapheObj) paragrapheTmp);
+                listeParagraphe.add(new ParagrapheObj(paragrapheTmp));
             }
         } catch (DaoException e) {
             e.printStackTrace();
@@ -153,11 +150,11 @@ public class SrvAdventure {
         ArrayList<Action> listeAction = null;
 
         // Pour chaque paragraphe
-        for (ParagrapheObj paragraphe : listeParagraphe)
+        for (ParagrapheObj paragrapheObj : listeParagraphe)
         {
             // Récupération de la liste des actions (pour le paragraphe en cours)
             try {
-                listeAction = actionDao.recupererListeActionViaIdParagraphe(paragraphe.getIdParagraphe());
+                listeAction = actionDao.recupererListeActionViaIdParagraphe(paragrapheObj.getParagraphe().getIdParagraphe());
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
@@ -166,7 +163,7 @@ public class SrvAdventure {
                 e.printStackTrace();
             }
             // Association de la liste d'actions au paragraphe en cours
-            paragraphe.setActionList(listeAction);
+            paragrapheObj.setActionList(listeAction);
         }
 
         // Renvoie de l'objet aventure complet (Aventure + Liste des paragraphes associés + Liste des actions associées à chaque paragraphe.
@@ -178,72 +175,23 @@ public class SrvAdventure {
     /**
      * Objet Joueur : Requêtes DAO + Construction des objets
      * Chargement du jeu d'essai Manuellement pour TEST (Bypass DAO Access)
+     * NE PAS UTILISER : INCOMPLET
      * @param nomPersonnage
      * @return
      */
     public static PJoueurObj getPlayerTest(String nomPersonnage)
     {
-        // TODO : Vérifier si la table pers_pjpctempo est POPULE (déjà réalisé lors de la création du person en BDD)
-        // Si c'est le cas, on charge la table pers_pjpctempo et on la stocke dans PJoueurObj
-        // Sinon, on la POPULE dans un premier temps
 
-        // TODO 1 : Requête DAO : Récupération du personnage d'après son nom
-        PersonnageDao personnageDao = new PersonnageDao();
+        PJoueurObj pJoueurObj = new PJoueurObj();
 
-        Personnage personnage = null;
-        try {
-            personnage = personnageDao.recupererPersonnageViaNomPersonnage(nomPersonnage);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        // Création de l'objet personnage joueur à partir du personnage en base
-        PJoueurObj pjoueur = (PJoueurObj) personnage;
-
-        // TODO 2 : Requête DAO : Récupération des attributs variables du joueur (d'après son nom)
-        PJPCTemporaireDao pJPCTemporaireDao = new PJPCTemporaireDao();
-
-        PJPCTemporaire persoTmp = null;
-        try {
-            persoTmp = pJPCTemporaireDao.recupererPJPCTempoViaNomPersonnage(nomPersonnage);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
-        // Association de Perso_Tmp à l'objet Personnage
-        pjoueur.setPerso_tmp(persoTmp);
-
-        // TODO 3 : Requête DAO : Récupération de la liste des inventaires du joueur (d'après son nom)
-        InventaireDao inventaireDao = new InventaireDao();
-
-        ArrayList<Inventaire> listeInventaire = null;
-        try {
-            listeInventaire = inventaireDao.recupererListeInventaireViaNomPersonnage(nomPersonnage);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        // Association de la liste des inventaires à l'objet Personnage
-        pjoueur.setListeInventaire(listeInventaire);
-
-        // On retourne l'objet Joueur (Personnage) avec les attributs temporaires et sa liste d'inventaires
-        return pjoueur;
+        return pJoueurObj;
 
     }
 
     /**
      * Objet Aventure : Requêtes DAO + Contruction des objets ()
      * Chargement du jeu d'essai Manuellement pour TEST (Bypass DAO Access)
+     * NE PAS UTILISER : INCOMPLET
      * @param isbnAdventure
      * @return
      */
@@ -270,7 +218,7 @@ public class SrvAdventure {
         aventure.setIsbnseries("ab4");
 
         // Création de l'objet aventure à partir de l'aventure en base
-        AventureObj aventureObj = (AventureObj) aventure;
+        AventureObj aventureObj = new AventureObj(aventure);
 
         // TODO 2 : Requête DAO : Récupération de la liste des paragraphes de l'aventure (d'après l'identifiant du paragraphe)
         ParagrapheDao paragrapheDao = new ParagrapheDao();
@@ -283,7 +231,7 @@ public class SrvAdventure {
             // Cast Paragraphe -> ParagrapheObj (pour chaque paragraphe
             for (Paragraphe paragrapheTmp : listeParagrapheTmp)
             {
-                listeParagraphe.add((ParagrapheObj) paragrapheTmp);
+                listeParagraphe.add(new ParagrapheObj(paragrapheTmp));
             }
         } catch (DaoException e) {
             e.printStackTrace();
@@ -301,11 +249,11 @@ public class SrvAdventure {
         ArrayList<Action> listeAction = null;
 
         // Pour chaque paragraphe
-        for (ParagrapheObj paragraphe : listeParagraphe)
+        for (ParagrapheObj paragrapheObj : listeParagraphe)
         {
             // Récupération de la liste des actions (pour le paragraphe en cours)
             try {
-                listeAction = actionDao.recupererListeActionViaIdParagraphe(paragraphe.getIdParagraphe());
+                listeAction = actionDao.recupererListeActionViaIdParagraphe(paragrapheObj.getParagraphe().getIdParagraphe());
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
@@ -314,7 +262,7 @@ public class SrvAdventure {
                 e.printStackTrace();
             }
             // Association de la liste d'actions au paragraphe en cours
-            paragraphe.setActionList(listeAction);
+            paragrapheObj.setActionList(listeAction);
         }
 
         // Renvoie de l'objet aventure complet (Aventure + Liste des paragraphes associés + Liste des actions associées à chaque paragraphe.

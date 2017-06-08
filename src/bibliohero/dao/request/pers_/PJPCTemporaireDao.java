@@ -102,6 +102,8 @@ public class PJPCTemporaireDao {
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 		ps.setString(1, nomPersonnage);
 		ResultSet rs = ps.executeQuery();
+		rs.next();
+
 		PJPCTemporaire pjpcTemp = new PJPCTemporaire();
 		pjpcTemp.setForce(rs.getShort("forcep"));
 		pjpcTemp.setDexterite(rs.getShort("dexteritep"));

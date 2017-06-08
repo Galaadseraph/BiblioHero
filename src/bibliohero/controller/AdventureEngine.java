@@ -181,14 +181,14 @@ public class AdventureEngine  implements Observer {
 
         // Récupération du paragraphe en cours à partir de l'aventure
         for (ParagrapheObj paragrapheObj : this.aventure.getParagrapheList()) {
-            if ( paragrapheObj.getNumParagraphe() == numParagrapheEnCours )
+            if ( paragrapheObj.getParagraphe().getNumParagraphe() == numParagrapheEnCours )
             {
                 this.paragrapheEnCours = paragrapheObj;
             }
         }
 
         // Récupération du texte du paragraphe
-        String texteParagraphe = this.paragrapheEnCours.getTexte();
+        String texteParagraphe = this.paragrapheEnCours.getParagraphe().getTexte();
         // TODO : pour Test seulement (Exemple) (paragraphe et liste d'actions en dur)
         texteParagraphe = "Ceci est le premier paragraphe";
 
