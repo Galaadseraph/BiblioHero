@@ -155,7 +155,7 @@ public class AdventureEngine  implements Observer {
         // TODO : (3) Chargement des actions associées à chaque paragraphe
 
         // Fait appel au service pour récupérer l'aventure en base de données.
-        return SrvAdventure.getAdventure(isbnAventure);
+        return null;//SrvAdventure.getAdventure(isbnAventure);
 
     }
 

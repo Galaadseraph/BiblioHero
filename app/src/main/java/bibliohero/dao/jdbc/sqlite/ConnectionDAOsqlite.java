@@ -34,11 +34,6 @@ public class ConnectionDAOsqlite {
 				Class.forName("org.sqlite.JDBC");
 				connection = DriverManager.getConnection("jdbc:sqlite:biblioheros.sqlite");
 				System.out.println("Connexion � la base de donn�es r�ussie! ");
-=======
-				
->>>>>>> master:src/bibliohero/dao/jdbc/sqlite/ConnectionDAOsqlite.java
-				return connection;
-			
 		}
         return connection;
     }

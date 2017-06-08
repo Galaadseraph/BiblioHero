@@ -105,23 +105,23 @@ public class SrvAdventure {
         // Sinon, on la POPULE dans un premier temps
 
         // TODO 1 : Requête DAO : Récupération du personnage d'après son nom
-        Personnage personnage =  PersonnageDao.recupererPersonnageViaNom(nomPersonnage);
+        //Personnage personnage =  PersonnageDao.recupererPersonnageViaNom(nomPersonnage);
 
         // Création de l'objet personnage joueur à partir du personnage en base
-        PJoueurObj pjoueur = (PJoueurObj) personnage;
+        //PJoueurObj pjoueur = (PJoueurObj) personnage;
 
         // TODO 2 : Requête DAO : Récupération des attributs variables du joueur (d'après son nom)
-        PJPCTemporaire persoTmp =  PJPCTemporaireDao.recupererPjpcTemporaireViaNom(nomPersonnage);
+        //PJPCTemporaire persoTmp =  PJPCTemporaireDao.recupererPjpcTemporaireViaNom(nomPersonnage);
         //
-        pjoueur.setPerso_tmp(persoTmp);
+        //pjoueur.setPerso_tmp(persoTmp);
 
         // TODO 3 : Requête DAO : Récupération de la liste des inventaires du joueur (d'après son nom)
-        ArrayList<Inventaire> listeInventaire = InventaireDao.recupererListeInventaireViaNom(nomPersonnage);
+       // ArrayList<Inventaire> listeInventaire = InventaireDao.recupererListeInventaireViaNom(nomPersonnage);
         //
-        pjoueur.setListeInventaire(listeInventaire);
+        //pjoueur.setListeInventaire(listeInventaire);
 
         // On retourne l'objet Joueur
-        return pjoueur;
+        return null;//pjoueur;
 
     }
 
@@ -135,7 +135,7 @@ public class SrvAdventure {
     {
 
         // TODO 1 : Requête DAO : Récupération de l'aventure d'après son identifiant "isbn"
-        Aventure aventure =  new Aventure();
+        /*Aventure aventure =  new Aventure();
         aventure.setAuteur();
         aventure.setClasseRequise();
         aventure.setCodeTheme();
@@ -148,26 +148,26 @@ public class SrvAdventure {
         aventure.setNvRequis();
         aventure.setSynopsis();
         aventure.setVersion();
-
+*/
         // Création de l'objet aventure à partir de l'aventure en base
-        AventureObj aventureObj = (AventureObj) aventure;
+        //AventureObj aventureObj = (AventureObj) aventure;
 
         // TODO 2 : Requête DAO : Récupération de la liste des paragraphes de l'aventure (d'après l'identifiant du paragraphe)
-        ArrayList<ParagrapheObj> listeParagraphe = ParagrapheDao.recupererListeParagrapheViaId(isbnAdventure);
+        //ArrayList<ParagrapheObj> listeParagraphe = ParagrapheDao.recupererListeParagrapheViaId(isbnAdventure);
         // Association de la liste de paragraphes à l'aventure
-        aventureObj.setParagrapheList(listeParagraphe);
+        //aventureObj.setParagrapheList(listeParagraphe);
 
         // TODO 3 : Requête DAO : Récupération de la liste des actions pour chaque paragraphe de la liste des paragraphes
-        for (ParagrapheObj paragraphe : listeParagraphe)
+        /*for (ParagrapheObj paragraphe : listeParagraphe)
         {
             // Récupération de la liste des actions pour le paragraphe en cours
             ArrayList<Action> listeAction = ParagrapheDao.recupererListeActionViaId(paragraphe.getIdParagraphe());
             // Association de la liste d'actions au paragraphe en cours
             paragraphe.setActionList(listeAction);
-        }
+        }*/
 
         // Renvoie de l'objet aventure complet (Aventure + Liste des paragraphes associés + Liste des actions associées à chaque paragraphe.
-        return aventureObj;
+        return null;//aventureObj;
     }
 
     //endregion

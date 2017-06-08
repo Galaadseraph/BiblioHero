@@ -11,7 +11,7 @@ import bibliohero.model.pers_.TypeInventaire;
 
 public class TypeInventaireDao {
 
-	//Methode pour récuprer le type des inventaires
+	//Methode pour rï¿½cuprer le type des inventaires
 	public ArrayList <TypeInventaire> recupererTypeInventaire() throws DaoException, SQLException, ClassNotFoundException{
 		
 		String sql = "Select * from pers_Typeinventaire;";
@@ -28,7 +28,7 @@ public class TypeInventaireDao {
 			typeInventaire.setNom(rs.getString("nom"));
 			typeInventaire.setCode(rs.getString("code"));
 			
-			//Je crois qu'il faudra lié le code de typeInventaire avec la table inventaire via le nom
+			//Je crois qu'il faudra liÃ© le code de typeInventaire avec la table inventaire via le nom
 		
 
 			listeTypeInventaire.add(typeInventaire);

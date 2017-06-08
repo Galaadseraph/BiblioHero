@@ -46,20 +46,20 @@ public class CreatePerso extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_perso);
         namePerso = (EditText)findViewById(R.id.NomPerso);
-        minus1 = (Button)findViewById(R.id.Minus1Attr);
-        add1 = (Button)findViewById(R.id.Add1Attr);
-        minus2 = (Button)findViewById(R.id.Minus2Attr);
-        add2 = (Button)findViewById(R.id.Add2Attr);
-        minus3 = (Button)findViewById(R.id.Minus3Attr);
-        add3 = (Button)findViewById(R.id.Add3Attr);
-        minus4 = (Button)findViewById(R.id.Minus4Attr);
-        add4 = (Button)findViewById(R.id.Add4Attr);
-        minus5 = (Button)findViewById(R.id.Minus5Attr);
-        add5 = (Button)findViewById(R.id.Add5Attr);
-        minus6 = (Button)findViewById(R.id.Minus6Attr);
-        add6 = (Button)findViewById(R.id.Add6Attr);
-        minus7 = (Button)findViewById(R.id.Minus7Attr);
-        add7 = (Button)findViewById(R.id.Add7Attr);
+        minus1 = (Button)findViewById(R.id.Minus1Value);
+        add1 = (Button)findViewById(R.id.Add1value);
+        minus2 = (Button)findViewById(R.id.Minus2Value);
+        add2 = (Button)findViewById(R.id.Add2Value);
+        minus3 = (Button)findViewById(R.id.Minus3Value);
+        add3 = (Button)findViewById(R.id.Add3Value);
+        minus4 = (Button)findViewById(R.id.Minus4Value);
+        add4 = (Button)findViewById(R.id.Add4Value);
+        minus5 = (Button)findViewById(R.id.Minus5Value);
+        add5 = (Button)findViewById(R.id.Add5Value);
+        minus6 = (Button)findViewById(R.id.Minus6Value);
+        add6 = (Button)findViewById(R.id.Add6Value);
+        minus7 = (Button)findViewById(R.id.Minus7Value);
+        add7 = (Button)findViewById(R.id.Add7Value);
         minus1.setOnClickListener(this);
         minus2.setOnClickListener(this);
         minus3.setOnClickListener(this);
@@ -92,85 +92,85 @@ public class CreatePerso extends AppCompatActivity implements View.OnClickListen
         int i;
         switch(v.getId())
         {
-            case R.id.Minus1Attr:
+            case R.id.Minus1Value:
                 i = Integer.getInteger(attr1.getText().toString());
                 i--;
                 if (i>0&&i<18)
                     attr1.setText(String.valueOf(i));
                 break;
-            case R.id.Minus2Attr:
+            case R.id.Minus2Value:
                 i = Integer.getInteger(attr2.getText().toString());
                 i--;
                 if (i>0&&i<18)
                     attr2.setText(String.valueOf(i));
                 break;
-            case R.id.Minus3Attr:
+            case R.id.Minus3Value:
                 i = Integer.getInteger(attr3.getText().toString());
                 i--;
                 if (i>0&&i<18)
                     attr3.setText(String.valueOf(i));
                 break;
-            case R.id.Minus4Attr:
+            case R.id.Minus4Value:
                 i = Integer.getInteger(attr4.getText().toString());
                 i--;
                 if (i>0&&i<18)
                     attr4.setText(String.valueOf(i));
                 break;
-            case R.id.Minus5Attr:
+            case R.id.Minus5Value:
                 i = Integer.getInteger(attr5.getText().toString());
                 i--;
                 if (i>0&&i<18)
                     attr5.setText(String.valueOf(i));
                 break;
-            case R.id.Minus6Attr:
+            case R.id.Minus6Value:
                 i = Integer.getInteger(attr6.getText().toString());
                 i--;
                 if (i>0&&i<18)
                     attr6.setText(String.valueOf(i));
                 break;
-            case R.id.Minus7Attr:
+            case R.id.Minus7Value:
                 i = Integer.getInteger(attr7.getText().toString());
                 i--;
                 if (i>0&&i<18)
                     attr7.setText(String.valueOf(i));
                 break;
-            case R.id.Add1Attr:
+            case R.id.Add1value:
                 i = Integer.getInteger(attr1.getText().toString());
                 i++;
                 if (i>0&&i<18)
                     attr1.setText(String.valueOf(i));
                 break;
-            case R.id.Add2Attr:
+            case R.id.Add2Value:
                 i = Integer.getInteger(attr2.getText().toString());
                 i++;
                 if (i>0&&i<18)
                     attr2.setText(String.valueOf(i));
                 break;
-            case R.id.Add3Attr:
+            case R.id.Add3Value:
                 i = Integer.getInteger(attr3.getText().toString());
                 i++;
                 if (i>0&&i<18)
                     attr3.setText(String.valueOf(i));
                 break;
-            case R.id.Add4Attr:
+            case R.id.Add4Value:
                 i = Integer.getInteger(attr4.getText().toString());
                 i++;
                 if (i>0&&i<18)
                     attr4.setText(String.valueOf(i));
                 break;
-            case R.id.Add5Attr:
+            case R.id.Add5Value:
                 i = Integer.getInteger(attr5.getText().toString());
                 i++;
                 if (i>0&&i<18)
                     attr5.setText(String.valueOf(i));
                 break;
-            case R.id.Add6Attr:
+            case R.id.Add6Value:
                 i = Integer.getInteger(attr6.getText().toString());
                 i++;
                 if (i>0&&i<18)
                     attr6.setText(String.valueOf(i));
                 break;
-            case R.id.Add7Attr:
+            case R.id.Add7Value:
                 i = Integer.getInteger(attr7.getText().toString());
                 i++;
                 if (i>0&&i<18)
@@ -180,7 +180,7 @@ public class CreatePerso extends AppCompatActivity implements View.OnClickListen
     }
 
     public void genererPerso()
-    {
+    {/*
         Globales.pj.setNom(namePerso.getText().toString().toLowerCase());
         Globales.pj.setClasse();
         Globales.pj.setRace();
@@ -189,7 +189,7 @@ public class CreatePerso extends AppCompatActivity implements View.OnClickListen
         Globales.pj.setForce();
         Globales.pj.setDexterite();
         Globales.pj.setEndurance();
-        Globales.pj.setIntelligence();
+        Globales.pj.setIntelligence();*/
     }
 
     public void openGameActivity(View v)

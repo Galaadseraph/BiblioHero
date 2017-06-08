@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BiblioHero</string>
+    <string name="chevronsgauche">-</string>
+    <string name="chevronsdroit">+</string>
 </resources>

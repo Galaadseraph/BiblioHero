@@ -104,7 +104,8 @@
                                 android:inputType="textPersonName"
                                 android:padding="15dp"
                                 android:text="Race : "
-                                android:textAlignment="textStart" />
+                                android:textAlignment="textStart"
+                                android:layout_gravity="start"/>
 
                             <TextView
                                 android:id="@+id/RacePerso"

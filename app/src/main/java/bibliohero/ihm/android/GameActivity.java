@@ -31,44 +31,44 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_main);
 
-        descrip = findViewById(R.id.des)
+        descrip = (TextView)findViewById(R.id.descrip);
     }
 
     public void btnPersoClick(View v)
     {
-        Button b = this.findViewById(R.id.buttonperso);
+        Button b = (Button)this.findViewById(R.id.buttonperso);
         if (b.getText()=="Personnage")
         {
             b.setText("Histoire");
             this.findViewById(R.id.TabPersonnage).setVisibility(View.VISIBLE);
             this.findViewById(R.id.TabHistoire).setVisibility(View.GONE);
-            this.findViewById(R.id.TabEquipe).setVisibility(View.GONE);
+            this.findViewById(R.id.TabEquip).setVisibility(View.GONE);
         }
         else
         {
             b.setText("Personnage");
             this.findViewById(R.id.TabPersonnage).setVisibility(View.GONE);
             this.findViewById(R.id.TabHistoire).setVisibility(View.VISIBLE);
-            this.findViewById(R.id.TabEquipe).setVisibility(View.GONE);
+            this.findViewById(R.id.TabEquip).setVisibility(View.GONE);
         }
     }
 
     public void btnEquipementClick(View v)
     {
-        Button b = this.findViewById(R.id.buttonObjects);
+        Button b = (Button)this.findViewById(R.id.buttonObjets);
         if (b.getText()=="Equipement")
         {
             b.setText("Histoire");
             this.findViewById(R.id.TabPersonnage).setVisibility(View.GONE);
             this.findViewById(R.id.TabHistoire).setVisibility(View.GONE);
-            this.findViewById(R.id.TabEquipe).setVisibility(View.VISIBLE);
+            this.findViewById(R.id.TabEquip).setVisibility(View.VISIBLE);
         }
         else
         {
             b.setText("Equipement");
             this.findViewById(R.id.TabPersonnage).setVisibility(View.GONE);
             this.findViewById(R.id.TabHistoire).setVisibility(View.VISIBLE);
-            this.findViewById(R.id.TabEquipe).setVisibility(View.GONE);
+            this.findViewById(R.id.TabEquip).setVisibility(View.GONE);
         }
     }
 

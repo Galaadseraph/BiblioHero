@@ -31,4 +31,21 @@ public class LotEquipementDao {
 		rs.close();
 		return listeLotEquipement;
 	}
+
+	//Methode pour recuperer le genre via le codelot
+	public String recupererLotEquipementViaCode(String codeLot) throws SQLException, DaoException, ClassNotFoundException{
+		String sql = "SELECT nom FROM pers_lotequipement WHERE pers_lotequipement.codelot = ?;";
+
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ps.setString(1, codeLot);
+		ResultSet rs = ps.executeQuery();
+
+		if(rs.next()){
+			return rs.getString(1);
+		}
+		else{
+			return null;
+		}
+	}
+
 }
