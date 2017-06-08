@@ -275,9 +275,6 @@ public class SrvAdventure {
         // TODO 2 : Requête DAO : Récupération de la liste des paragraphes de l'aventure (d'après l'identifiant du paragraphe)
         ParagrapheDao paragrapheDao = new ParagrapheDao();
 
-        Paragraphe p = new Paragraphe();
-        ParagrapheObj po = (ParagrapheObj) p;
-
         ArrayList<ParagrapheObj> listeParagraphe = null;
         try {
             // Récupération de la liste de paragraphe
