@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import bibliohero.dao.jdbc.sqlite.ConnectionDAOsqlite;
 import bibliohero.exceptions.DaoException;
 import bibliohero.model.pers_.Inventaire;
-import bibliohero.model.pers_.PJPCTemporaire;
+
 
 public class InventaireDao {
 
@@ -19,7 +19,7 @@ public class InventaireDao {
 
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		System.out.println("Essai d'envoi de donnï¿½es");
+		
 
 		while(rs.next()){
 			Inventaire inventaire = new Inventaire();
@@ -65,11 +65,28 @@ public class InventaireDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public ArrayList<Inventaire> recupererListeInventaireViaNomPersonnage(String nomPersonnage)throws DaoException, ClassNotFoundException, SQLException
-	{
-		// TODO :
-		ArrayList<Inventaire> inventaire = new ArrayList();
+	public ArrayList<Inventaire> recupererListeInventaireViaNomPersonnage(String nomPersonnage)throws DaoException, ClassNotFoundException, SQLException{
+		
+		String sql = "SELECT * FROM pers_inventaire WHERE idpersonnage = (SELECT idpersonnage FROM pers_personnage WHERE nom = ?);";
+		ArrayList<Inventaire> listeInventaire = new ArrayList();
 
-		return inventaire;
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ps.setString(1, nomPersonnage);
+		ResultSet rs = ps.executeQuery();
+		
+
+		while(rs.next()){
+			Inventaire inventaire = new Inventaire();
+			inventaire.setIdInventaire(rs.getInt("idinventaire"));
+			inventaire.setNom(rs.getString("nom"));
+			inventaire.setTypeInventaire(rs.getString("typeinventaire"));
+			inventaire.setNbEmplacement(rs.getInt("nbemplacement"));
+			inventaire.setIdPersonnage(rs.getInt("idpersonnage"));
+
+			listeInventaire.add(inventaire);
+		}
+		
+		rs.close();
+		return listeInventaire;
 	}
 }
