@@ -282,7 +282,7 @@ public class PersonnageDao{
 		}
 
 	/**
-	 * Récupère un personnage (via son nom qui est unique) 
+	 * Récupère un personnage (via son nom qui est unique)
  	 * @param nomPersonnage
 	 * @return
 	 * @throws DaoException
