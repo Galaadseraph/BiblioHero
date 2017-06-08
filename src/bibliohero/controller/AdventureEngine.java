@@ -111,7 +111,7 @@ public class AdventureEngine  implements Observer {
         // TODO
         //return SrvAdventure.getPlayer(nomJoueur);
         // UTILISE POUR TEST SEULEMENT
-        return SrvAdventure.getPlayerTest(nomJoueur);
+        return SrvAdventure.getPlayer(nomJoueur);
     }
 
     /**
