@@ -1,7 +1,6 @@
 package bibliohero.service;
 
 import bibliohero.dao.request.avt_.ActionDao;
-import bibliohero.dao.request.pers_.PersonnageDao;
 
 import bibliohero.controller.AdventureEngineObj.AventureObj;
 import bibliohero.controller.AdventureEngineObj.PJoueurObj;
@@ -193,87 +192,6 @@ public class SrvAdventure {
 
         return pJoueurObj;
 
-    }
-
-    /**
-     * Objet Aventure : Requêtes DAO + Contruction des objets ()
-     * Chargement du jeu d'essai Manuellement pour TEST (Bypass DAO Access)
-     * NE PAS UTILISER : INCOMPLET
-     * @param isbnAdventure
-     * @return
-     */
-    public static AventureObj getAdventureTest(String isbnAdventure)
-    {
-
-        // TODO 1 : Requête DAO : Récupération de l'aventure d'après son identifiant "isbn"
-        Aventure aventure =  new Aventure();
-        aventure.setIdaventure(1);
-
-        aventure.setNom("le coeur du chaos");
-        aventure.setAuteur("Cyril Guillot");
-        aventure.setVersion("1.00");
-        aventure.setSynopsis("dans les années 70 80 un groupe terroriste dechaine les foules");
-        aventure.setNbParagraphe(15);
-
-        aventure.setCodeTheme("HST");
-
-        aventure.setClasseRequise("aucune");
-        aventure.setNvRequis(0);
-        aventure.setDictionnaire(false);
-
-        aventure.setIsbnAventure("1");
-        aventure.setIsbnseries("ab4");
-
-        // Création de l'objet aventure à partir de l'aventure en base
-        AventureObj aventureObj = new AventureObj(aventure);
-
-        // TODO 2 : Requête DAO : Récupération de la liste des paragraphes de l'aventure (d'après l'identifiant du paragraphe)
-        ParagrapheDao paragrapheDao = new ParagrapheDao();
-
-        ArrayList<ParagrapheObj> listeParagraphe = null;
-        try {
-            // Récupération de la liste de paragraphe
-            ArrayList<Paragraphe> listeParagrapheTmp;
-            listeParagrapheTmp = paragrapheDao.recupererListeParagrapheViaIsbnAventure(isbnAdventure);
-            // Cast Paragraphe -> ParagrapheObj (pour chaque paragraphe
-            for (Paragraphe paragrapheTmp : listeParagrapheTmp)
-            {
-                listeParagraphe.add(new ParagrapheObj(paragrapheTmp));
-            }
-        } catch (DaoException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        // Association de la liste de paragraphes à l'aventure
-        aventureObj.setParagrapheList(listeParagraphe);
-
-        // TODO 3 : Requête DAO : Récupération de la liste des actions pour chaque paragraphe de la liste des paragraphes
-        ActionDao actionDao = new ActionDao();
-
-        ArrayList<Action> listeAction = null;
-
-        // Pour chaque paragraphe
-        for (ParagrapheObj paragrapheObj : listeParagraphe)
-        {
-            // Récupération de la liste des actions (pour le paragraphe en cours)
-            try {
-                listeAction = actionDao.recupererListeActionViaIdParagraphe(paragrapheObj.getParagraphe().getIdParagraphe());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (DaoException e) {
-                e.printStackTrace();
-            }
-            // Association de la liste d'actions au paragraphe en cours
-            paragrapheObj.setActionList(listeAction);
-        }
-
-        // Renvoie de l'objet aventure complet (Aventure + Liste des paragraphes associés + Liste des actions associées à chaque paragraphe.
-        return aventureObj;
     }
 
     //endregion
