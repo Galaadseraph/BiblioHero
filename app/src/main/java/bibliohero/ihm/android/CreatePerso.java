@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 public class CreatePerso extends AppCompatActivity implements View.OnClickListener {
 
+    EditText namePerso = null;
     Button minus1 = null;
     Button minus2 = null;
     Button minus3 = null;
@@ -43,6 +45,7 @@ public class CreatePerso extends AppCompatActivity implements View.OnClickListen
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_perso);
+        namePerso = (EditText)findViewById(R.id.NomPerso);
         minus1 = (Button)findViewById(R.id.Minus1Attr);
         add1 = (Button)findViewById(R.id.Add1Attr);
         minus2 = (Button)findViewById(R.id.Minus2Attr);
@@ -174,6 +177,19 @@ public class CreatePerso extends AppCompatActivity implements View.OnClickListen
                     attr7.setText(String.valueOf(i));
                 break;
         }
+    }
+
+    public void genererPerso()
+    {
+        Globales.pj.setNom(namePerso.getText().toString().toLowerCase());
+        Globales.pj.setClasse();
+        Globales.pj.setRace();
+        Globales.pj.setSexe();
+        Globales.pj.setGenre();
+        Globales.pj.setForce();
+        Globales.pj.setDexterite();
+        Globales.pj.setEndurance();
+        Globales.pj.setIntelligence();
     }
 
     public void openGameActivity(View v)

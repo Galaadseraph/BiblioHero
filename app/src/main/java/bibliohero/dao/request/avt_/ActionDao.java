@@ -1,4 +1,4 @@
-kage bibliohero.dao.request.avt_;
+package bibliohero.dao.request.avt_;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

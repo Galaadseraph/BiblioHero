@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import bibliohero.dao.request.avt_.ActionDao;
 import bibliohero.dao.request.avt_.ParagrapheDao;
@@ -22,11 +23,15 @@ public class GameActivity extends AppCompatActivity {
     private ActionDao adao;
     private Action[] actions;
 
+    private TextView descrip;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_main);
+
+        descrip = findViewById(R.id.des)
     }
 
     public void btnPersoClick(View v)
