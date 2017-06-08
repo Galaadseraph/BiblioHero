@@ -3,6 +3,7 @@ package bibliohero.controller;
 import bibliohero.ihm.consoletest.cuiAdventure;
 import bibliohero.ihm.consoletest.cuiGame;
 import bibliohero.ihm.consoletest.KeyValue;
+import bibliohero.service.SrvGame;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -41,6 +42,8 @@ public class GameEngine implements Observer {
 
     private boolean testMode;       // Test
 
+    private String nomJoueurSelectionne;       // Nom du joueur qui a été sélectionné par l'utilisateur (via JOUER ou CONTINUER)
+
     //endregion
 
     //region Méthodes
@@ -62,6 +65,8 @@ public class GameEngine implements Observer {
         cuiAdventure.getInstance().addObserver(AdventureEngine.getInstance());
 
         // TODO : Tester si 1er démarrage ou non
+
+        // TODO : Charger les informations concernant le joueur (Dernier joueur qui a joué)
 
     }
     //endregion
@@ -111,19 +116,25 @@ public class GameEngine implements Observer {
                 switch (((KeyValue<String, String>) o).getKey()) {
                     case "CUI_GAME_MAINMENU_CHOICE":
                         // Test
-                        //System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getValue());
+                        //System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getKey() + ((KeyValue) o).getValue());
                         // On "switch" d'écran
                         // TODO : Utiliser des ENUM
                         switch (((KeyValue<String, String>) o).getValue()) {
                             // -> JOUER
                             case "1":
                                 System.out.println(" -> JOUER");
-                                // On lance le moteur d'aventure
+                                // Création d'un nouveau personnage + aventure mère
+
+                                // Affectation du personnage au moteur d'aventure
+
+                                // (2) On lance le moteur d'aventure
                                 AdventureEngine.getInstance().run();
                                 break;
                             // -> CONTINUER
                             case "2":
-                                System.out.println(" -> JOUER");
+                                System.out.println(" -> CONTINUER");
+                                // (1) Sélection d'un joueur parmi une liste
+                                cuiGame.getInstance().displayCharList(SrvGame.getCharacterList());
                                 break;
                             // -> GESTION
                             case "3":
@@ -144,9 +155,24 @@ public class GameEngine implements Observer {
                         }
 
                         break;
-                    case "CUI_GAME_TODO_CHOICE":
-                        System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getValue());
-                        break;
+                    case "CUI_GAME_CHAR_LIST":
+                        // Choix du personnage pour l'aventure
+
+                        // Test
+                        System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getKey() + ((KeyValue) o).getValue());
+
+                        // TODO : Affecter le personnage choisit au moteur d'aventure;
+                        // La valeur choisit dans l'IU sert d'index pour récupérer le personnage dans la liste.
+                        // Remarque : On fait appel au service 2 fois (On suppose que la liste des personnages n'a pas changé entre temps)
+                        // Voir si plus judicieux de charger la liste des personnages dans le moteur de Jeu.
+                        this.nomJoueurSelectionne = SrvGame.getCharacterList().get(((KeyValue<String, Integer>) o).getValue()).getNom();
+
+                        // Affectation du personnage préalablement sélectionné au moteur d'aventure
+                        AdventureEngine.getInstance().setNomJoueur(this.nomJoueurSelectionne);
+
+                        // (2) On lance le moteur d'aventure
+                        AdventureEngine.getInstance().run();
+
                 }
 
             }

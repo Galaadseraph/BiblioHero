@@ -76,6 +76,18 @@ public class AdventureEngine  implements Observer {
     }
     //endregion
 
+    //region Getter/Setter
+
+    public String getNomJoueur() {
+        return nomJoueur;
+    }
+
+    public void setNomJoueur(String nomJoueur) {
+        this.nomJoueur = nomJoueur;
+    }
+
+    //endregion
+
     /**
      * execution du moteur de jeu ()
      */
