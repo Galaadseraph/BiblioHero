@@ -155,7 +155,7 @@ public class GameEngine implements Observer {
                         }
 
                         break;
-                    case "CUI_GAME_CHAR_LIST":
+                    case "CUI_GAME_CHAR_LIST":      // Liste des Personnages
                         // Choix du personnage pour l'aventure
 
                         // Test
@@ -165,7 +165,7 @@ public class GameEngine implements Observer {
                         // La valeur choisit dans l'IU sert d'index pour récupérer le personnage dans la liste.
                         // Remarque : On fait appel au service 2 fois (On suppose que la liste des personnages n'a pas changé entre temps)
                         // Voir si plus judicieux de charger la liste des personnages dans le moteur de Jeu.
-                        this.nomJoueurSelectionne = SrvGame.getCharacterList().get(((KeyValue<String, Integer>) o).getValue()).getNom();
+                        this.nomJoueurSelectionne = SrvGame.getCharacterList().get(((KeyValue<String, Integer>) o).getValue()-1).getNom();
 
                         // Affectation du personnage préalablement sélectionné au moteur d'aventure
                         AdventureEngine.getInstance().setNomJoueur(this.nomJoueurSelectionne);

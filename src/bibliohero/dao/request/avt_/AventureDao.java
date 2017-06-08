@@ -71,15 +71,34 @@ public class AventureDao {
 	 * @throws ClassNotFoundException
 	 */
 	public Aventure recupererAventureViaIsbnAventure(String isbn) throws DaoException, SQLException, ClassNotFoundException{
-		String sql = "SELECT idaventure FROM avt_aventure WHERE isbnaventure = ?;";
-
-		Aventure aventure = new Aventure();
+		String sql = "SELECT * FROM avt_aventure WHERE isbnaventure = ?;";
 
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 		ps.setString(1, isbn);
 		ResultSet rs = ps.executeQuery();
+		rs.next();
+
+		Aventure aventure = new Aventure();
 
 		aventure.setIdaventure(rs.getInt("idaventure"));
+
+		aventure.setNom(rs.getString("nom"));
+		aventure.setAuteur(rs.getString("auteur"));
+		aventure.setIsbnAventure(rs.getString("isbnaventure"));
+		aventure.setClasseRequise(rs.getString("classerequise"));
+		aventure.setSynopsis(rs.getString("synopsis"));
+		aventure.setVersion(rs.getString("version"));
+		aventure.setIsbnseries(rs.getString("isbnserie"));
+
+		SeriesDao seriesDao = new SeriesDao();
+		aventure.setIsbnseries(seriesDao.recupererSeriesViaISBN(rs.getString("isbnserie")));
+		ThemeDao themeDao = new ThemeDao();
+		aventure.setCodeTheme(themeDao.recupererThemeViaCode(rs.getString("codetheme")));
+
+		aventure.setNbParagraphe(rs.getInt("nbparagraphe"));
+		aventure.setNvRequis(rs.getInt("nvrequis"));
+
+		aventure.setDictionnaire(rs.getBoolean("dictionnaire"));
 
 		return aventure;
 	}

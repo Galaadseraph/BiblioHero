@@ -294,9 +294,10 @@ public class PersonnageDao{
 		
 
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
-		ps.setString(1, nomPersonnage.toLowerCase());
+		ps.setString(1, nomPersonnage);
 		ResultSet rs = ps.executeQuery();
-		
+		rs.next();
+
 		Personnage personnage = new Personnage();
 		personnage.setIdPersonnage(rs.getInt("idpersonnage"));
 		personnage.setNom(rs.getString("nom"));

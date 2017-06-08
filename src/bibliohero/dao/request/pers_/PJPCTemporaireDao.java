@@ -45,12 +45,12 @@ public class PJPCTemporaireDao {
 	
 	//Insertion de donnees dans la table PJPCTemporaire via la table pers_personnage
 	public void insererPersonnagePJPCTemporaire(Personnage pers) throws DaoException, ClassNotFoundException, SQLException{
-		String sql = "INSERT INTO pers_pjpctemp ("
-				+ "experience, richesse, moral "
-				+ " forcep, dexteritep, endurance, intelligence, pv, idpersonnage)"
+		String sql = "INSERT INTO pers_pjpctempo ("
+				+ "experience, richesse, moral, "
+				+ " forcep, dexteritep, endurance, intelligence, pv, idpersonnage, background)"
 				+ "VALUES ("
-				+ "?, ?, ?, ? "
-				+ "?, ?, ?, ?, ?, ?)";
+				+ "?, ?, ?, ?, ?, "
+				+ "?, ?, ?, ?, ?)";
 	
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 	
@@ -65,6 +65,10 @@ public class PJPCTemporaireDao {
 		ps.setShort(8, pers.getPvActu());
 		
 		ps.setInt(9, pers.getIdPersonnage());
+		// Initialisation isbnAvt = 1 (Aventure Mère) + numPara = 1 (Premier Paragraphe
+		// Ensuite, on ajoute chaque numéro deparagraphe parcouru séparé par une virgule. Exemple : [numPara:1,6,89,12]
+		ps.setString(10, "[isbnAvt:1][numPara:1]");
+
 		ps.executeUpdate();
 	}
 	
@@ -92,9 +96,15 @@ public class PJPCTemporaireDao {
 		pjpcTemp.setIdpersonnage(idPersonnage);
 		return pjpcTemp;
 	}
-	
-	//Selectionner PJPCTemporaire en fonction de l'idpersonnage pr-selectionné par un nom
-	
+
+	/**
+	 * Selectionner PJPCTemporaire en fonction de l'idpersonnage pr-selectionné par un nom
+	 * @param nomPersonnage
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws DaoException
+	 */
 	public PJPCTemporaire recupererPJPCTempoViaNomPersonnage(String nomPersonnage) throws ClassNotFoundException, SQLException, DaoException {
 
 		String sql = "SELECT * FROM pers_pjpctempo WHERE idpersonnage = (SELECT idpersonnage FROM pers_personnage WHERE nom = ?);";
@@ -102,21 +112,31 @@ public class PJPCTemporaireDao {
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
 		ps.setString(1, nomPersonnage);
 		ResultSet rs = ps.executeQuery();
-		rs.next();
 
 		PJPCTemporaire pjpcTemp = new PJPCTemporaire();
-		pjpcTemp.setForce(rs.getShort("forcep"));
-		pjpcTemp.setDexterite(rs.getShort("dexteritep"));
-		pjpcTemp.setEndurance(rs.getShort("endurance"));
-		pjpcTemp.setIntelligence(rs.getShort("intelligence"));
-		pjpcTemp.setPv(rs.getShort("pv"));
-		pjpcTemp.setMoral(rs.getInt("moral"));
 
-		pjpcTemp.setRichesse(rs.getDouble("richesse"));
-		pjpcTemp.setExperience(rs.getDouble("experience"));
+		// Vérification si la requête nous retourne des enregistrements.
+		if (rs.next()) {
 
-		pjpcTemp.setBackground(rs.getString("background"));
+			pjpcTemp.setForce(rs.getShort("forcep"));
+			pjpcTemp.setDexterite(rs.getShort("dexteritep"));
+			pjpcTemp.setEndurance(rs.getShort("endurance"));
+			pjpcTemp.setIntelligence(rs.getShort("intelligence"));
+			pjpcTemp.setPv(rs.getShort("pv"));
+			pjpcTemp.setMoral(rs.getInt("moral"));
 
-		return pjpcTemp;
+			pjpcTemp.setRichesse(rs.getDouble("richesse"));
+			pjpcTemp.setExperience(rs.getDouble("experience"));
+
+			pjpcTemp.setBackground(rs.getString("background"));
+
+			return pjpcTemp;
+		}
+		else
+		{
+			return null;
+
+		}
+
 	}
 }

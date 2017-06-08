@@ -65,6 +65,13 @@ public class SrvAdventure {
         PJPCTemporaire persoTmp = null;
         try {
             persoTmp = pJPCTemporaireDao.recupererPJPCTempoViaNomPersonnage(nomPersonnage);
+            // Si la table temporaire est vide, la remplir
+            // TODO : Normalement, il faut le faire lors de la création du personnage en base (sert ici pour le debug)
+            if (persoTmp == null)
+            {
+                pJPCTemporaireDao.insererPersonnagePJPCTemporaire(pjoueur.getPersonnage());
+                persoTmp = pJPCTemporaireDao.recupererPJPCTempoViaNomPersonnage(nomPersonnage);
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -75,7 +82,7 @@ public class SrvAdventure {
         // Association de Perso_Tmp à l'objet Personnage
         pjoueur.setPerso_tmp(persoTmp);
 
-        // TODO 3 : Requête DAO : Récupération de la liste des inventaires du joueur (d'après son nom)
+        // TODO 3 : Requête DAO : Récupération de la liste des inventaires du joueur/personnage (d'après son nom)
         InventaireDao inventaireDao = new InventaireDao();
 
         ArrayList<Inventaire> listeInventaire = null;
@@ -124,7 +131,7 @@ public class SrvAdventure {
         // TODO 2 : Requête DAO : Récupération de la liste des paragraphes de l'aventure (d'après l'identifiant du paragraphe)
         ParagrapheDao paragrapheDao = new ParagrapheDao();
 
-        ArrayList<ParagrapheObj> listeParagraphe = null;
+        ArrayList<ParagrapheObj> listeParagraphe = new ArrayList<>();
         try {
             // Récupération de la liste de paragraphe
             ArrayList<Paragraphe> listeParagrapheTmp;

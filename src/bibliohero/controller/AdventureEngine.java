@@ -97,7 +97,7 @@ public class AdventureEngine  implements Observer {
 
         // TODO : Chargement des Beans à partir de la base de donnée
 
-        // (1) Chargement du joueur (table pers_personnage + pers_pjpctempo)
+        // (1) Chargement du joueur (table pers_personnage + pers_pjpctempo + Liste des inventaires)
         this.joueur = loadPlayer(this.nomJoueur);
 
         // (2) Chargement de l'aventure sélectionnée (à partir de l'identifiant)
@@ -115,7 +115,7 @@ public class AdventureEngine  implements Observer {
     }
 
     /**
-     * Chargement du joueur de l'aventure à partir de son nom
+     * Chargement du joueur/personnage de l'aventure à partir de son nom
      */
     protected PJoueurObj loadPlayer(String nomJoueur) {
 
@@ -131,9 +131,9 @@ public class AdventureEngine  implements Observer {
      */
     protected String getAdventureIsbnFromBackground() {
 
-        // TODO : get from joueur
+        // TODO : get from joueur (Aventure mère par défaut)
         //this.isbnAventure = ;
-        return "isbn_nbr";
+        return "1";
 
     }
 
