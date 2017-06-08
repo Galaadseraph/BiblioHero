@@ -70,13 +70,13 @@ public class AventureDao {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public Aventure recupererAventureViaIsbnAventure(int isbn) throws DaoException, SQLException, ClassNotFoundException{
+	public Aventure recupererAventureViaIsbnAventure(String isbn) throws DaoException, SQLException, ClassNotFoundException{
 		String sql = "SELECT idaventure FROM avt_aventure WHERE isbnaventure = ?;";
 
 		Aventure aventure = new Aventure();
 
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
-		ps.setInt(1, isbn);
+		ps.setString(1, isbn);
 		ResultSet rs = ps.executeQuery();
 
 		aventure.setIdaventure(rs.getInt("idaventure"));

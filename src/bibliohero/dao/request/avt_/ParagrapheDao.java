@@ -82,12 +82,12 @@ public class ParagrapheDao {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<Paragraphe> recupererListeParagrapheViaIsbnAventure(int isbn) throws DaoException, SQLException, ClassNotFoundException {
+	public ArrayList<Paragraphe> recupererListeParagrapheViaIsbnAventure(String isbn) throws DaoException, SQLException, ClassNotFoundException {
 		String sql = "SELECT * FROM avt_paragraphe WHERE idaventure = (SELECT idaventure FROM avt_aventure WHERE isbnaventure = ?);";
 		ArrayList<Paragraphe> listeParagraphes = new ArrayList();
 
 		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
-		ps.setInt(1, isbn);
+		ps.setString(1, isbn);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
