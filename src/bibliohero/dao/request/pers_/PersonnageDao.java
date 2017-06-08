@@ -280,4 +280,20 @@ public class PersonnageDao{
 			rs.close();
 			return listePersonnages;
 		}
+
+	/**
+	 * Récupère un personnage (via son nom qui est unique)
+ 	 * @param nomPersonnage
+	 * @return
+	 * @throws DaoException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public Personnage recupererPersonnageViaNomPersonnage(String nomPersonnage)throws DaoException, ClassNotFoundException, SQLException
+	{
+		// TODO :
+		Personnage personnage = new Personnage();
+
+		return personnage;
+	}
 }

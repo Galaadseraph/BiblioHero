@@ -56,4 +56,20 @@ public class InventaireDao {
 			}
 			return listeInventaires;
 		}
+
+	/**
+	 * Récupère la liste des inventaires d'un personnage (via son nom qui est unique)
+ 	 * @param nomPersonnage
+	 * @return
+	 * @throws DaoException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public ArrayList<Inventaire> recupererListeInventaireViaNomPersonnage(String nomPersonnage)throws DaoException, ClassNotFoundException, SQLException
+	{
+		// TODO :
+		ArrayList<Inventaire> inventaire = new ArrayList();
+
+		return inventaire;
+	}
 }
