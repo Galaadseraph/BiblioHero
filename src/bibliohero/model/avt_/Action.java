@@ -23,7 +23,7 @@ public class Action {
 	public void setIdAction(int idAction) {
 		this.idAction = idAction;
 	}
-	public String getCodeAction() {
+	public String getCodeTypeAction() {
 		return codeTypeAction;
 	}
 

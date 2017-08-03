@@ -77,8 +77,10 @@ public class ActionDao {
 			action.setCodeCombat(rs.getString("codecombat"));
 			
 			
-			TypeActionDao typeActionDao = new TypeActionDao();
-			action.setCodeAction(typeActionDao.recupererTypeActionViaCode(rs.getString("codetypeaction")));
+			//TypeActionDao typeActionDao = new TypeActionDao();
+			//action.setCodeAction(typeActionDao.recupererTypeActionViaCode(rs.getString("codetypeaction")));
+			action.setCodeAction(rs.getString("codetypeaction"));
+
 			action.setParagrapheSuite(rs.getInt("paragraphesuite"));
 
 			listeActions.add(action);
