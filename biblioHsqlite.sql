@@ -124,7 +124,7 @@ CREATE TABLE avt_action(
 	description      TEXT NOT NULL ,
 	effet            TEXT NOT NULL ,
 	paragraphesuite  INTEGER NOT NULL ,
-	codeaction       TEXT NOT NULL ,
+	codetypeaction   TEXT NOT NULL ,
 	codecombat	 TEXT ,
 	PRIMARY KEY (idaction) ,
 
@@ -213,9 +213,9 @@ CREATE TABLE pers_typeinventaire(
 
 
 CREATE TABLE avt_typeaction(
-	idtypeaction  INTEGER  NOT NULL ,
-	codeaction    TEXT NOT NULL UNIQUE ,
-	nom           TEXT NOT NULL ,
+	idtypeaction   INTEGER  NOT NULL ,
+	codetypeaction TEXT NOT NULL UNIQUE ,
+	nom            TEXT NOT NULL ,
 	PRIMARY KEY (idtypeaction)
 );
 
