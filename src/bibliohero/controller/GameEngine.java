@@ -3,6 +3,7 @@ package bibliohero.controller;
 import bibliohero.ihm.consoletest.cuiAdventure;
 import bibliohero.ihm.consoletest.cuiGame;
 import bibliohero.ihm.consoletest.KeyValue;
+import bibliohero.service.SrvGame;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -31,6 +32,10 @@ public class GameEngine implements Observer {
 
         // Mode Test
         this.testMode = true;
+
+        // Par défaut, On execute le mode console Dektop (pour test)
+        this.uiSource = EnumUISource.DESKTOP_CUI;
+
         // INIT
         this.init();
     }
@@ -40,6 +45,9 @@ public class GameEngine implements Observer {
     //region Attributs
 
     private boolean testMode;       // Test
+    private EnumUISource uiSource;  // Sélection de l'interface utilisateur
+
+    private String nomJoueurSelectionne;       // Nom du joueur qui a été sélectionné par l'utilisateur (via JOUER ou CONTINUER)
 
     //endregion
 
@@ -47,21 +55,38 @@ public class GameEngine implements Observer {
 
     /**
      * Intialisation
+     *
+     * @author - Guillaume J.
      */
     private void init()
     {
-
         // Permettre au moteur du jeu d'écouter les event provenant de l'interface Utilisateur
-        // TODO : Remplacer cuiGame par la CUI ou la GUI
+
         // Test de passage
         System.out.println("DEBUG - init - GameEngine Class");
 
-        // Le moteur de jeu est à l'écoute des events provenant de la CUI Moteur de jeu (Principal)
-        cuiGame.getInstance().addObserver(this);
-        // Le moteur de l'aventure est à l'écoute des events provenant de la CUI Moteur de l'aventure
-        cuiAdventure.getInstance().addObserver(AdventureEngine.getInstance());
+        // Déclaration des écouteurs d'événements provenants de l'Interface Utilisateur
+        switch (this.uiSource) {
 
+            case DESKTOP_CUI:
+                // Le moteur de jeu est à l'écoute des events provenant de la CUI Moteur de jeu (Principal)
+                cuiGame.getInstance().addObserver(this);
+                // Le moteur de l'aventure est à l'écoute des events provenant de la CUI Moteur de l'aventure
+                cuiAdventure.getInstance().addObserver(AdventureEngine.getInstance());
+                break;
+
+            case DESKTOP_GUI:
+                // TODO
+                break;
+
+            case MOBILE_GUI:
+                // TODO
+                break;
+
+        }
         // TODO : Tester si 1er démarrage ou non
+
+        // TODO : Charger les informations concernant le joueur (Dernier joueur qui a joué)
 
     }
     //endregion
@@ -88,14 +113,34 @@ public class GameEngine implements Observer {
      */
     protected void displayMainMenu()
     {
-        // TODO : Affichage du menu en mode console / Switch avec le mode Android/Swing
-        cuiGame.getInstance().displayMainMenu();
+        // TODO : Affichage du menu en mode console / Switch avec le mode Mobile (Android) ou Desktop (Swing)
+        // Affichage du Menu Principal
+        switch (this.uiSource) {
+
+            case DESKTOP_CUI:
+                //
+                cuiGame.getInstance().displayMainMenu();
+                break;
+
+            case DESKTOP_GUI:
+                // TODO
+                break;
+
+            case MOBILE_GUI:
+                // TODO
+                break;
+        }
     }
 
     //region Evt from UI
 
-    // On écoute les événements issus de l'interface utilisateur (via Observable)
-
+    /**
+     * Ecoute des événements issus de l'interface utilisateur (via Observable)
+     * @param observable
+     * @param o
+     *
+     * @author - Guillaume J.
+     */
     @Override
     public void update(Observable observable, Object o) {
         // Events provenants de la UI
@@ -111,19 +156,25 @@ public class GameEngine implements Observer {
                 switch (((KeyValue<String, String>) o).getKey()) {
                     case "CUI_GAME_MAINMENU_CHOICE":
                         // Test
-                        //System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getValue());
+                        //System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getKey() + ((KeyValue) o).getValue());
                         // On "switch" d'écran
                         // TODO : Utiliser des ENUM
                         switch (((KeyValue<String, String>) o).getValue()) {
                             // -> JOUER
                             case "1":
                                 System.out.println(" -> JOUER");
-                                // On lance le moteur d'aventure
+                                // Création d'un nouveau personnage + aventure mère
+
+                                // Affectation du personnage au moteur d'aventure
+
+                                // (2) On lance le moteur d'aventure
                                 AdventureEngine.getInstance().run();
                                 break;
                             // -> CONTINUER
                             case "2":
-                                System.out.println(" -> JOUER");
+                                System.out.println(" -> CONTINUER");
+                                // (1) Sélection d'un joueur parmi une liste
+                                cuiGame.getInstance().displayCharList(SrvGame.getCharacterList());
                                 break;
                             // -> GESTION
                             case "3":
@@ -144,9 +195,24 @@ public class GameEngine implements Observer {
                         }
 
                         break;
-                    case "CUI_GAME_TODO_CHOICE":
-                        System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getValue());
-                        break;
+                    case "CUI_GAME_CHAR_LIST":      // Liste des Personnages
+                        // Choix du personnage pour l'aventure
+
+                        // Test
+                        System.out.println("Event reçu de la UI (Jeu) : " + ((KeyValue) o).getKey() + ((KeyValue) o).getValue());
+
+                        // TODO : Affecter le personnage choisit au moteur d'aventure;
+                        // La valeur choisit dans l'IU sert d'index pour récupérer le personnage dans la liste.
+                        // Remarque : On fait appel au service 2 fois (On suppose que la liste des personnages n'a pas changé entre temps)
+                        // Voir si plus judicieux de charger la liste des personnages dans le moteur de Jeu.
+                        this.nomJoueurSelectionne = SrvGame.getCharacterList().get(((KeyValue<String, Integer>) o).getValue()-1).getNom();
+
+                        // Affectation du personnage préalablement sélectionné au moteur d'aventure
+                        AdventureEngine.getInstance().setNomJoueur(this.nomJoueurSelectionne);
+
+                        // (2) On lance le moteur d'aventure
+                        AdventureEngine.getInstance().run();
+
                 }
 
             }

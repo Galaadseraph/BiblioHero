@@ -6,11 +6,15 @@ import java.util.ArrayList;
 
 /**
  * Le personnage du joueur qui est utilisé dans l'aventure
+ * On encapsule la classe Personnage (Miroir de la table en BDD)
+ * Pas d'héritage possible car Downcast Impossible
  * Created by jiolle.cdi04 on 02/06/2017.
  */
-public class PJoueurObj extends Personnage {
+public class PJoueurObj{
 
     //region Attributes
+
+    private Personnage personnage;        // Personnage (classe de base)
 
     // Attributs complémentaires (déjà définit dans la classe de base)
     //private Equipe equipe;              // Equipe dont fait partie le personnage
@@ -29,6 +33,14 @@ public class PJoueurObj extends Personnage {
 
     //region Getter/Setter
 
+    public Personnage getPersonnage() {
+        return personnage;
+    }
+
+    public void setPersonnage(Personnage personnage) {
+        this.personnage = personnage;
+    }
+
     public PJPCTemporaire getPerso_tmp() {
         return perso_tmp;
     }
@@ -46,4 +58,18 @@ public class PJoueurObj extends Personnage {
     }
 //endregion
 
+    //region Constructeur
+
+    public PJoueurObj()
+    {
+        this.personnage = personnage;
+    }
+
+    public PJoueurObj(Personnage personnage)
+    {
+        super();
+        this.personnage = personnage;
+    }
+
+    //endregion
 }

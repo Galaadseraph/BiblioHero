@@ -112,7 +112,7 @@ public class PersonnageDao{
 		ps.setBoolean(1, pers.isPermadeath());
 		ps.setBoolean(2, pers.isHommedefer());
 		
-		ps.setString(3, pers.getNom());
+		ps.setString(3, pers.getNom().toLowerCase());
 		ps.setString(4, pers.getEquipe());
 		ps.setString(5, pers.getRace());
 		ps.setString(6, pers.getClasse());
@@ -280,4 +280,68 @@ public class PersonnageDao{
 			rs.close();
 			return listePersonnages;
 		}
+
+	/**
+	 * Récupère un personnage (via son nom qui est unique)
+ 	 * @param nomPersonnage
+	 * @return
+	 * @throws DaoException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public Personnage recupererPersonnageViaNomPersonnage(String nomPersonnage)throws DaoException, ClassNotFoundException, SQLException{
+		String sql = "SELECT * FROM pers_personnage WHERE nom = ?;";
+		
+
+		PreparedStatement ps = ConnectionDAOsqlite.getConnection().prepareStatement(sql);
+		ps.setString(1, nomPersonnage);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+
+		Personnage personnage = new Personnage();
+		personnage.setIdPersonnage(rs.getInt("idpersonnage"));
+		personnage.setNom(rs.getString("nom"));
+
+		//-----------
+		//Competences
+		//------------
+		personnage.setPvMax(rs.getShort("pv"));
+		personnage.setForce(rs.getShort("forcep"));
+		personnage.setDexterite(rs.getShort("dexteritep"));
+		personnage.setEndurance(rs.getShort("endurance"));
+		personnage.setIntelligence(rs.getShort("intelligence"));
+		personnage.setMoral(rs.getShort("moral"));
+		//-----------
+		//Les doubles et byte
+		//-----------
+		personnage.setRichesse(rs.getDouble("richesse"));
+		personnage.setExperience(rs.getDouble("experience"));
+		personnage.setNiveau(rs.getByte("niveau"));
+		//-----------
+		//Les booleens
+		//-----------
+		personnage.setEstActif(rs.getBoolean("estactif"));
+		personnage.setPermadeath(rs.getBoolean("permadeath"));
+		personnage.setHommedefer(rs.getBoolean("hommeDeFer"));
+		personnage.setEstJoueur(rs.getBoolean("estJoueur"));
+		//------------
+		//Code a aller chercher en base
+		//------------
+		TypeRaceDao typeRD = new TypeRaceDao();
+		personnage.setRace(typeRD.recupererRaceViaCode(rs.getString("coderace")));
+
+		TypeClasseDao typeClasseD = new TypeClasseDao();
+		personnage.setClasse(typeClasseD.recupererClasseeViaCode(rs.getString("codeclasse")));
+
+		TypeSexeDao typeSexeD = new TypeSexeDao();
+		personnage.setSexe(typeSexeD.recupererSexeViaCode(rs.getString("codesexe")));
+
+		TypeGenreDao typeGenreD = new TypeGenreDao();
+		personnage.setGenre(typeGenreD.recupererGenreViaCode(rs.getString("codegenre")));
+
+		EquipeDao equipeD = new EquipeDao();
+		personnage.setEquipe(equipeD.recupererEquipeViaCode(rs.getString("codeequipe")));
+
+		return personnage;
+	}
 }
