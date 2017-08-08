@@ -32,6 +32,10 @@ public class GameEngine implements Observer {
 
         // Mode Test
         this.testMode = true;
+
+        // Par défaut, On execute le mode console Dektop (pour test)
+        this.uiSource = EnumUISource.DESKTOP_CUI;
+
         // INIT
         this.init();
     }
@@ -41,6 +45,7 @@ public class GameEngine implements Observer {
     //region Attributs
 
     private boolean testMode;       // Test
+    private EnumUISource uiSource;  // Sélection de l'interface utilisateur
 
     private String nomJoueurSelectionne;       // Nom du joueur qui a été sélectionné par l'utilisateur (via JOUER ou CONTINUER)
 
@@ -50,20 +55,35 @@ public class GameEngine implements Observer {
 
     /**
      * Intialisation
+     *
+     * @author - Guillaume J.
      */
     private void init()
     {
-
         // Permettre au moteur du jeu d'écouter les event provenant de l'interface Utilisateur
-        // TODO : Remplacer cuiGame par la CUI ou la GUI
+
         // Test de passage
         System.out.println("DEBUG - init - GameEngine Class");
 
-        // Le moteur de jeu est à l'écoute des events provenant de la CUI Moteur de jeu (Principal)
-        cuiGame.getInstance().addObserver(this);
-        // Le moteur de l'aventure est à l'écoute des events provenant de la CUI Moteur de l'aventure
-        cuiAdventure.getInstance().addObserver(AdventureEngine.getInstance());
+        // Déclaration des écouteurs d'événements provenants de l'Interface Utilisateur
+        switch (this.uiSource) {
 
+            case DESKTOP_CUI:
+                // Le moteur de jeu est à l'écoute des events provenant de la CUI Moteur de jeu (Principal)
+                cuiGame.getInstance().addObserver(this);
+                // Le moteur de l'aventure est à l'écoute des events provenant de la CUI Moteur de l'aventure
+                cuiAdventure.getInstance().addObserver(AdventureEngine.getInstance());
+                break;
+
+            case DESKTOP_GUI:
+                // TODO
+                break;
+
+            case MOBILE_GUI:
+                // TODO
+                break;
+
+        }
         // TODO : Tester si 1er démarrage ou non
 
         // TODO : Charger les informations concernant le joueur (Dernier joueur qui a joué)
@@ -93,14 +113,34 @@ public class GameEngine implements Observer {
      */
     protected void displayMainMenu()
     {
-        // TODO : Affichage du menu en mode console / Switch avec le mode Android/Swing
-        cuiGame.getInstance().displayMainMenu();
+        // TODO : Affichage du menu en mode console / Switch avec le mode Mobile (Android) ou Desktop (Swing)
+        // Affichage du Menu Principal
+        switch (this.uiSource) {
+
+            case DESKTOP_CUI:
+                //
+                cuiGame.getInstance().displayMainMenu();
+                break;
+
+            case DESKTOP_GUI:
+                // TODO
+                break;
+
+            case MOBILE_GUI:
+                // TODO
+                break;
+        }
     }
 
     //region Evt from UI
 
-    // On écoute les événements issus de l'interface utilisateur (via Observable)
-
+    /**
+     * Ecoute des événements issus de l'interface utilisateur (via Observable)
+     * @param observable
+     * @param o
+     *
+     * @author - Guillaume J.
+     */
     @Override
     public void update(Observable observable, Object o) {
         // Events provenants de la UI

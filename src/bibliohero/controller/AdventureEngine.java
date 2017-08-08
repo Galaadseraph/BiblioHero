@@ -140,7 +140,7 @@ public class AdventureEngine  implements Observer {
     }
 
     /**
-     * Récupère le numéro du dernier paragraphe de l'aventure
+     * Récupère le numéro du dernier paragraphe parcouru de l'aventure
      */
     protected int getLastParagrapheFromBackground() {
 
